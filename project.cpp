@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -44,6 +45,38 @@ struct profile{
 };
 
 //-----------VIEW DESIGN SPACE-------------//
+void GoTo(SHORT posX, SHORT posY) {
+	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD Position;
+	Position.X = posX;
+	Position.Y = posY;
+
+	SetConsoleCursorPosition(hStdout, Position);
+}
+
+void view_loginboard() {
+	system("cls");
+	GoTo(0, 0);
+
+	//In o login
+	GoTo(22, 8);
+	cout << static_cast<char>(201);
+	for (int i = 0; i < 11; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(187);
+	GoTo(22, 9);
+	cout << static_cast<char>(186);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 143);
+	cout << "   LOGIN   ";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << static_cast<char>(186);
+	GoTo(22, 10);
+	cout << static_cast<char>(200);
+	for (int i = 0; i < 11; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(188);
+}
+
 void view_student(){
 	
 }
