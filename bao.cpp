@@ -2,6 +2,7 @@
 
 //--------EDIT SPACE----------------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year){
+	//you can't add one more student because it's not the 1st semester of the year
 	if (num == 0){
 		//read file csv
 		return;
@@ -31,6 +32,12 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	newnode -> last_name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> last_name, auxilary);
 
+	cout << "\tClass: ";
+	cin.ignore();
+	cin.getline(auxilary, 200);
+	newnode -> classroom = new char[strlen(auxilary) + 1];
+	strcpy(newnode -> classroom, auxilary);
+
 	cout << "\tGender: ";
 	cin.ignore();
 	cin.getline(auxilary, 200);
@@ -55,57 +62,86 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 
 void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 	system("cls");
-	subjects *current = psubject;
-	while (current -> next != NULL) current = current -> next;
+	if (num == 0){
+		subjects *current = psubject;
+		while (current -> next != NULL) current = current -> next;
 
-	subjects *newnode = new subjects;
-	newnode -> year = year;
-	newnode -> semester = semester;
-	char auxilary[200];
+		subjects *newnode = new subjects;
+		newnode -> year = year;
+		newnode -> semester = semester;
+		char auxilary[200];
 
-	cout << "Course name: ";
-	cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> name = new char[strlen(auxilary) + 1];
-	strcpy(newnode -> name, auxilary);
-
-	cout << "Id course:";
-	cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> course_id = new char[(strlen(auxilary) + 1)];
-	strcpy(newnode -> course_id, auxilary);
-
-	cout << "Teacher: ";
-	cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> teacher_name = new char[strlen(auxilary) + 1];
-	strcpy(newnode -> teacher_name, auxilary);
-
-	cout << "Num of creadits: ";
-	cin >> newnode -> num_of_credits;
-
-	cout << "Input the session of this course: " << endl;
-	for (int i = 0; i < 2; ++i){
-		cout << "\tSession " << i << ":" << endl;
-		cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
+		cout << "Course name: ";
 		cin.ignore();
 		cin.getline(auxilary, 200);
-		newnode -> session[i].day = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> session[i].day, auxilary);
-		cout << "\t\tHour start:";
-		cin >> newnode -> session[i].hour_start;
-		cout << "\t\tMinute start:";
-		cin >> newnode -> session[i].minute_start;
-	}
+		newnode -> name = new char[strlen(auxilary) + 1];
+		strcpy(newnode -> name, auxilary);
 
-	newnode -> next = NULL;
-	if (psubject == NULL) psubject = newnode;
-		else current -> next = newnode;
+		cout << "Id course:";
+		cin.ignore();
+		cin.getline(auxilary, 200);
+		newnode -> course_id = new char[(strlen(auxilary) + 1)];
+		strcpy(newnode -> course_id, auxilary);
+
+		cout << "Teacher: ";
+		cin.ignore();
+		cin.getline(auxilary, 200);
+		newnode -> teacher_name = new char[strlen(auxilary) + 1];
+		strcpy(newnode -> teacher_name, auxilary);
+
+		cout << "Num of creadits: ";
+		cin >> newnode -> num_of_credits;
+
+		cout << "Input the session of this course: " << endl;
+		for (int i = 0; i < 2; ++i){
+			cout << "\tSession " << i << ":" << endl;
+			cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
+			cin.ignore();
+			cin.getline(auxilary, 200);
+			newnode -> session[i].day = new char[strlen(auxilary) + 1];
+			strcpy(newnode -> session[i].day, auxilary);
+			cout << "\t\tHour start:";
+			cin >> newnode -> session[i].hour_start;
+			cout << "\t\tMinute start:";
+			cin >> newnode -> session[i].minute_start;
+		}
+
+		newnode -> next = NULL;
+		if (psubject == NULL) psubject = newnode;
+			else current -> next = newnode;
+	} else {
+
+		//show list of subject;
+
+		int pos; // mon hoc can xoa (xac dinh bang vi tri)
+		cin >> pos;
+		subjects *current = psubject;
+		int tmp = 0;
+		while (pos != tmp - 1){
+			current = current -> next;
+			++tmp;
+		}
+		subjects *auxilary = current -> next;
+		current -> next = current -> next -> next;
+		delete auxilary;
+	}
 	return;
 }
 
-void class_edit(int num){
-	//Khong can thiet
+void class_edit(int num, classrooms *&pclassid){
+	//you can't create new class because it's not the 1st semester of the year
+	classrooms *current = pclassid;
+	classrooms *newnode = new classrooms;
+	while (current -> next != NULL) current = current -> next;
+	char auxilary[200];
+	cin.ignore();
+	cin.getline(auxilary, 200);
+	newnode -> classroom = new char[strlen(auxilary) + 1];
+	strcpy(newnode -> classroom, auxilary);
+	newnode -> next = NULL;
+	if (current = NULL) pclassid = newnode;
+		else current -> next = newnode;
+	return;
 }
 
 void semester_edit(int num, subjects *&psubject, int &semester, int &year){

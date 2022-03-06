@@ -9,28 +9,28 @@
 
 using namespace std;
 
-struct date_of_birth{
+struct date_of_birth {
 	int year, month, day;
 };
 
-struct sessions{
+struct sessions {
 	char *day;
 	int hour_start;
 	int minute_start;
 };
 
-struct list_student{
-    int id;
-    list_student *next;
+struct list_student {
+	int id;
+	list_student *next;
 };
 
-struct classrooms{
-    char *classroom;
-    list_student *id_student = new list_student;
-    classrooms *next;
+struct classrooms {
+	char *classroom;
+	list_student *id_student = new list_student;
+	classrooms *next;
 };
 
-struct subjects{
+struct subjects {
 	int year;
 	int semester;
 	char *course_id;
@@ -45,12 +45,12 @@ struct subjects{
 	subjects *next;
 };
 
-struct subject2{
-    char *course_id;
-    subject2 *next;
+struct subject2 {
+	char *course_id;
+	subject2 *next;
 };
 
-struct profile{
+struct profile {
 	char *classroom;
 	int year;
 	subject2 *psub2;

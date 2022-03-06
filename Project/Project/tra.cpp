@@ -52,30 +52,30 @@ void view_loginboard() {
 	cout << static_cast<char>(188);
 }
 
-void view_student(){
-	
-}
-
-void view_subject(){
-	
-}
-
-void view_class(){
+void view_student() {
 
 }
 
-void view_semester(){
-	
-}
-
-void view_school_year(){
-	
-}
-
-void view_list_of_course(){
+void view_subject() {
 
 }
 
-void view_scoreboard(){
+void view_class() {
+
+}
+
+void view_semester() {
+
+}
+
+void view_school_year() {
+
+}
+
+void view_list_of_course() {
+
+}
+
+void view_scoreboard() {
 
 }
