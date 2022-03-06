@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include <windows.h>
 #include <iomanip>
 
@@ -13,7 +14,18 @@ struct sessions{
 	char *day;
 	int hour_start;
 	int minute_start;
-}
+};
+
+struct list_student{
+    int id;
+    list_student *next;
+};
+
+struct classrooms{
+    char *classroom;
+    list_student *id_student = new list_student;
+    classrooms *next;
+};
 
 struct subjects{
 	int year;
@@ -28,7 +40,12 @@ struct subjects{
 	int day_of_week;
 	sessions session[2];
 	subjects *next;
-}
+};
+
+struct subject2{
+    char *course_id;
+    subject2 *next;
+};
 
 struct profile{
 	char *classroom;
@@ -134,7 +151,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	profile *current = pstudent;
 	while (current -> next != NULL) current = current -> next;
 
-	profile newnode = new profile;
+	profile *newnode = new profile;
 	char auxilary[200];
 
 	current -> no = ++no;
@@ -145,19 +162,19 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 
 	cout << "\tFirst name: ";
 	cin.ignore();
-	cin.getline(auxilary);
+	cin.getline(auxilary, 200);
 	newnode -> first_name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> first_name, auxilary);
 
 	cout << "\tLast name: ";
 	cin.ignore();
-	cin.getline(auxilary);
+	cin.getline(auxilary, 200);
 	newnode -> last_name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> last_name, auxilary);
 
 	cout << "\tGender: ";
 	cin.ignore();
-	cin.getline(auxilary);
+	cin.getline(auxilary, 200);
 	newnode -> gender = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> gender, auxilary);
 
@@ -189,19 +206,19 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 
 	cout << "Course name: ";
 	cin.ignore();
-	cin.getline(auxilary);
+	cin.getline(auxilary, 200);
 	newnode -> name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> name, auxilary);
 
 	cout << "Id course:";
-	cin.ignoew();
-	cin.getline(auxilary);
+	cin.ignore();
+	cin.getline(auxilary, 200);
 	newnode -> course_id = new char[(strlen(auxilary) + 1)];
 	strcpy(newnode -> course_id, auxilary);
 
 	cout << "Teacher: ";
 	cin.ignore();
-	cin.getline(auxilary);
+	cin.getline(auxilary, 200);
 	newnode -> teacher_name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> teacher_name, auxilary);
 
@@ -213,13 +230,13 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 		cout << "\tSession " << i << ":" << endl;
 		cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
 		cin.ignore();
-		cin.getline(auxilary);
+		cin.getline(auxilary, 200);
 		newnode -> session[i].day = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> session.day);
+		strcpy(newnode -> session[i].day, auxilary);
 		cout << "\t\tHour start:";
-		cin >> newnode -> session.hour_start;
-		cout << "\t\tMinute start:"
-		cin >> newnode -> session.minute_start;
+		cin >> newnode -> session[i].hour_start;
+		cout << "\t\tMinute start:";
+		cin >> newnode -> session[i].minute_start;
 	}
 
 	newnode -> next = NULL;
@@ -228,26 +245,26 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 	return;
 }
 
-void class_edit(int num, int &classroom){
+void class_edit(int num){
 	//Khong can thiet
 }
 
-void semester_edit(int num, int &semester, int &year){
+void semester_edit(int num, subjects *&psubject, int &semester, int &year){
 	if (semester == 3){
 		cout << "You can't create the new one because there are only 3 semester in a year." << endl;
 		cout << "Create new year if you want to go to next semester." << endl;
 		return;
 	}
 	++semester;
-	subject_edit(0);
+	subject_edit(0, psubject, semester, year);
 }
 
-void school_year_edit(int &semester){
+void school_year_edit(subjects *&psubject, int &classroom, int &semester, int &year){
 	++year;
 	classroom = -1;
-	class_edit(0, classroom);
+	class_edit(0);
 	semester = -1;
-	semester_edit(1, semester, year);
+	semester_edit(1, psubject, semester, year);
 }
 
 //----------STAFF MEMBER FUNCTION SPACE-------------//
@@ -261,13 +278,17 @@ void undergraduate_function(){
 	//4. View list of student.
 	//	view_student();
 }
-void subject_function(){
-	//2. Add subject.
+void subject_function(subjects *&psubject, int &semester, int &year){
+	//1. Add subject.
 	//	subject_edit(1);
-	//3. Remove subject.
+	//2. Remove subject.
 	//	subject_edit(2);
-	//4. View list of subject.
+	//3. View list of subject.
 	//	view_subject();
+    int num;
+    cin >> num;
+    if (num != 3) subject_edit(num, psubject, semester, year);
+        else view_subject();
 }
 
 void class_function(){
@@ -279,20 +300,34 @@ void class_function(){
 	//	class_edit(2);
 	//4. View list of class.
 	//	view_class();
+
+    int num;
+    cin >> num;
+    if (num == 4) view_class();
+        else class_edit(num);
 }
 
-void semester_function(){
+void semester_function(subjects *&psubject, int &semester, int &year){
 	//1. Create new semester (1 - 3).
 	//	semester_edit(0);
 	//2. View semester.
 	//	view_semester();
+
+    int num;
+    cin >> num;
+    if (num == 1) semester_edit(0, psubject, semester, year);
+
 }
 
-void year_function(){
+void year_function(subjects *&psubject, int &classroom, int &semester, int &year){
 	//1. Create new school year.
-	//	create_school_year();
+	//	school_year_edit();
 	//2. View school year.
 	//	view_school_year();
+    int num;
+    cin >> num;
+    if (num == 1) school_year_edit(psubject, classroom, semester, year);
+        else view_school_year();
 }
 
 //--------STUDENT FUNCTION SPACE-------------//
@@ -306,7 +341,7 @@ void remove_course(){
 
 
 //----------ACCOUNT------------//
-void login(&roll){
+void login(int &roll){
 
 }
 
@@ -327,22 +362,22 @@ void print_option_1(){
 	return;
 }
 
-void make_choice_1(int &choice){
+void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year){
 	switch (choice){
 		case 0:
 			logout();
 			break;
 		case 1:
-			year_function();
+			year_function(psubject, classroom, semester, year);
 			break;
 		case 2:
-			semester_function();
+			semester_function(psubject, semester, year);
 			break;
 		case 3:
 			class_function();
 			break;
 		case 4:
-			subject_function();
+			subject_function(psubject, semester, year);
 			break;
 		case 5:
 			undergraduate_function();
@@ -385,15 +420,23 @@ void make_choice_2(int &choice){
 
 int main(){
 
+    int no = 0, semester = 0, year = 0, classroom = -1;
+    profile *pstudent;
+    subjects *psubject;
+    classrooms *pclassid;
+    pstudent = NULL;
+    psubject = NULL;
+    pclassid = NULL;
+
 	while (true){
-		int roll, choice = 1;
+		int roll = 1, choice = 1;
 		login(roll);
 		if (roll == 3) break;
 		if (roll == 1){
 			while (choice){
 				print_option_1();
 				cin >> choice;
-				make_choice_1(choice);
+				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year);
 			}
 		} else {
 			while (choice){
