@@ -144,7 +144,7 @@ void class_edit(int num, classrooms *&pclassid) {
   newnode->classroom = new char[strlen(auxilary) + 1];
   strcpy(newnode->classroom, auxilary);
   newnode->next = NULL;
-  if (current = NULL)
+  if (current == NULL)
     pclassid = newnode;
   else
     current->next = newnode;
