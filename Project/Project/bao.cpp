@@ -1,5 +1,6 @@
 #include "project.h"
 
+//-----------VIEW DESIGN SPACE-------------//
 void view_student(profile *&p, subjects *&ps, int &semester){
 	cout << "\t\tSTUDENT PROFILE" << endl << endl;
 	cout << "\tName: " << p -> first_name << " " << p-> last_name << endl;
@@ -126,13 +127,13 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 	strcpy(newnode -> name, auxilary);
 
 	cout << "Id course:";
-	//cin.ignore();
+	cin.ignore();
 	cin.getline(auxilary, 200);
 	newnode -> course_id = new char[(strlen(auxilary) + 1)];
 	strcpy(newnode -> course_id, auxilary);
 
 	cout << "Teacher: ";
-	//cin.ignore();
+	cin.ignore();
 	cin.getline(auxilary, 200);
 	newnode -> teacher_name = new char[strlen(auxilary) + 1];
 	strcpy(newnode -> teacher_name, auxilary);
@@ -144,7 +145,7 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 	for (int i = 0; i < 2; ++i){
 		cout << "\tSession " << i << ":" << endl;
 		cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
-		//cin.ignore();
+		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> session[i].day = new char[strlen(auxilary) + 1];
 		strcpy(newnode -> session[i].day, auxilary);
@@ -165,35 +166,71 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 	return;
 }
 
-void class_edit(int num, classrooms *&pclassid){
+void class_edit(int num, profile *&pstudent, classrooms *&pclassid){
 	// you can't create new class because it's not the 1st semester of the year
-	system("cls");
-	cout << ">> CREATE NEW CLASS <<" << endl;
-	cout << "\t Name of class: ";
-  	classrooms *newnode = new classrooms;
-  	char auxilary[200];
-  	cin.ignore();
-  	cin.getline(auxilary, 200);
-  	newnode->classroom = new char[strlen(auxilary) + 1];
-  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
-  	newnode->next = NULL;
-  	if (pclassid == NULL)
-    	pclassid = newnode;
-  	else{
-  		classrooms *current = pclassid;
-  		while (current->next != NULL) current = current->next;
-    	current->next = newnode;
-  	}
-  	cout << "Do you want to create another class?" << endl;
-  	cout << "\t1. Sure!" << endl << "\t2.No." << endl << "\tInput: ";
-  	int choice;
-  	cin >> choice;
-  	if (choice == 1) class_edit(0, pclassid);
-
+	if (num == 0){
+		system("cls");
+		cout << ">> CREATE NEW CLASS <<" << endl;
+		cout << "\t Name of class: ";
+	  	classrooms *newnode = new classrooms;
+	  	char auxilary[200];
+	  	cin.ignore();
+	  	cin.getline(auxilary, 200);
+	  	newnode->classroom = new char[strlen(auxilary) + 1];
+	  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
+	  	newnode->next = NULL;
+	  	if (pclassid == NULL)
+	    	pclassid = newnode;
+	  	else{
+	  		classrooms *current = pclassid;
+	  		while (current->next != NULL) current = current->next;
+	    	current->next = newnode;
+	  	}
+	  	cout << "Do you want to create another class?" << endl;
+	  	cout << "\t1. Sure!" << endl << "\t2.No." << endl << "\tInput: ";
+	  	int choice;
+	  	cin >> choice;
+	  	if (choice == 1) class_edit(0, pstudent, pclassid);
+	}
+	if (num == 2){
+		//remove
+	}
+	if  (num == 1){
+		cout << ">> ADD STUDENT TO CLASS <<" << endl;
+		if (pstudent == NULL){
+			cout << "You don't have any student to add to class.";
+			system("pause");
+			return;
+		}
+		cout << "Input student id: ";
+		int tmp;
+		cin >> tmp;
+		profile *current = pstudent;
+		while (current != NULL){
+			if (current -> id == tmp) break;
+			current = current -> next;
+		}
+		if (current -> id == tmp){
+			char auxilary[200];
+			cout << "Input student classroom:";
+			cin.ignore();
+			cin.getline(auxilary, 200);
+			strcpy(current -> classroom, auxilary);
+			cout << "=> Import successfully!" << endl;
+		} else 
+			cout << "The id does not exits!!!" << endl;
+		cout << "Do you want to add another student?" << endl;
+		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
+		int choice;
+		cin >> choice;
+		if (choice == 1) class_edit(1, pstudent, pclassid);
+	}
   	return;
 }
 
 void semester_edit(int num, subjects *&psubject, int &semester, int &year){
+	system("cls");
+	cout << "\t\t>> SEMESTER EDIT << " << endl;
 	if (semester == 0 && year == 0){
 		cout << "Error!" << endl;
 		cout << "Please create new school year first." << endl;
@@ -206,6 +243,13 @@ void semester_edit(int num, subjects *&psubject, int &semester, int &year){
 		system("pause");
 		return;
 	}
+	cout << "Do you want to create new semester?" << endl;
+	cout << "(Notice that all class in semester " << semester << "can't operate anymore)." << endl;
+	cout << "1. I'm sure with that." << endl;
+	cout << "2. No, i changed my mind." << endl;
+	int choice;
+	cin >> choice;
+	if (choice == 2) return;
 	++semester;
 	cout << "Now is Year: " << year << " Semester: " << semester << endl;
 	cout << "\t=> Press Enter to continue." << endl;
@@ -213,12 +257,13 @@ void semester_edit(int num, subjects *&psubject, int &semester, int &year){
 	subject_edit(0, psubject, semester, year);
 }
 
-void school_year_edit(subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
+void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
 	++year;
 	classroom = 0;
 	cout << "You have successfully initialized new school year!" << endl;
 	cout << "Now you need to create new class and new semester." << endl;
-	class_edit(0, pclassid);
+	system("pause");
+	class_edit(0, pstudent, pclassid);
 	semester = 0;
 	semester_edit(1, psubject, semester, year);
 }
@@ -263,7 +308,7 @@ void subject_function(subjects *&psubject, int &semester, int &year){
         else view_subject();
 }
 
-void class_function(classrooms *&pclassid){
+void class_function(profile *&pstudent, classrooms *&pclassid){
 	//1. Create new class (1 - 10).
 	//	class_edit(0, NULL);
 	//2. Add student to class.
@@ -289,7 +334,7 @@ void class_function(classrooms *&pclassid){
     else if (num == 4) 
     	view_scoreboard(); 
     else 
-    	class_edit(num, pclassid);
+    	class_edit(num, pstudent, pclassid);
 }
 
 void semester_function(subjects *&psubject, int &semester, int &year){
@@ -307,7 +352,7 @@ void semester_function(subjects *&psubject, int &semester, int &year){
 
 }
 
-void year_function(subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
+void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
 	//1. Create new school year.
 	//	school_year_edit();
 	//2. View school year.
@@ -319,7 +364,7 @@ void year_function(subjects *&psubject, classrooms *&pclassid, int &classroom, i
 	cout << "\tInput: ";
     int num;
     cin >> num;
-    if (num == 1) school_year_edit(psubject, pclassid, classroom, semester, year);
+    if (num == 1) school_year_edit(pstudent, psubject, pclassid, classroom, semester, year);
         else view_school_year();
 }
 
@@ -351,7 +396,8 @@ void print_option_1(){
 	cout << "\t2. Semester." << endl;
 	cout << "\t3. Class." << endl;
 	cout << "\t4. Subject." << endl;
-	cout << "\t5. Undergraduate." << endl;
+	cout << "\t5. Student." << endl;
+	cout << "\t6. Exit program." << endl;
 	return;
 }
 
@@ -361,19 +407,21 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classro
 			logout();
 			break;
 		case 1:
-			year_function(psubject, pclassid, classroom, semester, year);
+			year_function(pstudent, psubject, pclassid, classroom, semester, year);
 			break;
 		case 2:
 			semester_function(psubject, semester, year);
 			break;
 		case 3:
-			class_function(pclassid);
+			class_function(pstudent, pclassid);
 			break;
 		case 4:
 			subject_function(psubject, semester, year);
 			break;
 		case 5:
 			undergraduate_function(no, pstudent, psubject, semester, classroom, year);
+			break;
+		case 6:
 			break;
 	}
 	return;
@@ -406,6 +454,8 @@ void make_choice_2(int &choice){
 			break;
 		case 4:
 			view_scoreboard();
+			break;
+		case 5: 
 			break;
 	}
 	return;
