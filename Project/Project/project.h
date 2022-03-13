@@ -71,7 +71,11 @@ struct profile {
 	profile *next;
 };
 
-//-----------VIEW DESIGN SPACE-------------//
+//-----------STORE DATA-----------//
+
+//-----------CONDITION BARRIER-----------//
+
+//-----------VIEW DESIGN SPACE-----------//
 void GoTo(SHORT posX, SHORT posY);
 
 void view_space();
@@ -92,7 +96,7 @@ void view_list_of_course();
 
 void view_scoreboard();
 
-//--------EDIT SPACE----------------//
+//-----------EDIT SPACE-----------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year);
 
 void subject_edit(int num, subjects *&psubject, int &semester, int &year);
@@ -103,7 +107,7 @@ void semester_edit(int num, subjects *&psubject, int &semester, int &year);
 
 void school_year_edit(subjects *&psubject, int &classroom, int &semester, int &year);
 
-//----------STAFF MEMBER FUNCTION SPACE-------------//
+//-----------STAFF MEMBER FUNCTION SPACE-----------//
 void undergraduate_function();
 
 void subject_function(subjects *&psubject, int &semester, int &year);
@@ -114,7 +118,7 @@ void semester_function(subjects *&psubject, int &semester, int &year);
 
 void year_function(subjects *&psubject, int &classroom, int &semester, int &year);
 
-//--------STUDENT FUNCTION SPACE-------------//
+//-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
 void enroll_course();
 
@@ -126,7 +130,7 @@ void login(int &role);
 
 void logout();
 
-//---------INPUT SPACE--------//
+//-----------INPUT SPACE-----------//
 void print_option_1();
 
 void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year);
@@ -134,5 +138,7 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classro
 void print_option_2();
 
 void make_choice_2(int &choice);
+
+//-----------DELETE LINKED LIST-----------//
 
 #endif
