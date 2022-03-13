@@ -279,7 +279,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		cin >> choice;
 		if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 	}
-  	return;
+ 	return;
 }
 
 void semester_edit(int num, subjects *&psubject, int &semester, int &year){
@@ -374,10 +374,10 @@ void subject_function(subjects *&psubject, int &semester, int &year){
 	//4. Update mark.
 	//	update_mark();
 
-    int num;
-    cin >> num;
-    if (num != 3) subject_edit(num, psubject, semester, year);
-        else view_subject();
+   int num;
+   cin >> num;
+   if (num != 3) subject_edit(num, psubject, semester, year);
+       else view_subject();
 }
 
 void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
@@ -398,6 +398,7 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	cout << "\t2. Remove student from class" << endl;
 	cout << "\t3. View list of class." << endl;
 	cout << "\t4. View scoreboard of class." << endl;
+<<<<<<< HEAD
     int num;
     cout << "\tInput: ";
     cin >> num;
@@ -407,6 +408,17 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
     	view_scoreboard(); 
     else 
     	class_edit(num, pstudent, pclassid, semester);
+=======
+   int num;
+   cout << "\tInput: ";
+   cin >> num;
+   if (num == 3) 
+   	view_class();
+   else if (num == 4) 
+   	view_scoreboard(); 
+   else 
+   	class_edit(num, pstudent, pclassid);
+>>>>>>> 46a25c433fa4fa18fa8b6e052fd9c9d00b594755
 }
 
 void semester_function(subjects *&psubject, int &semester, int &year){
@@ -418,9 +430,9 @@ void semester_function(subjects *&psubject, int &semester, int &year){
 	cout << "\t1. Create new semester." << endl;
 	cout << "\t2. View semester: " << endl;
 	cout << "\t\tInput:";
-    int num;
-    cin >> num;
-    if (num == 1) semester_edit(0, psubject, semester, year);
+   int num;
+   cin >> num;
+   if (num == 1) semester_edit(0, psubject, semester, year);
 
 }
 
@@ -434,10 +446,10 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 	cout << "\t1. Create new school year." << endl;
 	cout << "\t2. View school year." << endl;
 	cout << "\tInput: ";
-    int num;
-    cin >> num;
-    if (num == 1) school_year_edit(pstudent, psubject, pclassid, classroom, semester, year);
-        else view_school_year();
+   int num;
+   cin >> num;
+   if (num == 1) school_year_edit(pstudent, psubject, pclassid, classroom, semester, year);
+       else view_school_year();
 }
 
 //--------STUDENT FUNCTION SPACE-------------//
