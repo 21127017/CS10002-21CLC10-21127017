@@ -78,8 +78,6 @@ void view_list_of_course() {
 
 void view_scoreboard() {
 
-}
-
 void login(int &role, int &id_profile) {
 	system("cls");
 	ifstream inp;
