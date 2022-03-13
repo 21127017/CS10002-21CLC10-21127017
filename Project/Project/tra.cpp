@@ -79,3 +79,25 @@ void view_list_of_course() {
 void view_scoreboard() {
 
 }
+
+void login(int &role) {
+	ifstream inp;
+	inp.open("login_information.csv");
+
+	int N;
+	inp >> N;
+	inp.ignore();
+
+	login_information inf;
+
+	for (int i = 0; i < N; i++) {
+		inp >> inf.role;
+		inp.getline(inf.username, 256, ',');
+		inp.getline(inf.password, 256, ',');
+		inp >> inf.user_id;
+		inp.ignore();
+		role = inf.role;
+		cout << inf.role + 1 << " ";
+		cout << inf.username << " " << inf.password << " " << inf.user_id << endl;
+	} 
+}
