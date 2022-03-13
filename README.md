@@ -15,4 +15,5 @@ Các công việc còn lại:
 - Thiết kế phần xuất dữ liệu theo yêu cầu.
 - Thiết kế giao diện từng phần.
 - Tạo fie csv
+- Viết hàm ràng buộc dữ liệu đầu vào.
 
