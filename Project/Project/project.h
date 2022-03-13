@@ -10,7 +10,7 @@
 using namespace std;
 
 struct login_information {
-	int role; //role: 1_academic staff, 2_student, 3_undefined account
+	int role; //role: 1_academic staff, 2_student, 3_unidentifined account
 	char *username;
 	char *password;
 	int user_id;
