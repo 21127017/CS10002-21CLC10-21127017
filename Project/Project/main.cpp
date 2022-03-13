@@ -11,31 +11,31 @@ int main(){
     pclassid = NULL;
 
 	while (true){
-		int roll = 1, choice = 1;
-		login(roll);
-		if (roll == 3) break;
-		if (roll == 1){
+		int role = 1, choice = 1;
+		login(role);
+		if (role == 3) cout << "The account was not exits." << endl;
+		if (role == 1){
 			while (choice){
 				print_option_1();
 				cin >> choice;
 				if (choice == 6){
-					roll = 3;
+					role = 4;
 					break;
 				}
 				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year);
 			}
-		} else {
+		} else if (role == 2) {
 			while (choice){
 				print_option_2();
 				cin >> choice;
 				if (choice == 5){
-					roll = 3;
+					role = 4;
 					break;
 				}
 				make_choice_2(choice);
 			}
 		}
-		if (roll == 3) break;
+		if (role == 4) break;
 	}
 
 	system("cls");
