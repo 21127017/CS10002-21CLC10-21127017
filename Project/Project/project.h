@@ -71,6 +71,15 @@ struct profile {
 	profile *next;
 };
 
+struct staff{
+	char *name;
+	date_of_birth dob;
+	char *role;
+	char *gender;
+	long long social_id;
+	staff *next;
+};
+
 //-----------STORE DATA-----------//
 
 //-----------CONDITION BARRIER-----------//
