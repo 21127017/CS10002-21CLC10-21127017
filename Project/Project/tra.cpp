@@ -80,24 +80,57 @@ void view_scoreboard() {
 
 }
 
-void login(int &role) {
+void login(int &role, int &id_profile) {
+	system("cls");
 	ifstream inp;
 	inp.open("login_information.csv");
 
-	int N;
-	inp >> N;
-	inp.ignore();
+	char temp_char;
+	char temp_string[256];
+
+	//input username from keyboard
+	char *username;
+	cout << "USERNAME: ";
+	cin.getline(temp_string, 256, ',');
+	username = new char[strlen(temp_string) + 1];
+	memcpy(username, temp_string, strlen(temp_string) + 1);
+
+	//input password from keyboard
+	char *password;
+	cout << "PASSWORD: ";
+	cin.getline(temp_string, 256, ',');
+	password = new char[strlen(temp_string) + 1];
+	memcpy(password, temp_string, strlen(temp_string) + 1);
 
 	login_information inf;
-
-	for (int i = 0; i < N; i++) {
+	while (!inp.eof()) {
 		inp >> inf.role;
-		inp.getline(inf.username, 256, ',');
-		inp.getline(inf.password, 256, ',');
+		if (inf.role == 0) {
+			role = 3;
+			id_profile = 0;
+			break;
+		} // end of file
+		inp >> temp_char; // read ,
+
+		//read username in file
+		inp.getline(temp_string, 256, ',');
+		inf.username = new char[strlen(temp_string) + 1];
+		memcpy(inf.username, temp_string, strlen(temp_string) + 1);
+
+		//read password in file
+		inp.getline(temp_string, 256, ',');
+		inf.password = new char[strlen(temp_string) + 1];
+		memcpy(inf.password, temp_string, strlen(temp_string) + 1);
+
 		inp >> inf.user_id;
 		inp.ignore();
-		role = inf.role;
-		cout << inf.role + 1 << " ";
-		cout << inf.username << " " << inf.password << " " << inf.user_id << endl;
-	} 
+
+		//login successful
+		if (!strcmp(inf.username, username) && !strcmp(inf.password, password)) {
+			role = inf.role;
+			id_profile = inf.user_id;
+			break;
+		}
+	}
+	inp.close();
 }

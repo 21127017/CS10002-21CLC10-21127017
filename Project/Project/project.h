@@ -126,7 +126,7 @@ void remove_course();
 
 
 //----------ACCOUNT------------//
-void login(int &role);
+void login(int &role, int &id_profile);
 
 void logout();
 
