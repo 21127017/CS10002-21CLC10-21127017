@@ -9,6 +9,13 @@
 
 using namespace std;
 
+struct login_information {
+	int role; //role: 1_academic staff, 2_student, 3_undefined account
+	char *username;
+	char *password;
+	int user_id;
+};
+
 struct date_of_birth {
 	int year, month, day;
 };
@@ -118,8 +125,8 @@ void enroll_course();
 void remove_course();
 
 
-//-----------ACCOUNT-----------//
-void login(int &roll);
+//----------ACCOUNT------------//
+void login(int &role);
 
 void logout();
 
