@@ -103,7 +103,8 @@ void login(int &role, int &id_profile) {
 	memcpy(password, temp_string, strlen(temp_string) + 1);
 
 	login_information inf;
-	inp >> N;
+	inp >> N >> temp_char >> temp_char >> temp_char;
+	inp.ignore();
 	while (!inp.eof()) {
 		inp >> inf.role;
 		if (inf.role == 0) {
