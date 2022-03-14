@@ -139,6 +139,10 @@ void login(int &role, int &id_profile);
 
 void logout();
 
+void changePassword(const int &changed_id);
+
+bool inputNewPass(char *&oldpassword);
+
 //-----------INPUT SPACE-----------//
 void print_option_1();
 
