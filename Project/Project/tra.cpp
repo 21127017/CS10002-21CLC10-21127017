@@ -86,6 +86,8 @@ void login(int &role, int &id_profile) {
 	char temp_char;
 	char temp_string[256];
 
+	int N; //number of account in file
+
 	//input username from keyboard
 	char *username;
 	cout << "USERNAME: ";
@@ -101,13 +103,14 @@ void login(int &role, int &id_profile) {
 	memcpy(password, temp_string, strlen(temp_string) + 1);
 
 	login_information inf;
+	inp >> N;
 	while (!inp.eof()) {
 		inp >> inf.role;
 		if (inf.role == 0) {
 			role = 3;
 			id_profile = 0;
 			break;
-		} // end of file
+		} // end of file, cannot find account properly
 		inp >> temp_char; // read ,
 
 		//read username in file
@@ -123,11 +126,16 @@ void login(int &role, int &id_profile) {
 		inp >> inf.user_id;
 		inp.ignore();
 
-		//login successful
-		if (!strcmp(inf.username, username) && !strcmp(inf.password, password)) {
-			role = inf.role;
-			id_profile = inf.user_id;
-			break;
+		if (!strcmp(inf.username, username)) {
+			if (!strcmp(inf.password, password)) {//login successful
+				role = inf.role;
+				id_profile = inf.user_id;
+				break;
+			} else {//wrong password
+				role = 3;
+				id_profile = 0;
+				break;
+			}
 		}
 	}
 	inp.close();
