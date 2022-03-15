@@ -45,10 +45,18 @@ void view_space() {
 
 void view_loginboard() {
 	system("cls");
-	GoTo(0, 0);
+	view_space();
 
-	//In o login
-	
+	GoTo(47, 9);
+	cout << "LOGIN";
+
+	char temp[200] = "USERNAME";
+	designSquare(33, 10, 3, 12, temp);
+	designSquare(45, 10, 3, 22, nullptr);
+
+	memcpy(temp, "PASSWORD", 9);
+	designSquare(33, 13, 3, 12, temp);
+	designSquare(45, 13, 3, 22, nullptr);
 }
 
 void view_student() {
@@ -112,8 +120,7 @@ Again:
 			cin >> choice;
 			if (choice == 1) {
 				goto Again;
-			}
-			else 
+			} else
 				return false;
 		}
 	} else {
@@ -142,11 +149,11 @@ void changePassword(const int &changed_id) {
 		inp >> temp_char; // read ,
 
 		inp.getline(temp_string, 200, ',');
-		inf[i].username = new char[strlen(temp_string) + 1];
+		inf[i].username = new char[strlen(temp_string) + 1]; //allocate username
 		memcpy(inf[i].username, temp_string, strlen(temp_string) + 1);
 
 		inp.getline(temp_string, 200, ',');
-		inf[i].password = new char[strlen(temp_string) + 1];
+		inf[i].password = new char[strlen(temp_string) + 1]; //allocate password
 		memcpy(inf[i].password, temp_string, strlen(temp_string) + 1);
 
 		inp >> inf[i].user_id;
@@ -167,11 +174,14 @@ void changePassword(const int &changed_id) {
 		out.close();
 	}
 
+	for (int i = 0; i < N; i++) {
+		delete[] inf[i].username;
+		delete[] inf[i].password;
+	}
 	delete[] inf;
 }
 
 void login(int &role, int &id_profile) {
-	system("cls");
 	ifstream inp;
 	inp.open("login_information.csv");
 
@@ -179,18 +189,18 @@ void login(int &role, int &id_profile) {
 	char temp_string[200];
 
 	int N; //number of account in file
-
+	view_loginboard();
 	//input username from keyboard
 	char *username;
-	cout << "USERNAME: ";
-	cin.getline(temp_string, 200, ',');
+	GoTo(46, 11);
+	cin.getline(temp_string, 200);
 	username = new char[strlen(temp_string) + 1];
 	memcpy(username, temp_string, strlen(temp_string) + 1);
 
 	//input password from keyboard
 	char *password;
-	cout << "PASSWORD: ";
-	cin.getline(temp_string, 200, ',');
+	GoTo(46, 14);
+	cin.getline(temp_string, 200);
 	password = new char[strlen(temp_string) + 1];
 	memcpy(password, temp_string, strlen(temp_string) + 1);
 
@@ -202,6 +212,8 @@ void login(int &role, int &id_profile) {
 		if (inf.role == 0) {
 			role = 3;
 			id_profile = 0;
+			GoTo(43, 16);
+			cout << "LOGIN FAILED";
 			break;
 		} // end of file, cannot find account properly
 		inp >> temp_char; // read ,
@@ -223,13 +235,25 @@ void login(int &role, int &id_profile) {
 			if (!strcmp(inf.password, password)) {//login successful
 				role = inf.role;
 				id_profile = inf.user_id;
+				GoTo(40, 16);
+				cout << "LOGIN SUCCESSFULLY";
+				delete[] inf.username;
+				delete[] inf.password;
 				break;
 			} else {//wrong password
 				role = 3;
-				id_profile = 0;
+				id_profile = 0; 
+				GoTo(41, 16);
+				cout << "WRONG PASSWORD";
+				delete[] inf.username;
+				delete[] inf.password;
 				break;
 			}
 		}
+		delete[] inf.username;
+		delete[] inf.password;
 	}
+	delete[] username;
+	delete[] password;
 	inp.close();
 }

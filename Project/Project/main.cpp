@@ -2,7 +2,7 @@
 
 int main(){
 
-    int no = 0, semester = 0, year = 0, classroom = -1, id_profile;
+    int no = 0, semester = 0, year = 0, classroom = -1, id_profile = 0;
     profile *pstudent;
     subjects *psubject;
     classrooms *pclassid;
