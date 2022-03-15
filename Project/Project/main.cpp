@@ -42,5 +42,6 @@ int main(){
 	cout <<"THANK FOR USING OUR APPLICATION!" << endl;
 	cout << "We hope you have a good experience.";
 
+	GoTo(0, 31);
 	return 0;
 }

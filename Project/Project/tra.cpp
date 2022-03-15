@@ -10,23 +10,37 @@ void GoTo(SHORT posX, SHORT posY) {
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
-void view_space() {
-	system("cls");
-	GoTo(0, 0);
+void designSquare(SHORT posX, SHORT posY, int height, int width, char *content) {
+	GoTo(posX, posY); //cout -------------------
 	cout << static_cast<char>(201);
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < (width - 2); i++)
 		cout << static_cast<char>(205);
-	cout << static_cast<char>(187) << endl;
-	for (int j = 0; j < 50; j++) {
+	cout << static_cast<char>(187);
+
+	for (int i = 1; i < (height - 1); i++) {
+		GoTo(posX, (posY + i)); //cout |.........................|
 		cout << static_cast<char>(186);
-		for (int i = 0; i < 100; i++)
-			cout << " ";
-		cout << static_cast<char>(186) << endl;
+		GoTo((posX + width - 1), (posY + i));
+		cout << static_cast<char>(186);
 	}
+
+	GoTo(posX, (posY + height - 1)); //cout ---------------------
 	cout << static_cast<char>(200);
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < (width - 2); i++)
 		cout << static_cast<char>(205);
 	cout << static_cast<char>(188);
+
+	if (content != nullptr) {
+		//cout content of square
+		int len = strlen(content);
+		GoTo((posX + (width - len) / 2), (posY + (height - 1) / 2));
+		cout << content;
+	}
+}
+
+void view_space() {
+	system("cls");
+	designSquare(0, 0, 30, 100, nullptr);
 }
 
 void view_loginboard() {
@@ -34,22 +48,7 @@ void view_loginboard() {
 	GoTo(0, 0);
 
 	//In o login
-	GoTo(45, 8);
-	cout << static_cast<char>(201);
-	for (int i = 0; i < 11; i++)
-		cout << static_cast<char>(205);
-	cout << static_cast<char>(187);
-	GoTo(45, 9);
-	cout << static_cast<char>(186);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 143);
-	cout << "   LOGIN   ";
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-	cout << static_cast<char>(186);
-	GoTo(45, 10);
-	cout << static_cast<char>(200);
-	for (int i = 0; i < 11; i++)
-		cout << static_cast<char>(205);
-	cout << static_cast<char>(188);
+	
 }
 
 void view_student() {
@@ -77,6 +76,8 @@ void view_list_of_course() {
 }
 
 void view_scoreboard() {
+
+}
 
 bool inputNewPass(char *&oldpassword) {
 	//input old password
