@@ -87,6 +87,8 @@ struct staff{
 //-----------VIEW DESIGN SPACE-----------//
 void GoTo(SHORT posX, SHORT posY);
 
+void designSquare(SHORT posX, SHORT posY, int height, int width, char* content);
+
 void view_space();
 
 void view_loginboard();
