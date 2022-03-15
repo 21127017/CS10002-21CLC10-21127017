@@ -47,7 +47,7 @@ void read_cvs(profile* &pstudent)
 		pCur = pCur -> next;
 		
 		// dunno how to input subjects yet since different
-		// subjects have different numbers of subjects 
+		// students have different numbers of subjects 
 	}
 	input.close();
 	return;
