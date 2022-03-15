@@ -10,7 +10,7 @@ void GoTo(SHORT posX, SHORT posY) {
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
-void designSquare(SHORT posX, SHORT posY, int height, int width, char* content) {
+void designSquare(SHORT posX, SHORT posY, int height, int width, char *content) {
 	GoTo(posX, posY); //cout -------------------
 	cout << static_cast<char>(201);
 	for (int i = 0; i < (width - 2); i++)
@@ -30,29 +30,17 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char* content) 
 		cout << static_cast<char>(205);
 	cout << static_cast<char>(188);
 
-	//cout content of square
-	int len = strlen(content);
-	GoTo((posX + (width - len)/2),(posY + (height - 1)/2));
-	cout << content;
+	if (content != nullptr) {
+		//cout content of square
+		int len = strlen(content);
+		GoTo((posX + (width - len) / 2), (posY + (height - 1) / 2));
+		cout << content;
+	}
 }
 
 void view_space() {
 	system("cls");
-	GoTo(0, 0);
-	cout << static_cast<char>(201);
-	for (int i = 0; i < 100; i++)
-		cout << static_cast<char>(205);
-	cout << static_cast<char>(187) << endl;
-	for (int j = 0; j < 50; j++) {
-		cout << static_cast<char>(186);
-		for (int i = 0; i < 100; i++)
-			cout << " ";
-		cout << static_cast<char>(186) << endl;
-	}
-	cout << static_cast<char>(200);
-	for (int i = 0; i < 100; i++)
-		cout << static_cast<char>(205);
-	cout << static_cast<char>(188);
+	designSquare(0, 0, 30, 100, nullptr);
 }
 
 void view_loginboard() {
@@ -88,6 +76,8 @@ void view_list_of_course() {
 }
 
 void view_scoreboard() {
+
+}
 
 bool inputNewPass(char *&oldpassword) {
 	//input old password
