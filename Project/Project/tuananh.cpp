@@ -1,20 +1,6 @@
 #include "project.h"
 using namespace std;
 
-struct profile {
-	char *classroom;
-	int year;
-	subject2 *psub2;
-	int no;
-	int id;
-	char *first_name;
-	char *last_name;
-	char *gender;
-	long long social_id;
-	date_of_birth dob;
-	profile *next;
-};
-
 void read_cvs(profile* &pstudent)
 {
 	// csv format: no -> id -> classroom -> year 
