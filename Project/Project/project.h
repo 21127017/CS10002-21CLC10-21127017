@@ -80,6 +80,9 @@ struct staff{
 	staff *next;
 };
 
+//----------COLORS----------//
+void set_color(int code);
+
 //-----------STORE DATA-----------//
 
 //-----------CONDITION BARRIER-----------//
