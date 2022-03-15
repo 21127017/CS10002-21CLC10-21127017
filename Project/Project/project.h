@@ -90,7 +90,7 @@ void set_color(int code);
 //-----------VIEW DESIGN SPACE-----------//
 void GoTo(SHORT posX, SHORT posY);
 
-void designSquare(SHORT posX, SHORT posY, int height, int width, char* content);
+void designSquare(SHORT posX, SHORT posY, int height, int width, char* content, int color);
 
 void view_space();
 

@@ -3,8 +3,9 @@
 //-----------VIEW DESIGN SPACE-------------//
 void set_color(int code) {
     HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(color, code );
+    SetConsoleTextAttribute(color, code);
 }
+
 void GoTo(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD Position;
@@ -14,7 +15,8 @@ void GoTo(SHORT posX, SHORT posY) {
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
-void designSquare(SHORT posX, SHORT posY, int height, int width, char *content) {
+void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color) {
+	set_color(color);
 	GoTo(posX, posY); //cout -------------------
 	cout << static_cast<char>(201);
 	for (int i = 0; i < (width - 2); i++)
@@ -33,7 +35,7 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content) 
 	for (int i = 0; i < (width - 2); i++)
 		cout << static_cast<char>(205);
 	cout << static_cast<char>(188);
-
+	set_color(7);
 	if (content != nullptr) {
 		//cout content of square
 		int len = strlen(content);
@@ -44,7 +46,7 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content) 
 
 void view_space() {
 	system("cls");
-	designSquare(0, 0, 30, 100, nullptr);
+	designSquare(0, 0, 30, 100, nullptr, 7);
 }
 
 void view_loginboard() {
@@ -55,12 +57,12 @@ void view_loginboard() {
 	cout << "LOGIN";
 
 	char temp[200] = "USERNAME";
-	designSquare(33, 10, 3, 12, temp);
-	designSquare(45, 10, 3, 22, nullptr);
+	designSquare(33, 10, 3, 12, temp, 7);
+	designSquare(45, 10, 3, 22, nullptr, 7);
 
 	memcpy(temp, "PASSWORD", 9);
-	designSquare(33, 13, 3, 12, temp);
-	designSquare(45, 13, 3, 22, nullptr);
+	designSquare(33, 13, 3, 12, temp, 7);
+	designSquare(45, 13, 3, 22, nullptr, 7);
 }
 
 void view_student() {
@@ -217,7 +219,9 @@ void login(int &role, int &id_profile) {
 			role = 3;
 			id_profile = 0;
 			GoTo(43, 16);
+			set_color(4);
 			cout << "LOGIN FAILED";
+			set_color(7);
 			break;
 		} // end of file, cannot find account properly
 		inp >> temp_char; // read ,
@@ -240,7 +244,9 @@ void login(int &role, int &id_profile) {
 				role = inf.role;
 				id_profile = inf.user_id;
 				GoTo(40, 16);
+				set_color(9);
 				cout << "LOGIN SUCCESSFULLY";
+				set_color(7);
 				delete[] inf.username;
 				delete[] inf.password;
 				break;
@@ -248,7 +254,9 @@ void login(int &role, int &id_profile) {
 				role = 3;
 				id_profile = 0; 
 				GoTo(41, 16);
+				set_color(4);
 				cout << "WRONG PASSWORD";
+				set_color(7);
 				delete[] inf.username;
 				delete[] inf.password;
 				break;
