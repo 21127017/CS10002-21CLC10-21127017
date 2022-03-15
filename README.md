@@ -17,6 +17,9 @@ Công việc đã hoàn thành:
     + Hiển thị danh sách sinh viên (chưa qua thiết kế).
     + Thêm các điều kiện ràng buộc cơ bản(vd: không thể tạo thêm năm học mới nếu chưa tạo đủ 3 kì).
 - Trà:
+    + Thiết kế giao diện login
+    + Đăng nhập, đổi mật khẩu
+    + Thiết kế giới hạn giao diện, hàm vẽ khung
 - Anh:
 
 Các công việc còn lại:

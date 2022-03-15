@@ -244,7 +244,7 @@ void login(int &role, int &id_profile) {
 				role = inf.role;
 				id_profile = inf.user_id;
 				GoTo(40, 16);
-				set_color(9);
+				set_color(266);
 				cout << "LOGIN SUCCESSFULLY";
 				set_color(7);
 				delete[] inf.username;
