@@ -1,6 +1,10 @@
 #include "project.h"
 
 //-----------VIEW DESIGN SPACE-------------//
+void set_color(int code) {
+    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(color, code );
+}
 void GoTo(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD Position;
