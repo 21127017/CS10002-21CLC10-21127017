@@ -6,7 +6,7 @@ Công việc tuần 05(tính theo số lab ktlt th):
 
 Công việc đã hoàn thành:
 - Bảo:
-    + Tạo khung sườn (Struct và các hàm cần thiết).
+    + Thiết kế khung sườn đồ án (Struct và các hàm cần thiết).
     + Tạo năm học mới.
     + Tạo học kì mới.
     + Thêm môn học.
