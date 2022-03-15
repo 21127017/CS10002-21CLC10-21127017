@@ -1,5 +1,11 @@
 #include "project.h"
 
+//----------COLORS----------//
+void set_color(int code) {
+    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(color, code );
+}
+
 //-----------VIEW DESIGN SPACE-------------//
 void view_student(profile *&pstudent, subjects *&ps, int &semester){
 	cout << "\t\tSTUDENT PROFILE" << endl << endl;
