@@ -20,6 +20,8 @@ Công việc đã hoàn thành:
     + Xoá môn học.
     + Hàm xoá học sinh.
     + Hàm thay đổi điểm của học sinh.
+    + Hàm xem thông tin 1 môn học.
+    + Hàm tạo khoảng cách khi in cột.
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
