@@ -20,6 +20,7 @@ Công việc đã hoàn thành:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
     + Thiết kế giới hạn giao diện, hàm vẽ khung
+    + Hàm Lưu trữ dữ liệu tài khoản mật khẩu.
 - Anh:
 
 Các công việc còn lại:
@@ -32,7 +33,6 @@ Các công việc còn lại:
 - Hàm thay đổi điểm của học sinh.
 - Hàm lưu trữ dữ liệu tổng hợp.
 - Hàm lưu trữ dữ liệu giảng viên.
-- Hàm Lưu trữ dữ liệu tài khoản mật khẩu.
 - Hàm xem thông tin các năm học.
 - Hàm xem thông tin các kì.
 - Hàm xem thông tin các môn học.
