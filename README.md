@@ -27,10 +27,8 @@ Công việc đã hoàn thành:
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
-- Hàm xoá môn học.
 - Hàm xoá học sinh.
 - Hàm thay đổi thông tin môn học.
-- Hàm nhập điểm cho học sinh.
 - Hàm thay đổi điểm của học sinh.
 - Hàm lưu trữ dữ liệu tổng hợp.
 - Hàm lưu trữ dữ liệu giảng viên.
