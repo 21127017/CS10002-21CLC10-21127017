@@ -16,6 +16,8 @@ Công việc đã hoàn thành:
     + Hàm xoá các danh sách liên kết đã sử dụng.
     + Hiển thị danh sách sinh viên (chưa qua thiết kế).
     + Thêm các điều kiện ràng buộc cơ bản(vd: không thể tạo thêm năm học mới nếu chưa tạo đủ 3 kì).
+    + Nhập điểm cho học sinh.
+    + Xoá môn học.
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
