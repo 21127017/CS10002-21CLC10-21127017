@@ -90,7 +90,7 @@ void view_space() {
 	for (int j = 0; j < 86; j++) {
 		cout << " ";
 	}
-	cout << static_cast<char>(186) << " _ ";
+	cout << static_cast<char>(186) << " " << static_cast<char>(196) << " ";
 	cout << static_cast<char>(186) << " " << static_cast<char>(254) << " ";
 	cout << static_cast<char>(186) << " X ";
 	cout << static_cast<char>(186) << endl;
