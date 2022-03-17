@@ -19,6 +19,7 @@ Công việc đã hoàn thành:
     + Nhập điểm cho học sinh.
     + Xoá môn học.
     + Hàm xoá học sinh.
+    + Hàm thay đổi điểm của học sinh.
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
@@ -28,8 +29,7 @@ Công việc đã hoàn thành:
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
-- Hàm thay đổi thông tin môn học.
-- Hàm thay đổi điểm của học sinh.
+- Hàm thay đổi thông tin môn học(Bao).
 - Hàm lưu trữ dữ liệu tổng hợp.
 - Hàm lưu trữ dữ liệu giảng viên.
 - Hàm Lưu trữ dữ liệu tài khoản mật khẩu.
