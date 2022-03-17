@@ -16,6 +16,10 @@ Công việc đã hoàn thành:
     + Hàm xoá các danh sách liên kết đã sử dụng.
     + Hiển thị danh sách sinh viên (chưa qua thiết kế).
     + Thêm các điều kiện ràng buộc cơ bản(vd: không thể tạo thêm năm học mới nếu chưa tạo đủ 3 kì).
+    + Nhập điểm cho học sinh.
+    + Xoá môn học.
+    + Hàm xoá học sinh.
+    + Hàm thay đổi điểm của học sinh.
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
@@ -26,11 +30,7 @@ Công việc đã hoàn thành:
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
-- Hàm xoá môn học.
-- Hàm xoá học sinh.
-- Hàm thay đổi thông tin môn học.
-- Hàm nhập điểm cho học sinh.
-- Hàm thay đổi điểm của học sinh.
+- Hàm thay đổi thông tin môn học(Bao).
 - Hàm lưu trữ dữ liệu tổng hợp.
 - Hàm lưu trữ dữ liệu giảng viên.
 - Hàm xem thông tin các năm học.
