@@ -1,14 +1,12 @@
 #include "project.h"
 
-//----------COLORS----------//
-
-
 //-----------VIEW DESIGN SPACE-------------//
 void view_student(profile *&pstudent, subjects *&ps, int &semester){
+	system("cls");
 	cout << "\t\tSTUDENT PROFILE" << endl << endl;
 	if (pstudent == NULL){
 		cout << "No result." << endl << endl;
-		system("cls");
+		system("pause");
 		return;
 	}
 	profile *p = pstudent;
@@ -126,7 +124,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	}
 }
 
-void subject_edit(int num, subjects *&psubject, int &semester, int &year){
+void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year){
 	system("cls");
 	if (num == 1){
 		cout << "\t\t>> CREATE NEW COURSE << " << endl;
@@ -183,10 +181,68 @@ void subject_edit(int num, subjects *&psubject, int &semester, int &year){
 		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
 		int choice;
 		cin >> choice;
-		if (choice == 1) subject_edit(1, psubject, semester, year);
+		if (choice == 1) subject_edit(1, pstudent, psubject, semester, year);
 	}
 	if (num == 2){
-
+		//show list of course in this semester
+		cout << "\tInput the id of course you want to delete: ";
+		char auxilary[200];
+		cin.ignore();
+		cin.getline(auxilary, 200);
+		subjects *current = psubject;
+		if (strcmp(current -> course_id, auxilary) == 0){
+			psubject = psubject -> next;
+			delete current;
+		}
+		while (current -> next != NULL && strcmp(current -> next -> course_id, auxilary) != 0)
+			current = current -> next;
+		if (current -> next == NULL){
+			cout << "\tThe id was not exits." << endl;
+			system("pause");
+		} else {
+			subjects *tmp = current -> next;
+			current -> next = current -> next -> next;
+			delete tmp;
+			cout << "\tDelete course complete!" << endl;
+			system("pause");
+		}
+	}
+	if (num == 4){
+		//Show list of course.
+		cout << "\tChoose a course you want to update score." << endl << "\tInput: ";
+		char auxilary[200];
+		cin.ignore();
+		cin.getline(auxilary, 200);
+		subjects *current = psubject;
+		while (current != NULL && strcmp(current -> course_id, auxilary) != 0)
+			current = current -> next;
+		if (current == NULL){
+			cout << "\tThe id was not exits." << endl;
+			cout << "\tDo you want to input again?" << endl;
+			cout << "\t1. Yes" << endl << "\t2. No" << endl;
+			cout << "\tInput:";
+			int choice;
+			cin >> choice;
+			if (choice == 1) subject_edit(4, pstudent, psubject, semester, year);
+		} else {
+			system("cls");
+			int count = 0;
+			cout << "\t\t>> INPUT SCORE <<";
+			profile *cur1 = pstudent;
+			while (cur1 != NULL){
+				subject2 *cur2 = cur1 -> psub2;
+				while (cur2 != NULL && strcmp(cur2 -> course_id, auxilary) != 0)
+					cur2 = cur2 -> next;
+				if (cur2 != NULL){
+					cout << "\tID: " << cur1 -> id << endl;
+					cout << "\tScore: ";
+					cin >> cur2 -> score;
+					++count;
+				}
+				cur1 = cur1 -> next;
+			}
+			if (count == 0) cout << "\tNo result." << endl;
+		}
 	}
 	return;
 }
@@ -285,7 +341,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
   	return;
 }
 
-void semester_edit(int num, subjects *&psubject, int &semester, int &year){
+void semester_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year){
 	system("cls");
 	cout << "\t\t>> CREATE NEW SEMESTER << " << endl;
 	if (semester == 0 && year == 0){
@@ -314,7 +370,7 @@ void semester_edit(int num, subjects *&psubject, int &semester, int &year){
 	cout << "\tNow is Year: " << year << " Semester: " << semester << endl;
 	cout << "\tLet's create new course for this semester!" << endl << endl;
 	system("pause");
-	subject_edit(0, psubject, semester, year);
+	subject_edit(0, pstudent, psubject, semester, year);
 }
 
 void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
@@ -339,7 +395,7 @@ void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pcla
 	cout << "\tNow you need to create new class and new semester." << endl << endl;
 	system("pause");
 	semester = 0;
-	semester_edit(1, psubject, semester, year);
+	semester_edit(1, pstudent, psubject, semester, year);
 	class_edit(0, pstudent, pclassid, semester);
 }
 
@@ -354,10 +410,11 @@ void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, in
 	//4. View list of student.
 	//	view_student(pstudent, psubject, semester);
 	system("cls");
-	cout << "0. Import file csv." << endl;
-	cout << "1. Add student manual." << endl;
-	cout << "2. Remove student." << endl;
-	cout << "3. View list of student." << endl;
+	cout << "\t\t>> STUDENT EDIT <<" << endl << endl;
+	cout << "\t0. Import file csv." << endl;
+	cout << "\t1. Add student manual." << endl;
+	cout << "\t2. Remove student." << endl;
+	cout << "\t3. View list of student." << endl << endl;
 	cout << "\tInput: ";
 	int num;
 	cin >> num;
@@ -367,7 +424,7 @@ void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, in
 		student_edit(num, no, pstudent, semester, classroom, year);
 	return;
 }
-void subject_function(subjects *&psubject, int &semester, int &year){
+void subject_function(profile *&pstudent, subjects *&psubject, int &semester, int &year){
 	//1. Add subject.
 	//	subject_edit(1);
 	//2. Remove subject.
@@ -376,10 +433,13 @@ void subject_function(subjects *&psubject, int &semester, int &year){
 	//	view_subject();
 	//4. Update mark.
 	//	update_mark();
-
+	cout << "\t1. Add new course." << endl;
+	cout << "\t2. Remove course." << endl;
+	cout << "\t3. View list of course." << endl;
+	cout << "\t4. Update mark" << endl << endl;
     int num;
     cin >> num;
-    if (num != 3) subject_edit(num, psubject, semester, year);
+    if (num != 3) subject_edit(num, pstudent, psubject, semester, year);
         else view_subject();
 }
 
@@ -394,13 +454,13 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	//	view_class();
 	//5. View scoreboard of class.
 	//	view_scorebard(class);
-
+	system("cls");
 	cout << "\t\t>> CLASS EDIT <<" << endl << endl;
 	cout << "\t0. Create new class." << endl;
 	cout << "\t1. Add student to class." << endl;
 	cout << "\t2. Remove student from class" << endl;
 	cout << "\t3. View list of class." << endl;
-	cout << "\t4. View scoreboard of class." << endl;
+	cout << "\t4. View scoreboard of class." << endl << endl;
     int num;
     cout << "\tInput: ";
     cin >> num;
@@ -412,18 +472,18 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
     	class_edit(num, pstudent, pclassid, semester);
 }
 
-void semester_function(subjects *&psubject, int &semester, int &year){
+void semester_function(profile *&pstudent, subjects *&psubject, int &semester, int &year){
 	//1. Create new semester (1 - 3).
 	//	semester_edit(0);
 	//2. View semester.
 	//	view_semester();
 	system("cls");
 	cout << "\t1. Create new semester." << endl;
-	cout << "\t2. View semester: " << endl;
-	cout << "\t\tInput:";
+	cout << "\t2. View semester: " << endl << endl;
+	cout << "\tInput:";
     int num;
     cin >> num;
-    if (num == 1) semester_edit(0, psubject, semester, year);
+    if (num == 1) semester_edit(0, pstudent, psubject, semester, year);
 
 }
 
@@ -435,7 +495,7 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 	system("cls");
 	cout <<"\t\t>> YEAR EDIT <<" << endl;
 	cout << "\t1. Create new school year." << endl;
-	cout << "\t2. View school year." << endl;
+	cout << "\t2. View school year." << endl << endl;
 	cout << "\tInput: ";
     int num;
     cin >> num;
@@ -459,6 +519,71 @@ void login(int &roll, int &id_profile){
 }
 
 void logout(){
+
+}
+
+//-----DELETE SPACE-----//
+void delete_student(profile *&pstudent){
+	/*
+	char *classroom;
+	int year;
+	subject2 *psub2;
+	int no;
+	int id;
+	char *first_name;
+	char *last_name;
+	char *gender;
+	long long social_id;
+	date_of_birth dob;
+	profile *next;
+	*/
+	profile *auxilary;
+	subject2 *tmp;
+	while (pstudent != NULL){
+		auxilary = pstudent;
+		pstudent = pstudent -> next;
+		subject2 *cur = auxilary -> psub2;
+		while (cur != NULL){
+			tmp = cur;
+			cur = cur -> next;
+			delete[] tmp -> course_id;
+			delete tmp;
+		}
+		delete[] auxilary -> first_name;
+		delete[] auxilary -> last_name;
+		delete[] auxilary -> gender;
+		delete[] auxilary -> classroom;
+		delete auxilary;
+	}
+	return;
+}
+
+void delete_subject(subjects *&psubject){
+	/* 
+	int year;
+	int semester;
+	char *course_id;
+	char *teacher_name;
+	int num_of_credits;
+	int maximum = 50;
+	char *name;
+	int start;
+	int end;
+	int day_of_week;
+	sessions session[2];
+	subjects *next;
+	*/
+	subjects *auxilary;
+	while (psubject != NULL){
+		auxilary = psubject;
+		psubject = psubject -> next;
+		delete[] auxilary -> session[0].day;
+		delete[] auxilary -> session[1].day;
+		delete[] auxilary -> name;
+		delete[] auxilary -> course_id;
+		delete[] auxilary -> teacher_name;
+		delete auxilary;
+	}
 
 }
 
@@ -487,13 +612,13 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 			year_function(pstudent, psubject, pclassid, classroom, semester, year);
 			break;
 		case 2:
-			semester_function(psubject, semester, year);
+			semester_function(pstudent, psubject, semester, year);
 			break;
 		case 3:
 			class_function(pstudent, pclassid, semester);
 			break;
 		case 4:
-			subject_function(psubject, semester, year);
+			subject_function(pstudent, psubject, semester, year);
 			break;
 		case 5:
 			undergraduate_function(no, pstudent, psubject, semester, classroom, year);
@@ -544,4 +669,51 @@ void make_choice_2(int &choice, int &id_profile){
 			break;
 	}
 	return;
+}
+
+int main(){
+
+    int no = 0, semester = 0, year = 0, classroom = -1, id_profile;
+    profile *pstudent;
+    subjects *psubject;
+    classrooms *pclassid;
+    pstudent = NULL;
+    psubject = NULL;
+    pclassid = NULL;
+
+	while (true){
+		int role = 1, choice = 1;
+		login(role, id_profile);
+		if (role == 3) cout << "The account was not exits." << endl;
+		if (role == 1){
+			while (choice){
+				print_option_1();
+				cout << endl << "    Input: ";
+				cin >> choice;
+				if (choice == 7){
+					role = 4;
+					break;
+				}
+				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year, id_profile);
+			}
+		} else if (role == 2) {
+			while (choice){
+				print_option_2();
+				cout << endl << "    Input: ";
+				cin >> choice;
+				if (choice == 6){
+					role = 4;
+					break;
+				}
+				make_choice_2(choice, id_profile);
+			}
+		}
+		if (role == 4) break;
+	}
+
+	system("cls");
+	cout <<"THANK FOR USING OUR APPLICATION!" << endl;
+	cout << "We hope you have a good experience.";
+
+	return 0;
 }
