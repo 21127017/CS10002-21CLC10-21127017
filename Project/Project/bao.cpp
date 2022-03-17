@@ -70,57 +70,103 @@ void view_scoreboard(){
 
 //--------EDIT SPACE----------------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year){
-	if (num == 0){
+	system("cls");
+	if (num == 1){
 		//read file csv
 		return;
 	}
 	//manual
-	profile *newnode = new profile;
-	char auxilary[200];
+	if (num == 2){
+		cout << "\t\t>> ADD STUDENT MANUAL <<" << endl << endl;
+		profile *newnode = new profile;
+		char auxilary[200];
 
-	newnode -> no = ++no;
-	cout << "\tStudent no: " << no << endl;
-	newnode -> psub2 = NULL;
+		newnode -> no = ++no;
+		cout << "\tStudent no: " << no << endl;
+		newnode -> psub2 = NULL;
 
-	cout << "\tStudent Id: ";
-	cin >> newnode -> id;
+		cout << "\tStudent Id: ";
+		cin >> newnode -> id;
 
-	cout << "\tFirst name: ";
-	cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> first_name = new char[strlen(auxilary) + 1];
-	strcpy(newnode -> first_name, auxilary);
+		cout << "\tFirst name: ";
+		cin.ignore();
+		cin.getline(auxilary, 200);
+		newnode -> first_name = new char[strlen(auxilary) + 1];
+		strcpy(newnode -> first_name, auxilary);
 
-	cout << "\tLast name: ";
-	//cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> last_name = new char[strlen(auxilary) + 1];
-	strcpy(newnode -> last_name, auxilary);
+		cout << "\tLast name: ";
+		//cin.ignore();
+		cin.getline(auxilary, 200);
+		newnode -> last_name = new char[strlen(auxilary) + 1];
+		strcpy(newnode -> last_name, auxilary);
 
-	cout << "\tGender: ";
-	//cin.ignore();
-	cin.getline(auxilary, 200);
-	newnode -> gender = new char[strlen(auxilary) + 1];
-	strcpy(newnode -> gender, auxilary);
+		cout << "\tGender: ";
+		//cin.ignore();
+		cin.getline(auxilary, 200);
+		newnode -> gender = new char[strlen(auxilary) + 1];
+		strcpy(newnode -> gender, auxilary);
 
-	cout << "\tSocial Id: ";
-	cin >> newnode -> social_id;
+		cout << "\tSocial Id: ";
+		cin >> newnode -> social_id;
 
-	cout << "\tDate of birth:" << endl;
-	cout << "\t\tYear: ";
-	cin >> newnode -> dob.year;
-	cout << "\t\tMonth: ";
-	cin >> newnode -> dob.month;
-	cout << "\t\tDay: ";
-	cin >> newnode -> dob.day;
+		cout << "\tDate of birth:" << endl;
+		cout << "\t\tYear: ";
+		cin >> newnode -> dob.year;
+		cout << "\t\tMonth: ";
+		cin >> newnode -> dob.month;
+		cout << "\t\tDay: ";
+		cin >> newnode -> dob.day;
 
-	newnode -> next = NULL;
-	if (pstudent == NULL) 
-		pstudent = newnode;
-	else {
-		profile *current = pstudent;
-		while (current -> next != NULL) current = current -> next;
-		current -> next = newnode;
+		newnode -> next = NULL;
+		if (pstudent == NULL) 
+			pstudent = newnode;
+		else {
+			profile *current = pstudent;
+			while (current -> next != NULL) current = current -> next;
+			current -> next = newnode;
+		}
+	}
+	if (num == 3){
+		cout << "\t\t>> REMOVE STUDENT <<" << endl << endl;
+		if (pstudent == NULL){
+			cout << "\tNo result...." << endl << endl;
+			cout << "\tDo you want to input again?" << endl;
+			cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
+			int choice;
+			cin >> choice;
+			if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
+			return;
+		}
+		cout << "\tInput student id: ";
+		int student_id;
+		cin >> student_id;
+		profile *cur = pstudent;
+		if (cur -> id == student_id){
+			pstudent = pstudent -> next;
+			delete cur;
+		} else {
+			profile *auxilary;
+			while (cur -> next != NULL && cur -> next -> id != student_id)
+				cur = cur -> next;
+			if (cur -> next == NULL){
+				cout << "\tCan't find this id. " << endl << endl;
+				cout << "\tDo you want to input again?" << endl;
+				cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
+				int choice;
+				cin >> choice;
+				if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
+				return;
+			}
+			auxilary = cur -> next;
+			cur -> next = cur -> next -> next;
+			delete auxilary;
+		}
+		cout << "\t=> Delete complete!" << endl << endl;
+		cout << "\tDo you want to remove another student?" << endl;
+		cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
+		int choice;
+		cin >> choice;
+		if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
 	}
 }
 
@@ -244,6 +290,12 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			if (count == 0) cout << "\tNo result." << endl;
 		}
 	}
+	if (num == 5){
+
+	}
+	if (num == 6){
+
+	}
 	return;
 }
 
@@ -306,7 +358,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			if (current -> id == tmp) break;
 			current = current -> next;
 		}
-		if (current -> id == tmp){
+		if (current != NULL && current -> id == tmp){
 			char auxilary[200];
 			cout << "Input student classroom:";
 			cin.ignore();
@@ -325,13 +377,20 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				int choice;
 				cin >> choice;
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
-					else return;
+				return;
 
 			}
 			strcpy(current -> classroom, auxilary);
 			cout << "=> Import successfully!" << endl;
-		} else 
+		} else {
 			cout << "The id does not exits!!!" << endl;
+			cout << "Do you want to input again?" << endl;
+			cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
+			int choice;
+			cin >> choice;
+			if (choice == 1) class_edit(1, pstudent, pclassid, semester);
+			return;
+		}
 		cout << "Do you want to add another student?" << endl;
 		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
 		int choice;
@@ -411,14 +470,14 @@ void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, in
 	//	view_student(pstudent, psubject, semester);
 	system("cls");
 	cout << "\t\t>> STUDENT EDIT <<" << endl << endl;
-	cout << "\t0. Import file csv." << endl;
-	cout << "\t1. Add student manual." << endl;
-	cout << "\t2. Remove student." << endl;
-	cout << "\t3. View list of student." << endl << endl;
+	cout << "\t1. Import file csv." << endl;
+	cout << "\t2. Add student manual." << endl;
+	cout << "\t3. Remove student." << endl;
+	cout << "\t4. View list of student." << endl << endl;
 	cout << "\tInput: ";
 	int num;
 	cin >> num;
-	if (num == 3) 
+	if (num == 4) 
 		view_student(pstudent, psubject, semester);
 	else 
 		student_edit(num, no, pstudent, semester, classroom, year);
@@ -670,7 +729,6 @@ void make_choice_2(int &choice, int &id_profile){
 	}
 	return;
 }
-
 
 int main(){
 
