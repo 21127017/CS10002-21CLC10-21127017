@@ -25,6 +25,8 @@ Công việc đã hoàn thành:
     + Đăng nhập, đổi mật khẩu
     + Thiết kế giới hạn giao diện, hàm vẽ khung
     + Hàm Lưu trữ dữ liệu tài khoản mật khẩu.
+    + Thiết kế giao diện menu giáo vụ
+    + Hàm di chuyển con trỏ bằng bàn phím
 - Anh:
 
 Các công việc còn lại:
