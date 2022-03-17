@@ -671,6 +671,7 @@ void make_choice_2(int &choice, int &id_profile){
 	return;
 }
 
+
 int main(){
 
     int no = 0, semester = 0, year = 0, classroom = -1, id_profile;
