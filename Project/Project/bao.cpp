@@ -270,6 +270,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			int choice;
 			cin >> choice;
 			if (choice == 1) subject_edit(4, pstudent, psubject, semester, year);
+			return;
 		} else {
 			system("cls");
 			int count = 0;
@@ -291,10 +292,65 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		}
 	}
 	if (num == 5){
-
+		cout << "\t\t>> UPDATE SCORE <<" << endl << endl;
+		if (pstudent == NULL || psubject == NULL){
+			cout << "Error. You need to create data first." << endl
+			system("pause");
+			return;
+		}
+		cout << "Input student id you want to update:";
+		int student_id;
+		cin >> student_id;
+		profile *cur = pstudent;
+		while (cur != NULL && cur -> id != student_id)
+			cur = cur -> next;
+		if (cur == NULL){
+			cout << "\tThe id was not exits." << endl << endl;
+			cout << "\tDo you want to input again?" << endl;
+			cout << "\t1. Yes" << endl << "\t2. No" << endl;
+			cout << "\tInput:";
+			int choice;
+			cin >> choice;
+			if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
+			return;
+		}
+		cout << "\tOld score: " << cur -> score << endl;
+		cout << "\tInput new score: ";
+		cin >> cur -> score;
+		cout << "\t=> Update successfully!" << endl << endl;
+		cout << "\tDo you want to continue?" << endl;
+		cout << "\t1. Yes" << endl << "\t2. No" << endl;
+		cout << "\tInput:";
+		int choice;
+		cin >> choice;
+		if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 	}
 	if (num == 6){
-
+		cout << "\t\t>> UPDATE COURSE INFORMATION <<" << endl << endl;
+		if (psubject == NULL){
+			cout << "\tCan't updated. You have no course to update." << endl;
+			system("pause");
+			return;
+		}
+		//show list of course
+		cout << "Input id of course you want to delete:";
+		cahr auxilary[200];
+		cin.ignore;
+		cin.getline(auxilary);
+		subjects *cur = psubject;
+		while (cur != NULL && strcmp(cur -> course_id, auxilary) != 0)
+			cur = cur -> next;
+		if (cur == NULL){
+			cout << "\tThe id was not exits." << endl << endl;
+			cout << "\tDo you want to input again?" << endl;
+			cout << "\t1. Yes" << endl << "\t2. No" << endl;
+			cout << "\tInput:";
+			int choice;
+			cin >> choice;
+			if (choice == 1) subject_edit(6, pstudent, psubject, semester, year);
+			return;
+		}
+		//--------------------sadjkasnfjksdnfjsdfkjsdfkjsdbfkjdsjfk
 	}
 	return;
 }
@@ -378,7 +434,6 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				cin >> choice;
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
-
 			}
 			strcpy(current -> classroom, auxilary);
 			cout << "=> Import successfully!" << endl;
@@ -491,11 +546,14 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 	//3. View list of subject.
 	//	view_subject();
 	//4. Update mark.
-	//	update_mark();
+	//	subject_edit(4);
+	//5. Update course information.
+	//  subject_edit(5);
 	cout << "\t1. Add new course." << endl;
 	cout << "\t2. Remove course." << endl;
 	cout << "\t3. View list of course." << endl;
-	cout << "\t4. Update mark" << endl << endl;
+	cout << "\t4. Update mark" << endl;
+	cout << "\t5. Update course information." << endl << endl;
     int num;
     cin >> num;
     if (num != 3) subject_edit(num, pstudent, psubject, semester, year);
@@ -728,51 +786,4 @@ void make_choice_2(int &choice, int &id_profile){
 			break;
 	}
 	return;
-}
-
-int main(){
-
-    int no = 0, semester = 0, year = 0, classroom = -1, id_profile;
-    profile *pstudent;
-    subjects *psubject;
-    classrooms *pclassid;
-    pstudent = NULL;
-    psubject = NULL;
-    pclassid = NULL;
-
-	while (true){
-		int role = 1, choice = 1;
-		login(role, id_profile);
-		if (role == 3) cout << "The account was not exits." << endl;
-		if (role == 1){
-			while (choice){
-				print_option_1();
-				cout << endl << "    Input: ";
-				cin >> choice;
-				if (choice == 7){
-					role = 4;
-					break;
-				}
-				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year, id_profile);
-			}
-		} else if (role == 2) {
-			while (choice){
-				print_option_2();
-				cout << endl << "    Input: ";
-				cin >> choice;
-				if (choice == 6){
-					role = 4;
-					break;
-				}
-				make_choice_2(choice, id_profile);
-			}
-		}
-		if (role == 4) break;
-	}
-
-	system("cls");
-	cout <<"THANK FOR USING OUR APPLICATION!" << endl;
-	cout << "We hope you have a good experience.";
-
-	return 0;
 }
