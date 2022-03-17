@@ -2,8 +2,30 @@
 
 //-----------VIEW DESIGN SPACE-------------//
 void set_color(int code) {
-    HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(color, code);
+	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(color, code);
+}
+
+int getkey() {
+	char c = _getch();
+	if (c == -32) {
+		c = _getch();
+		if (c == 72) {
+			return 8; //top
+		}
+		if (c == 80) {
+			return 2; //bottom
+		}
+		if (c == 75) {
+			return 4; //left
+		}
+		if (c == 77) {
+			return 6; //right
+		}
+	}
+	if (c == 27) return 0; //ESC
+	if (c == 13) return 5; //Enter
+	return 100;
 }
 
 void GoTo(SHORT posX, SHORT posY) {
@@ -15,8 +37,8 @@ void GoTo(SHORT posX, SHORT posY) {
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
-void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color) {
-	set_color(color);
+void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color1, int color2) {
+	set_color(color1);
 	GoTo(posX, posY); //cout -------------------
 	cout << static_cast<char>(201);
 	for (int i = 0; i < (width - 2); i++)
@@ -26,6 +48,12 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 	for (int i = 1; i < (height - 1); i++) {
 		GoTo(posX, (posY + i)); //cout |.........................|
 		cout << static_cast<char>(186);
+		cout << " ";
+		set_color(color2);
+		for (int j = 1; j < (width - 3); j++) {
+			cout << " ";
+		}
+		set_color(color1);
 		GoTo((posX + width - 1), (posY + i));
 		cout << static_cast<char>(186);
 	}
@@ -35,18 +63,58 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 	for (int i = 0; i < (width - 2); i++)
 		cout << static_cast<char>(205);
 	cout << static_cast<char>(188);
-	set_color(7);
+
+	set_color(color2);
 	if (content != nullptr) {
 		//cout content of square
 		int len = strlen(content);
 		GoTo((posX + (width - len) / 2), (posY + (height - 1) / 2));
 		cout << content;
 	}
+	set_color(7);
 }
 
 void view_space() {
 	system("cls");
-	designSquare(0, 0, 30, 100, nullptr, 7);
+	GoTo(0, 0);
+
+	cout << static_cast<char>(201);
+	for (int i = 0; i < 86; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(187) << endl;
+
+	cout << static_cast<char>(186);
+	for (int j = 0; j < 86; j++) {
+		cout << " ";
+	}
+	cout << static_cast<char>(186) << " _ ";
+	cout << static_cast<char>(186) << " " << static_cast<char>(254) << " ";
+	cout << static_cast<char>(186) << " X ";
+	cout << static_cast<char>(186) << endl;
+
+	cout << static_cast<char>(204);
+	for (int i = 0; i < 86; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(185) << endl;
+
+	for (int i = 0; i < 27; i++) {
+		cout << static_cast<char>(186);
+		for (int j = 0; j < 98; j++) {
+			cout << " ";
+		}
+		cout << static_cast<char>(186) << endl;
+	}
+
+	cout << static_cast<char>(200);
+	for (int i = 0; i < 98; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(188);
 }
 
 void view_loginboard() {
@@ -57,12 +125,123 @@ void view_loginboard() {
 	cout << "LOGIN";
 
 	char temp[200] = "USERNAME";
-	designSquare(33, 10, 3, 12, temp, 7);
-	designSquare(45, 10, 3, 22, nullptr, 7);
+	designSquare(33, 10, 3, 12, temp, 7, 7);
+	designSquare(45, 10, 3, 22, nullptr, 7, 7);
 
 	memcpy(temp, "PASSWORD", 9);
-	designSquare(33, 13, 3, 12, temp, 7);
-	designSquare(45, 13, 3, 22, nullptr, 7);
+	designSquare(33, 13, 3, 12, temp, 7, 7);
+	designSquare(45, 13, 3, 22, nullptr, 7, 7);
+}
+
+void print_option_1(int &num) { //Board for teacher
+	view_space();
+	int key = 100;
+	char temp[200];
+	int i = 0;
+
+	GoTo(34, 3); cout << " __  __  _____  _   _  _   _ ";
+	GoTo(34, 4); cout << "|  \\/  || ____|| \\ | || | | |";
+	GoTo(34, 5); cout << "| |\\/| ||  _|  |  \\| || | | |";
+	GoTo(34, 6); cout << "| |  | || |___ | |\\  || |_| |";
+	GoTo(34, 7); cout << "|_|  |_||_____||_| \\_| \\___/ ";
+
+	while (key != 5) {
+		memcpy(temp, "Profile", 8);
+		designSquare(27, 9, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Logout", 7);
+		designSquare(27, 13, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Year", 5);
+		designSquare(51, 9, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Semester", 9);
+		designSquare(51, 13, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Class", 6);
+		designSquare(51, 17, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Subject", 8);
+		designSquare(27, 17, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Student", 8);
+		designSquare(27, 21, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Guide", 6);
+		designSquare(51, 21, 3, 20, temp, 7, 7);
+
+		memcpy(temp, "Exit program", 13);
+		designSquare(38, 25, 3, 20, temp, 7, 7);
+
+		switch (i) {
+			case 0: 
+				memcpy(temp, "Profile", 8);
+				designSquare(27, 9, 3, 20, temp, 11, 432);
+				num = 6;
+				break;
+			case 1:
+				memcpy(temp, "Year", 5);
+				designSquare(51, 9, 3, 20, temp, 11, 432);
+				num = 1;
+				break;
+			case 2:
+				memcpy(temp, "Logout", 7);
+				designSquare(27, 13, 3, 20, temp, 11, 432);
+				num = 0;
+				break;
+			case 3:
+				memcpy(temp, "Semester", 9);
+				designSquare(51, 13, 3, 20, temp, 11, 432);
+				num = 2;
+				break;
+			case 4:
+				memcpy(temp, "Subject", 8);
+				designSquare(27, 17, 3, 20, temp, 11, 432);
+				num = 4;
+				break;
+			case 5:
+				memcpy(temp, "Class", 6);
+				designSquare(51, 17, 3, 20, temp, 11, 432);
+				num = 3;
+				break;
+			case 6:
+				memcpy(temp, "Student", 8);
+				designSquare(27, 21, 3, 20, temp, 11, 432);
+				num = 5;
+				break;
+			case 7:
+				memcpy(temp, "Guide", 6);
+				designSquare(51, 21, 3, 20, temp, 11, 432);
+				num = 8;
+				break;
+			default:
+				memcpy(temp, "Exit program", 13);
+				designSquare(38, 25, 3, 20, temp, 11, 432);
+				num = 7;
+				break;
+		}
+
+		key = getkey();
+		switch (key) {
+			case 2: 
+				i += 2;
+				break;
+			case 4:
+				i--;
+				break;
+			case 6:
+				i++;
+				break;
+			case 8:
+				i -= 2;
+				break;
+			default:
+				break;
+		}
+
+		if (i < 0) i = 8;
+		if (i > 8) i = 0;
+	}
 }
 
 void view_student() {
@@ -252,7 +431,7 @@ void login(int &role, int &id_profile) {
 				break;
 			} else {//wrong password
 				role = 3;
-				id_profile = 0; 
+				id_profile = 0;
 				GoTo(41, 16);
 				set_color(4);
 				cout << "WRONG PASSWORD";

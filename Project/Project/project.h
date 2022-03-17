@@ -6,6 +6,7 @@
 #include <cstring>
 #include <windows.h>
 #include <iomanip>	
+#include "conio.h"
 
 using namespace std;
 
@@ -90,7 +91,9 @@ void set_color(int code);
 //-----------VIEW DESIGN SPACE-----------//
 void GoTo(SHORT posX, SHORT posY);
 
-void designSquare(SHORT posX, SHORT posY, int height, int width, char* content, int color);
+int getkey();
+
+void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color1, int color2);
 
 void view_space();
 
@@ -149,7 +152,7 @@ void changePassword(const int &changed_id);
 bool inputNewPass(char *&oldpassword);
 
 //-----------INPUT SPACE-----------//
-void print_option_1();
+void print_option_1(int &num);
 
 void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year);
 
