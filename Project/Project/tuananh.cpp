@@ -1,6 +1,13 @@
 #include "project.h"
 using namespace std;
 
+void ShowCur(bool CursorVisibility) // Show / Hide the cursor.
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
+	SetConsoleCursorInfo(handle, &cursor);
+}
+
 void read_cvs(profile* &pstudent)
 {
 	// csv format: no -> id -> classroom -> year 
