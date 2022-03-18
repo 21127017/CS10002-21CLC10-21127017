@@ -1,14 +1,16 @@
 #include "project.h"
 
+/*
 void set_space(char tmp[], int space){
 	char gap[200] = "";
 	space -= strlen(tmp);
 	for (int i = 0; i < space / 2; ++i)
-		strcat(gap, " ");
-	strcat(tmp, gap);
-	strcat(gap, tmp);
-	if (space % 2) strcat(gap, " ");
+		strcat_s(gap, " ");
+	strcat_s(tmp, gap);
+	strcat_s(gap, tmp);
+	if (space % 2) strcat_s(gap, " ");
 }
+*/
 
 //-----------VIEW DESIGN SPACE-------------//
 void view_student(profile *&pstudent, subjects *&ps, int &semester){
@@ -134,19 +136,19 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> first_name = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> first_name, auxilary);
+		strcpy_s(newnode -> first_name, auxilary);
 
 		cout << "\tLast name: ";
 		//cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> last_name = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> last_name, auxilary);
+		strcpy_s(newnode -> last_name, auxilary);
 
 		cout << "\tGender: ";
 		//cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> gender = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> gender, auxilary);
+		strcpy_s(newnode -> gender, auxilary);
 
 		cout << "\tSocial Id: ";
 		cin >> newnode -> social_id;
@@ -232,17 +234,17 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> name = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> name, auxilary);
+		strcpy_s(newnode -> name, auxilary);
 
 		cout << "Id course:";
 		cin.getline(auxilary, 200);
 		newnode -> course_id = new char[(strlen(auxilary) + 1)];
-		strcpy(newnode -> course_id, auxilary);
+		strcpy_s(newnode -> course_id, auxilary);
 
 		cout << "Teacher: ";
 		cin.getline(auxilary, 200);
 		newnode -> teacher_name = new char[strlen(auxilary) + 1];
-		strcpy(newnode -> teacher_name, auxilary);
+            strcpy_s(newnode->teacher_name, auxilary);
 
 		cout << "Num of creadits: ";
 		cin >> newnode -> num_of_credits;
@@ -259,7 +261,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			cin.ignore();
 			cin.getline(auxilary, 200);
 			newnode -> session[i].day = new char[strlen(auxilary) + 1];
-			strcpy(newnode -> session[i].day, auxilary);
+                  strcpy_s(newnode->session[i].day, auxilary);
 			cout << "\t\tHour start:";
 			cin >> newnode -> session[i].hour_start;
 			cout << "\t\tMinute start:";
@@ -531,7 +533,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
 			}
-			strcpy(current -> classroom, auxilary);
+			strcpy_s(current -> classroom, auxilary);
 			cout << "=> Import successfully!" << endl;
 		} else {
 			cout << "The id does not exits!!!" << endl;
