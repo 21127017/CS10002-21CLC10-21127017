@@ -53,9 +53,46 @@ void read_cvs(profile* &pstudent)
 	return;
 }
 
-void enroll_course()
-{
+// ask the user to enter the id, then pass that id and that student's id to the function
+// this will return true if it found a valid id and the user hasn't already enrolled in this course
+// return false if: invalid course/student id, subject already found
+bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psubject) 
+{	
+	subjects* p_sub_cur = psubject;
+
+	while(p_sub_cur != NULL)
+	{
+		if (strstr(enroll, p_sub_cur -> course_id) != NULL);
+		p_sub_cur = p_sub_cur -> next;
+	}
 	
+	if (p_sub_cur == NULL)
+		return false;
+	
+	profile* p_pro_cur = pstudent;
+	while(p_pro_cur != NULL)
+	{
+		if (studentid == p_pro_cur->id)
+			break;
+		p_pro_cur = p_pro_cur -> next;
+	}
+	
+	if (p_pro_cur == NULL)
+		return false;
+	
+	
+	subject2* p_sub2_cur = p_pro_cur->psub2;
+	while (p_sub2_cur != NULL)
+	{
+		if (strstr(enroll, p_sub2_cur->course_id) != NULL)
+			return false;
+		if (p_sub2_cur->next == NULL)
+			break;
+		p_sub2_cur = p_sub2_cur->next;
+	}
+	p_sub2_cur->next = new Node;
+	p_sub2_cur->course_id = enroll;
+	return true;
 }
 
 void remove_course()
