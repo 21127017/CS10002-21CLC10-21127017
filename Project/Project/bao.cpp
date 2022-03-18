@@ -801,19 +801,19 @@ void delete_subject(subjects *&psubject){
 }
 
 //---------INPUT SPACE--------//
-void print_option_1(){
-	system("cls");
-	cout << "Choose your action:" << endl;
-	cout << "\t0. Log out." << endl;
-	cout << "\t1. Year." << endl;
-	cout << "\t2. Semester." << endl;
-	cout << "\t3. Class." << endl;
-	cout << "\t4. Subject." << endl;
-	cout << "\t5. Student." << endl;
-	cout << "\t6. View my profile." << endl;
-	cout << "\t7. Exit program." << endl;
-	return;
-}
+// void print_option_1(){
+// 	system("cls");
+// 	cout << "Choose your action:" << endl;
+// 	cout << "\t0. Log out." << endl;
+// 	cout << "\t1. Year." << endl;
+// 	cout << "\t2. Semester." << endl;
+// 	cout << "\t3. Class." << endl;
+// 	cout << "\t4. Subject." << endl;
+// 	cout << "\t5. Student." << endl;
+// 	cout << "\t6. View my profile." << endl;
+// 	cout << "\t7. Exit program." << endl;
+// 	return;
+// }
 
 void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, 
 	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &id_profile){
@@ -845,18 +845,18 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 	return;
 }
 
-void print_option_2(){
-	system("cls");
-	cout << "Choose your action: " << endl;
-	cout << "\t0. Log out." << endl;
-	cout << "\t1. Enroll Course." << endl;
-	cout << "\t2. Remove Course." << endl;
-	cout << "\t3. View list of course." << endl;
-	cout << "\t4. View scoreboard." << endl;
-	cout << "\t5. View my profile." << endl;
-	cout << "\t6. Exit program." << endl;
-	return;
-}
+// void print_option_2(){
+// 	system("cls");
+// 	cout << "Choose your action: " << endl;
+// 	cout << "\t0. Log out." << endl;
+// 	cout << "\t1. Enroll Course." << endl;
+// 	cout << "\t2. Remove Course." << endl;
+// 	cout << "\t3. View list of course." << endl;
+// 	cout << "\t4. View scoreboard." << endl;
+// 	cout << "\t5. View my profile." << endl;
+// 	cout << "\t6. Exit program." << endl;
+// 	return;
+// }
 
 void make_choice_2(int &choice, int &id_profile){
 	switch (choice){
