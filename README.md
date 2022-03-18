@@ -1,4 +1,4 @@
-﻿# CS162-21CLC10-21127017
+﻿# CS10002-21CLC10-21127017
 Công việc tuần 05(tính theo số lab ktlt th):
 - Bảo: Tạo giao diện ban đầu tạm thời.
 - Trà: Đăng nhập tài khoản, thiết kế giao diện đầu vào.
