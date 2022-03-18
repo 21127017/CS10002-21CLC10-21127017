@@ -30,7 +30,7 @@ Công việc đã hoàn thành:
     + Thiết kế giao diện menu giáo vụ
     + Hàm di chuyển con trỏ bằng bàn phím
 - Anh:
-
+    + Hàm hiện/ẩn con trỏ
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
