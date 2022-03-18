@@ -53,9 +53,9 @@ void read_cvs(profile* &pstudent)
 	return;
 }
 
-// ask the user to enter the id, then pass that id and that student's id to the function
-// this will return true if it found a valid id and the user hasn't already enrolled in this course
-// return false if: invalid course/student id, subject already found
+// arguments: course id + student id + the heads of the student and subject lists.
+// return true if it successfully added the course.
+// return false if: invalid course/student id, subject already found.
 bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psubject) 
 {	
 	subjects* p_sub_cur = psubject;
@@ -95,7 +95,54 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 	return true;
 }
 
-void remove_course()
+// arguments: course id + student id + the heads of the student and subject lists.
+// return true if it successfully deletes something.
+// return false if the id is wrong, the studentid isn't found, or the student isn't enrolled.
+void remove_course(char* remove, int studentid, profile* &pstudent, subjects psubject)
 {
+	subjects* p_sub_cur = psubject;
+
+	while(p_sub_cur != NULL)
+	{
+		if (strstr(remove, p_sub_cur -> course_id) != NULL);
+		p_sub_cur = p_sub_cur -> next;
+	}
 	
+	if (p_sub_cur == NULL)
+		return false;
+	
+	profile* p_pro_cur = pstudent;
+	while(p_pro_cur != NULL)
+	{
+		if (studentid == p_pro_cur->id)
+			break;
+		p_pro_cur = p_pro_cur -> next;
+	}
+	
+	if (p_pro_cur == NULL)
+		return false;
+	
+	subject2* p_sub2_cur = p_pro_cur->psub2;
+	
+	if(strstr(remove, p_sub2_cur->course_id)
+	{
+		subject2* temp = p_sub2_cur;
+		p_sub2_cur = p_sub2_cur->next;
+		p_pro_cur->psub2 = p_sub2_cur;
+		delete temp;
+		return true;
+	}
+	
+	while (p_sub2_cur->next != NULL)
+	{
+		if (strstr(remove, p_sub2_cur->next->course_id) != NULL)
+		{
+			subject2* temp = p_sub2_cur->next;
+			p_sub2_cur = p_sub2_cur->next->next;
+			delete temp;
+		}
+		p_sub2_cur = p_sub2_cur->next;
+	}
+	
+	return false;
 }
