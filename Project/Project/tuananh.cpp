@@ -69,7 +69,8 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 
 	while(p_sub_cur != NULL)
 	{
-		if (strstr(enroll, p_sub_cur -> course_id) != NULL);
+		if (strcmp(enroll, p_sub_cur -> course_id));
+			break;
 		p_sub_cur = p_sub_cur -> next;
 	}
 	
@@ -87,11 +88,11 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 	if (p_pro_cur == NULL)
 		return false;
 	
-	
 	subject2* p_sub2_cur = p_pro_cur->psub2;
+	
 	while (p_sub2_cur != NULL)
 	{
-		if (strstr(enroll, p_sub2_cur->course_id) != NULL)
+		if (strcmp(enroll, p_sub2_cur->course_id))
 			return false;
 		if (p_sub2_cur->next == NULL)
 			break;
@@ -111,7 +112,8 @@ void remove_course(char* remove, int studentid, profile* &pstudent, subjects psu
 
 	while(p_sub_cur != NULL)
 	{
-		if (strstr(remove, p_sub_cur -> course_id) != NULL);
+		if (strcmp(remove, p_sub_cur -> course_id));
+			break;
 		p_sub_cur = p_sub_cur -> next;
 	}
 	
@@ -131,7 +133,9 @@ void remove_course(char* remove, int studentid, profile* &pstudent, subjects psu
 	
 	subject2* p_sub2_cur = p_pro_cur->psub2;
 	
-	if(strstr(remove, p_sub2_cur->course_id)
+	if (p_sub2_cur == NULL) return false;
+	
+	if(strcmp(remove, p_sub2_cur->course_id)
 	{
 		subject2* temp = p_sub2_cur;
 		p_sub2_cur = p_sub2_cur->next;
@@ -142,11 +146,12 @@ void remove_course(char* remove, int studentid, profile* &pstudent, subjects psu
 	
 	while (p_sub2_cur->next != NULL)
 	{
-		if (strstr(remove, p_sub2_cur->next->course_id) != NULL)
+		if (strcmp(remove, p_sub2_cur->next->course_id))
 		{
 			subject2* temp = p_sub2_cur->next;
 			p_sub2_cur = p_sub2_cur->next->next;
 			delete temp;
+			return true;
 		}
 		p_sub2_cur = p_sub2_cur->next;
 	}
