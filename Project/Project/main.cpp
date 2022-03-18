@@ -16,8 +16,8 @@ int main(){
 		if (role == 3) cout << "The account was not exits." << endl;
 		if (role == 1){
 			while (choice){
-				print_option_1();
-				cin >> choice;
+				print_option_1(choice);
+				//cin >> choice;
 				if (choice == 6){
 					role = 4;
 					break;
@@ -26,13 +26,13 @@ int main(){
 			}
 		} else if (role == 2) {
 			while (choice){
-				print_option_2();
-				cin >> choice;
+				//print_option_2(choice);
+				//cin >> choice;
 				if (choice == 5){
 					role = 4;
 					break;
 				}
-				make_choice_2(choice, id_profile);
+				//make_choice_2(choice, id_profile);
 			}
 		}
 		if (role == 4) break;
