@@ -55,6 +55,7 @@ struct subjects {
 
 struct subject2 {
 	char *course_id;
+	int score;
 	subject2 *next;
 };
 
@@ -154,9 +155,9 @@ bool inputNewPass(char *&oldpassword);
 //-----------INPUT SPACE-----------//
 void print_option_1(int &num);
 
-void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year);
+void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &id_profile);
 
-void print_option_2();
+//void print_option_2(choice);
 
 void make_choice_2(int &choice);
 
