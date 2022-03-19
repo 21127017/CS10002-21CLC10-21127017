@@ -69,7 +69,7 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 
 	while(p_sub_cur != NULL)
 	{
-		if (strcmp(enroll, p_sub_cur -> course_id));
+		if (!strcmp(enroll, p_sub_cur -> course_id));
 			break;
 		p_sub_cur = p_sub_cur -> next;
 	}
@@ -92,7 +92,7 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 	
 	while (p_sub2_cur != NULL)
 	{
-		if (strcmp(enroll, p_sub2_cur->course_id))
+		if (!strcmp(enroll, p_sub2_cur->course_id))
 			return false;
 		if (p_sub2_cur->next == NULL)
 			break;
@@ -106,25 +106,27 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 // arguments: course id + student id + the heads of the student and subject lists.
 // return true if it successfully deletes something.
 // return false if the id is wrong, the studentid isn't found, or the student isn't enrolled.
-void remove_course(char* remove, int studentid, profile* &pstudent, subjects psubject)
+bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* psubject)
 {
 	subjects* p_sub_cur = psubject;
 
 	while(p_sub_cur != NULL)
 	{
-		if (strcmp(remove, p_sub_cur -> course_id));
+		if (!strcmp(remove, p_sub_cur -> course_id));
 			break;
+		cout << "not matching subject, moving on\n";
 		p_sub_cur = p_sub_cur -> next;
 	}
 	
 	if (p_sub_cur == NULL)
 		return false;
-	
+	cout << endl;
 	profile* p_pro_cur = pstudent;
 	while(p_pro_cur != NULL)
 	{
 		if (studentid == p_pro_cur->id)
 			break;
+		cout << "not matching student, moving on\n";
 		p_pro_cur = p_pro_cur -> next;
 	}
 	
@@ -135,22 +137,25 @@ void remove_course(char* remove, int studentid, profile* &pstudent, subjects psu
 	
 	if (p_sub2_cur == NULL) return false;
 	
-	if(strcmp(remove, p_sub2_cur->course_id)
+	if(!strcmp(remove, p_sub2_cur->course_id))
 	{
 		subject2* temp = p_sub2_cur;
 		p_sub2_cur = p_sub2_cur->next;
 		p_pro_cur->psub2 = p_sub2_cur;
 		delete temp;
+		cout << "first subject is matching.";
 		return true;
 	}
 	
 	while (p_sub2_cur->next != NULL)
 	{
-		if (strcmp(remove, p_sub2_cur->next->course_id))
+		cout << "this subject doesnt match, moving on\n";
+		if (!strcmp(remove, p_sub2_cur->next->course_id))
 		{
 			subject2* temp = p_sub2_cur->next;
 			p_sub2_cur = p_sub2_cur->next->next;
 			delete temp;
+			cout << "found it. deleting.";
 			return true;
 		}
 		p_sub2_cur = p_sub2_cur->next;
