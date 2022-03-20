@@ -63,7 +63,7 @@ struct profile {
 	char *classroom;
 	int year;
 	int enrolled_subject_no;
-	subject2 *psub2= new subject2;
+	subject2 *psub2;
 	int no;
 	int id;
 	char *first_name;

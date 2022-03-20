@@ -7,62 +7,89 @@ void ShowCur(bool CursorVisibility) // Show / Hide the cursor.
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
-void read_cvs(profile* &pstudent)
+// someone help me debug this please. The function reads through 
+// stuffs just fine until the subjects part, then it refuses to work
+bool read_csv_student(profile* &pstudent)
 {
 	// csv format: no -> id -> classroom -> year 
 	// -> names -> gender -> dob -> socialid -> no. of subjects -> subjects
 	profile* pCur = pstudent;
 	ifstream input;
-	input.open("studentinfo.cvs");
-	while(input.good() and !input.eof())
+	input.open("studentinfo.csv");
+	if (input.is_open())
 	{
-		if (pCur == NULL)
+		while(!input.eof())
 		{
-			pstudent = new profile;
-			pCur = pstudent;
-		}
-		char* tmp[200];
-		char a; // just a fodder to skip the "," in the csv
-		input >> pCur -> no;
-		input.get(a);
-		
-		input >> pCur -> id;
-		input.get(a);
-		
-		input.getline(tmp, 200, ',');
-		pCur -> classroom = new char[strlen(tmp) + 1];
-		memcpy(pCur -> classroom, tmp, strlen(tmp) +1);
-		
-		input >> pCur -> year;
-		input.get(a);
-		
-		input.getline(tmp, 200, ',');
-		pCur -> first_name = new char[strlen(tmp) + 1];
-		memcpy(pCur -> first_name, tmp, strlen(tmp) + 1);
-		
-		input.getline(tmp, 200, ',');
-		pCur -> last_name = new char[strlen(tmp) + 1];
-		memcpy(pCur -> last_name, tmp, strlen(tmp) + 1);
-		
-		input.getline(tmp, 200, ',');
-		pCur -> gender = new char[strlen(tmp) + 1];
-		memcpy(pCur -> gender, tmp, strlen(tmp) + 1);
-		
-		input >> pCur -> social_id;
-		input.get(a);
-		
-		input >> pCur-> enrolled_subject_no;
-		input.get(a);
-		
-		for (int i = 1; i <= pCur->enrolled_subject_no)
-		{
+			if (pstudent == NULL)
+			{
+				pstudent = new profile;
+				pCur = pstudent;
+			}
+			else
+			{
+				pCur->next = new profile;
+				pCur = pCur->next;
+			}
+			char tmp[200];
+			char a; // just a fodder to skip the "," in the csv
+			input >> pCur -> no;
+			input.get(a);
 			
+			input >> pCur -> id;
+			input.get(a);
+			
+			input.getline(tmp, 200, ',');
+			pCur -> classroom = new char[strlen(tmp) + 1];
+			memcpy(pCur -> classroom, tmp, strlen(tmp) +1);
+			
+			input >> pCur -> year;
+			input.get(a);
+			
+			input.getline(tmp, 200, ',');
+			pCur -> first_name = new char[strlen(tmp) + 1];
+			memcpy(pCur -> first_name, tmp, strlen(tmp) + 1);
+			
+			input.getline(tmp, 200, ',');
+			pCur -> last_name = new char[strlen(tmp) + 1];
+			memcpy(pCur -> last_name, tmp, strlen(tmp) + 1);
+			
+			input.getline(tmp, 200, ',');
+			pCur -> gender = new char[strlen(tmp) + 1];
+			memcpy(pCur -> gender, tmp, strlen(tmp) + 1);
+			
+			input >> pCur -> dob.day;
+			input.get(a);
+			input >> pCur -> dob.month;
+			input.get(a);
+			input >> pCur -> dob.year;
+			input.get(a);
+			
+			input >> pCur -> social_id;
+			input.get(a);
+			
+			input >> pCur-> enrolled_subject_no;
+			input.get(a);
+			
+			int n = pCur -> enrolled_subject_no;
+			for (int i = 1; i <= n; i++)
+			{
+				if (i != n)
+					input.getline(tmp, 200, ',');
+				else
+					input.getline(tmp, 200, '\n');
+					
+				subject2 *pNew = new subject2;
+				memcpy(pNew -> course_id, tmp, strlen(tmp) + 1);
+				pNew -> next = pCur -> psub2;
+				pCur -> psub2 = pNew;
+			}
 		}
-		
-		delete tmp;
+		cout << "endread\n";
+		input.close();
+		return true;
 	}
-	input.close();
-	return;
+	else
+		return false;
 }
 
 // arguments: course id + student id + the heads of the student and subject lists.
