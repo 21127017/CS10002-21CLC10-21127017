@@ -1,5 +1,4 @@
 #include "project.h"
-using namespace std;
 
 void ShowCur(bool CursorVisibility) // Show / Hide the cursor.
 {
@@ -11,7 +10,7 @@ void ShowCur(bool CursorVisibility) // Show / Hide the cursor.
 void read_cvs(profile* &pstudent)
 {
 	// csv format: no -> id -> classroom -> year 
-	// -> names -> gender -> dob -> socialid -> subjects
+	// -> names -> gender -> dob -> socialid -> no. of subjects -> subjects
 	profile* pCur = pstudent;
 	ifstream input;
 	input.open("studentinfo.cvs");
@@ -51,10 +50,16 @@ void read_cvs(profile* &pstudent)
 		
 		input >> pCur -> social_id;
 		input.get(a);
-		pCur = pCur -> next;
 		
-		// dunno how to input subjects yet since different
-		// students have different numbers of subjects 
+		input >> pCur-> enrolled_subject_no;
+		input.get(a);
+		
+		for (int i = 1; i <= pCur->enrolled_subject_no)
+		{
+			
+		}
+		
+		delete tmp;
 	}
 	input.close();
 	return;
@@ -114,7 +119,6 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	{
 		if (!strcmp(remove, p_sub_cur -> course_id));
 			break;
-		cout << "not matching subject, moving on\n";
 		p_sub_cur = p_sub_cur -> next;
 	}
 	
@@ -126,7 +130,6 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	{
 		if (studentid == p_pro_cur->id)
 			break;
-		cout << "not matching student, moving on\n";
 		p_pro_cur = p_pro_cur -> next;
 	}
 	
@@ -143,19 +146,16 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 		p_sub2_cur = p_sub2_cur->next;
 		p_pro_cur->psub2 = p_sub2_cur;
 		delete temp;
-		cout << "first subject is matching.";
 		return true;
 	}
 	
 	while (p_sub2_cur->next != NULL)
 	{
-		cout << "this subject doesnt match, moving on\n";
 		if (!strcmp(remove, p_sub2_cur->next->course_id))
 		{
 			subject2* temp = p_sub2_cur->next;
 			p_sub2_cur = p_sub2_cur->next->next;
 			delete temp;
-			cout << "found it. deleting.";
 			return true;
 		}
 		p_sub2_cur = p_sub2_cur->next;
