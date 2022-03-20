@@ -92,6 +92,41 @@ bool read_csv_student(profile* &pstudent)
 		return false;
 }
 
+void output_to_csv(profile* &pstudent)
+{
+	if (pstudent == NULL) return;
+	ofstream output;
+	output.open("studentinfo.csv", ios::out);
+	profile* pCur = pstudent;
+	while (pCur != NULL)
+	{
+		output << pCur->no << ","
+		       << pCur->id << ","
+   		       << pCur->classroom << ","
+		       << pCur->year << ","
+		       << pCur->first_name << ","
+		       << pCur->last_name << ","
+		       << pCur->gender << ","
+		       << pCur->dob.day << ","
+		       << pCur->dob.month << ","
+		       << pCur->dob.year << ","
+		       << pCur->social_id << ","
+		       << pCur->enrolled_subject_no << ","
+		subject2* p_cursub_2 = pCur->psub2;
+		while (p_cursub_2 != NULL)
+		{
+			output << p_cursub_2->course_id;
+			if (p_cursub->next != NULL)
+				output << ",";
+			else
+				output << endl;
+			p_cursub_2 = p_cursub_2->next;
+		}
+		pCur = pCur->next;
+	}
+	output.close();
+	return;
+}
 // arguments: course id + student id + the heads of the student and subject lists.
 // return true if it successfully added the course.
 // return false if: invalid course/student id, subject already found.
@@ -190,3 +225,5 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	
 	return false;
 }
+
+
