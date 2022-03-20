@@ -92,7 +92,7 @@ bool read_csv_student(profile* &pstudent)
 		return false;
 }
 
-void output_to_csv(profile* &pstudent)
+void output_to_csv_student(profile* &pstudent)
 {
 	if (pstudent == NULL) return;
 	ofstream output;
