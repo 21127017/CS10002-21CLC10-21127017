@@ -31,7 +31,9 @@ Công việc đã hoàn thành:
     + Hàm di chuyển con trỏ bằng bàn phím
 - Anh:
     + Hàm hiện/ẩn con trỏ
-
+    + Hàm đăng kí môn học cho sinh viên
+    + Hàm hủy đăng kí môn học cho sinh viên
+    + Hàm thêm học sinh vào lớp bằng file csv
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
