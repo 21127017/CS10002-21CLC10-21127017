@@ -84,7 +84,6 @@ bool read_csv_student(profile* &pstudent)
 				pCur -> psub2 = pNew;
 			}
 		}
-		cout << "endread\n";
 		input.close();
 		return true;
 	}
