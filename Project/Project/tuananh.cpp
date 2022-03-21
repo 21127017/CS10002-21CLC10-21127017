@@ -126,6 +126,28 @@ void output_to_csv_student(profile* &pstudent)
 	output.close();
 	return;
 }
+
+bool output_to_csv_staff(staff* pstaff)
+{
+	if (pstaff == NULL) return;
+	ofstream output;
+	output.open("staffinfo.csv", ios::out);
+	staff* pCur = pstaff;
+	while (pCur != NULL)
+	{
+		output << staff->name << ","
+			   << staff->dob.day << ","
+			   << staff->dob.month << ","
+			   << staff->dob.year << ","
+			   << staff->role << ","
+			   << staff->gender << ","
+			   << staff->social_id << ",";
+		output << endl;
+		pCur = pCur->next;
+	}
+	output.close();
+	return;
+}
 // arguments: course id + student id + the heads of the student and subject lists.
 // return true if it successfully added the course.
 // return false if: invalid course/student id, subject already found.
