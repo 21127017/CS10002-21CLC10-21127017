@@ -34,12 +34,13 @@ Công việc đã hoàn thành:
     + Hàm đăng kí môn học cho sinh viên
     + Hàm hủy đăng kí môn học cho sinh viên
     + Hàm lưu thông tin học sinh
+    + Hàm lưu trữ dữ liệu giảng viên.
 Các công việc còn lại:
 - Tạo fie csv.
 - Viết hàm ràng buộc dữ liệu đầu vào.
 - Hàm thay đổi thông tin môn học(Bao).
 - Hàm lưu trữ dữ liệu tổng hợp.(Tuấn Anh)
-- Hàm lưu trữ dữ liệu giảng viên.(Tuấn Anh)
+
 - Hàm xem thông tin các năm học.
 - Hàm xem thông tin các kì.
 - Hàm xem thông tin các môn học.
