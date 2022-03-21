@@ -91,9 +91,9 @@ void set_color(int code);
 //-----------CONDITION BARRIER-----------//
 
 //-----------VIEW DESIGN SPACE-----------//
-void GoTo(SHORT posX, SHORT posY);
-
 int getkey();
+
+void GoTo(SHORT posX, SHORT posY);
 
 void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color1, int color2);
 
@@ -115,6 +115,8 @@ void view_list_of_course();
 
 void view_scoreboard();
 
+void announcement(char *content, bool title, int &num);
+
 //-----------EDIT SPACE-----------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year);
 
@@ -129,13 +131,23 @@ void school_year_edit(subjects *&psubject, int &classroom, int &semester, int &y
 //-----------STAFF MEMBER FUNCTION SPACE-----------//
 void undergraduate_function();
 
+void print_undergraduate_function(/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/);
+
 void subject_function(subjects *&psubject, int &semester, int &year);
+
+void print_subject_function(/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/);
 
 void class_function();
 
+void print_class_function(/*profile *&pstudent, classrooms *&pclassid, int &semester*/);
+
 void semester_function(subjects *&psubject, int &semester, int &year);
 
+void print_semester_function(/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/);
+
 void year_function(subjects *&psubject, int &classroom, int &semester, int &year);
+
+void print_year_function(/*profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year*/);
 
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
