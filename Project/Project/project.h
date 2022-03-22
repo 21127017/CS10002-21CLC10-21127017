@@ -117,6 +117,8 @@ void view_scoreboard();
 
 void announcement(char *content, bool title, int &num);
 
+void exitProgram();
+
 //-----------EDIT SPACE-----------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year);
 

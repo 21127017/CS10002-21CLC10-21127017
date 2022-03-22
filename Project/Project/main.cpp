@@ -41,9 +41,7 @@ int main(){
 		if (role == 4) break;
 	}
 
-	system("cls");
-	cout <<"THANK FOR USING OUR APPLICATION!" << endl;
-	cout << "We hope you have a good experience.";
+	exitProgram();
 
 	GoTo(0, 31);
 	return 0;
