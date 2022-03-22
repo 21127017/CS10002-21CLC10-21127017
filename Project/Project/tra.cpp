@@ -205,7 +205,7 @@ void print_option_1(int &choice) { //Board for teacher
 			case 2:
 				memcpy(temp, "Logout", 7);
 				designSquare(27, 14, 3, 20, temp, 11, 432);
-				num = 9;
+				num = 0;
 				break;
 			case 3:
 				memcpy(temp, "Semester", 9);
@@ -763,7 +763,7 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 	}
 }
 
-void print_undergraduate_function(int choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/) {
+void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;

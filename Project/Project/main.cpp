@@ -19,12 +19,15 @@ int main(){
 		}
 		if (role == 1){
 			while (choice){
+				showcur(0);
 				print_option_1(choice);
+				showcur(1);
 				//cin >> choice;
 				if (choice == 7){
 					role = 4;
 					break;
 				}
+				if (choice == 0) break;
 				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year, id_profile);
 			}
 		} else if (role == 2) {

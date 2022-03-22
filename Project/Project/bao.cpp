@@ -234,12 +234,12 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> name, 100, auxilary);
+		strcpy_s(newnode -> name, 50, auxilary);
 
 		cout << "Id course:";
 		cin.getline(auxilary, 200);
 		newnode -> course_id = new char[(strlen(auxilary) + 1)];
-		strcpy_s(newnode -> course_id, 100, auxilary);
+		strcpy_s(newnode -> course_id, 50, auxilary);
 
 		cout << "Teacher: ";
 		cin.getline(auxilary, 200);
@@ -602,6 +602,7 @@ void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pcla
 	if (choice == 2) return;
 	++year;
 	classroom = 0;
+	delete_class(pclassid);
 	cout << endl;
 	cout << "\tYou have successfully initialized new school year!" << endl;
 	cout << "\tNow you need to create new class and new semester." << endl << endl;
@@ -621,15 +622,18 @@ void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, in
 	//	student_edit(2);
 	//4. View list of student.
 	//	view_student(pstudent, psubject, semester);
-	system("cls");
+	/*system("cls");
 	cout << "\t\t>> STUDENT EDIT <<" << endl << endl;
 	cout << "\t1. Import file csv." << endl;
 	cout << "\t2. Add student manual." << endl;
 	cout << "\t3. Remove student." << endl;
 	cout << "\t4. View list of student." << endl << endl;
-	cout << "\tInput: ";
+	cout << "\tInput: ";*/
 	int num;
-	cin >> num;
+	//cin >> num;
+	showcur(0);
+	print_undergraduate_function(num);
+	showcur(1);
 	if (num == 4) 
 		view_student(pstudent, psubject, semester);
 	else 
@@ -647,13 +651,16 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 	//	subject_edit(4);
 	//5. Update course information.
 	//  subject_edit(5);
-	cout << "\t1. Add new course." << endl;
+	/*cout << "\t1. Add new course." << endl;
 	cout << "\t2. Remove course." << endl;
 	cout << "\t3. View list of course." << endl;
 	cout << "\t4. Update mark" << endl;
-	cout << "\t5. Update course information." << endl << endl;
+	cout << "\t5. Update course information." << endl << endl;*/
     int num;
-    cin >> num;
+    showcur(0);
+    print_subject_function(num);
+    showcur(1);
+    //cin >> num;
     if (num != 3) subject_edit(num, pstudent, psubject, semester, year);
         else view_subject(psubject);
 }
@@ -669,16 +676,20 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	//	view_class();
 	//5. View scoreboard of class.
 	//	view_scorebard(class);
-	system("cls");
+	/*system("cls");
 	cout << "\t\t>> CLASS EDIT <<" << endl << endl;
 	cout << "\t0. Create new class." << endl;
 	cout << "\t1. Add student to class." << endl;
 	cout << "\t2. Remove student from class" << endl;
 	cout << "\t3. View list of class." << endl;
 	cout << "\t4. View scoreboard of class." << endl << endl;
+	cout << "\tInput: ";*/
+    
     int num;
-    cout << "\tInput: ";
-    cin >> num;
+    showcur(0);
+    print_class_function(num);
+    showcur(1);
+    //cin >> num;
     if (num == 3) 
     	view_class();
     else if (num == 4) 
@@ -692,12 +703,15 @@ void semester_function(profile *&pstudent, subjects *&psubject, int &semester, i
 	//	semester_edit(0);
 	//2. View semester.
 	//	view_semester();
-	system("cls");
+	/*system("cls");
 	cout << "\t1. Create new semester." << endl;
 	cout << "\t2. View semester: " << endl << endl;
-	cout << "\tInput:";
+	cout << "\tInput:";*/
     int num;
-    cin >> num;
+    showcur(0);
+    print_semester_function(num);
+    showcur(1);
+    //cin >> num;
     if (num == 1) semester_edit(0, pstudent, psubject, semester, year);
 
 }
@@ -707,13 +721,17 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 	//	school_year_edit();
 	//2. View school year.
 	//	view_school_year();
-	system("cls");
+	/*system("cls");
 	cout <<"\t\t>> YEAR EDIT <<" << endl;
 	cout << "\t1. Create new school year." << endl;
 	cout << "\t2. View school year." << endl << endl;
-	cout << "\tInput: ";
-    int num;
-    cin >> num;
+	cout << "\tInput: ";*/
+    system("cls");
+    int num = 0;
+    showcur(0);
+    print_year_function(num);
+    showcur(1);
+    //cin >> num;
     if (num == 1) school_year_edit(pstudent, psubject, pclassid, classroom, semester, year);
         else view_school_year();
 }
@@ -787,6 +805,16 @@ void delete_subject(subjects *&psubject){
 		delete auxilary;
 	}
 
+}
+
+void delete_class(classrooms *&pclassid) {
+    classrooms *auxilary;
+    while (pclassid != NULL) {
+	  auxilary = pclassid;
+	  pclassid = pclassid->next;
+	  delete auxilary;
+    }
+    return;
 }
 
 //---------INPUT SPACE--------//

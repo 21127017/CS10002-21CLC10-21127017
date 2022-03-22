@@ -83,6 +83,9 @@ struct staff{
 	staff *next;
 };
 
+//----------SHOW CUR----------//
+void showcur(bool CursorVisibility);
+
 //----------COLORS----------//
 void set_color(int code);
 
@@ -119,6 +122,11 @@ void announcement(char *content, bool title, int &num);
 
 void exitProgram();
 
+//-----------DELETE LINKED LIST-----------//
+void delete_student(profile *&pstudent);
+void delete_subject(subjects *&psubject);
+void delete_class(classrooms *&pclassid);
+
 //-----------EDIT SPACE-----------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year);
 
@@ -131,25 +139,21 @@ void semester_edit(int num, profile *&pstudent, subjects *&psubject, int &semest
 void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 
 //-----------STAFF MEMBER FUNCTION SPACE-----------//
-void undergraduate_function();
 
 void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/);
-
-void subject_function(subjects *&psubject, int &semester, int &year);
+void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year);
 
 void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/);
-
-void class_function();
+void subject_function(profile *&pstudent, subjects *&psubject, int &semester, int &year);
 
 void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid, int &semester*/);
-
-void semester_function(subjects *&psubject, int &semester, int &year);
+void class_function(profile *&pstudent, classrooms *&pclassid, int &semester);
 
 void print_semester_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/);
-
-void year_function(subjects *&psubject, int &classroom, int &semester, int &year);
+void semester_function(profile *&pstudent, subjects *&psubject, int &semester, int &year);
 
 void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year*/);
+void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
 void enroll_course();
@@ -174,9 +178,5 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classro
 //void print_option_2(choice);
 
 void make_choice_2(int &choice, int &id_profile);
-
-//-----------DELETE LINKED LIST-----------//
-void delete_student(profile *&pstudent);
-void delete_subject(subjects *&psubject);
 
 #endif
