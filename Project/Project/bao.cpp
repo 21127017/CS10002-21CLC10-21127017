@@ -123,7 +123,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	if (num == 2){
 		cout << "\t\t>> ADD STUDENT MANUAL <<" << endl << endl;
 		profile *newnode = new profile;
-		char auxilary[200];
+		char auxilary[50];
 
 		newnode -> no = ++no;
 		cout << "\tStudent no: " << no << endl;
@@ -134,21 +134,21 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 
 		cout << "\tFirst name: ";
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> first_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> first_name, 100, auxilary);
+		strcpy_s(newnode -> first_name, 50, auxilary);
 
 		cout << "\tLast name: ";
 		//cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> last_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> last_name, 100, auxilary);
+		strcpy_s(newnode -> last_name, 50, auxilary);
 
 		cout << "\tGender: ";
 		//cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> gender = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> gender, 100, auxilary);
+		strcpy_s(newnode -> gender, 50, auxilary);
 
 		cout << "\tSocial Id: ";
 		cin >> newnode -> social_id;
@@ -228,23 +228,23 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		subjects *newnode = new subjects;
 		newnode -> year = year;
 		newnode -> semester = semester;
-		char auxilary[200];
+		char auxilary[50];
 
 		cout << "Course name: ";
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> name = new char[strlen(auxilary) + 1];
 		strcpy_s(newnode -> name, 50, auxilary);
 
 		cout << "Id course:";
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> course_id = new char[(strlen(auxilary) + 1)];
 		strcpy_s(newnode -> course_id, 50, auxilary);
 
 		cout << "Teacher: ";
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		newnode -> teacher_name = new char[strlen(auxilary) + 1];
-            strcpy_s(newnode->teacher_name, 100, auxilary);
+            strcpy_s(newnode->teacher_name, 50, auxilary);
 
 		cout << "Num of creadits: ";
 		cin >> newnode -> num_of_credits;
@@ -259,9 +259,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			cout << "\tSession " << i + 1 << ":" << endl;
 			cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
 			cin.ignore();
-			cin.getline(auxilary, 200);
+			cin.getline(auxilary, 50);
 			newnode -> session[i].day = new char[strlen(auxilary) + 1];
-                  strcpy_s(newnode->session[i].day, 100, auxilary);
+                  strcpy_s(newnode->session[i].day, 50, auxilary);
 			cout << "\t\tHour start:";
 			cin >> newnode -> session[i].hour_start;
 			cout << "\t\tMinute start:";
@@ -287,9 +287,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cout << "\t\t>> REMOVE COURSE << " << endl << endl;
 		//show list of course in this semester
 		cout << "\tInput the id of course you want to delete: ";
-		char auxilary[200];
+		char auxilary[50];
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		subjects *current = psubject;
 		if (strcmp(current -> course_id, auxilary) == 0){
 			psubject = psubject -> next;
@@ -321,9 +321,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 	if (num == 4){
 		//Show list of course.
 		cout << "\tChoose a course you want to update score." << endl << "\tInput: ";
-		char auxilary[200];
+		char auxilary[50];
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		subjects *current = psubject;
 		while (current != NULL && strcmp(current -> course_id, auxilary) != 0)
 			current = current -> next;
@@ -365,9 +365,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		}
 		//show list of course
 		cout << "Input the Course_id: ";
-		char auxilary[200];
+		char auxilary[50];
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		subjects *cur1 = psubject;
 		while (cur1 != NULL && strcmp(cur1 -> course_id, auxilary) != 0)
 			cur1 = cur1 -> next;
@@ -432,9 +432,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		}
 		//show list of course
 		cout << "Input id of course you want to delete:";
-		char auxilary[200];
+		char auxilary[50];
 		cin.ignore();
-		cin.getline(auxilary, 200);
+		cin.getline(auxilary, 50);
 		subjects *cur = psubject;
 		while (cur != NULL && strcmp(cur -> course_id, auxilary) != 0)
 			cur = cur -> next;
@@ -464,9 +464,9 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		}
 		cout << "\t Name of class: ";
 	  	classrooms *newnode = new classrooms;
-	  	char auxilary[200];
+	  	char auxilary[50];
 	  	cin.ignore();
-	  	cin.getline(auxilary, 200);
+	  	cin.getline(auxilary, 50);
 	  	newnode->classroom = new char[strlen(auxilary) + 1];
 	  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
 	  	newnode->next = NULL;
@@ -513,10 +513,10 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			current = current -> next;
 		}
 		if (current != NULL && current -> id == tmp){
-			char auxilary[200];
+			char auxilary[50];
 			cout << "Input student classroom:";
 			cin.ignore();
-			cin.getline(auxilary, 200);
+			cin.getline(auxilary, 50);
 			classrooms *pclass = pclassid;
 			while (pclass != NULL){
 				if (strcmp(pclass -> classroom, auxilary) == 0)
@@ -533,7 +533,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
 			}
-			strcpy_s(current -> classroom, 100, auxilary);
+			strcpy_s(current -> classroom, 50, auxilary);
 			cout << "=> Import successfully!" << endl;
 		} else {
 			cout << "The id does not exits!!!" << endl;
