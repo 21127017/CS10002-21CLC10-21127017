@@ -138,12 +138,22 @@ void view_loginboard() {
 	designSquare(45, 13, 3, 22, nullptr, 7, 7);
 }
 
-void print_option_1() { //Board for teacher
+void exitProgram() {
+	view_space();
+	set_color(14);
+	GoTo(33, 14);
+	cout << "THANK FOR USING OUR APPLICATION!";
+	GoTo(32, 16);
+	cout << "We hope you have a good experience.";
+	set_color(7);
+}
+
+void print_option_1(int &choice) { //Board for teacher
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 7) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(34, 3); cout << " __  __  _____  _   _  _   _ ";
@@ -250,99 +260,10 @@ void print_option_1() { //Board for teacher
 			if (i < 0) i = 8;
 			if (i > 8) i = 0;
 		}
-		switch (num) {
-		case 9:
-			//Logout function
-			num = 0;
-			key = 100;
-			break;
-		case 1:
-			//1. Edit year function
-			print_year_function();
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. Edit semester function
-			print_semester_function();
-			num = 0;
-			key = 100;
-			break;
-		case 3:
-			//3. Edit class function
-			print_class_function();
-			num = 0;
-			key = 100;
-			break;
-		case 4:
-			//4. Edit subject function
-			print_subject_function();
-			num = 0;
-			key = 100;
-			break;
-		case 5:
-			//5. Edit student function
-			print_undergraduate_function();
-			num = 0;
-			key = 100;
-			break;
-		case 6:
-			//6. View my profile funtion
-			num = 0;
-			key = 100;
-			break;
-		case 7:
-			//7. Exit program
-			view_space();
-			set_color(14);
-			GoTo(33, 14);
-			cout << "THANK FOR USING OUR APPLICATION!";
-			GoTo(32, 16);
-			cout << "We hope you have a good experience.";
-			set_color(7);
-			return;
-		default:
-			//8. Guide view function
-			num = 0;
-			key = 100;
-			break;
-		}
+
+		choice = num;
+		break;
 	}
-}
-
-//None
-void view_student() {
-
-}
-
-//None
-void view_subject() {
-
-}
-
-//None
-void view_class() {
-
-}
-
-//None
-void view_semester() {
-
-}
-
-//None
-void view_school_year() {
-
-}
-
-//None
-void view_list_of_course() {
-
-}
-
-//None
-void view_scoreboard() {
-
 }
 
 bool inputNewPass(char *&oldpassword) {
@@ -522,12 +443,12 @@ void login(int &role, int &id_profile) {
 	inp.close();
 }
 
-void print_year_function(/*profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year*/) {
+void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 3) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(21, 3); cout << "__   __ _____     _     ____    _____  ____  ___  _____ ";
@@ -585,31 +506,17 @@ void print_year_function(/*profile *&pstudent, subjects *&psubject, classrooms *
 			if (i < 0) i = 2;
 			if (i > 2) i = 0;
 		}
-		switch (num) {
-		case 1:
-			//1. Create new school year.
-			//	school_year_edit();
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. View school year.
-			//	view_school_year();
-			num = 0;
-			key = 100;
-			break;
-		default:
-			return;
-		}
+		choice = num;
+		break;
 	}
 }
 
-void print_semester_function(/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
+void print_semester_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 3) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(8, 3); cout << " ____   _____  __  __  _____  ____  _____  _____  ____    _____  ____  ___  _____ ";
@@ -667,31 +574,17 @@ void print_semester_function(/*profile *&pstudent, subjects *&psubject, int &sem
 			if (i < 0) i = 2;
 			if (i > 2) i = 0;
 		}
-		switch (num) {
-		case 1:
-			//1. Create new semester (1 - 3).
-			//	semester_edit(0);
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. View semester.
-			//	view_semester();
-			num = 0;
-			key = 100;
-			break;
-		default:
-			return;
-		}
+		choice = num;
+		break;
 	}
 }
 
-void print_class_function(/*profile *&pstudent, classrooms *&pclassid, int &semester*/) {
+void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid, int &semester*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 6) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(18, 3); cout << "  ____  _         _     ____  ____    _____  ____  ___  _____ ";
@@ -773,50 +666,17 @@ void print_class_function(/*profile *&pstudent, classrooms *&pclassid, int &seme
 			if (i < 0) i = 5;
 			if (i > 5) i = 0;
 		}
-		switch (num) {
-		case 1:
-			//1. Create new class (1 - 10).
-			//	class_edit(0, NULL);
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. Add student to class.
-			//	class_edit(1);
-			num = 0;
-			key = 100;
-			break;
-		case 3:
-			//3. Remove student from class.
-			//	class_edit(2);
-			num = 0;
-			key = 100;
-			break;
-		case 4:
-			//4. View list of class.
-			//	view_class();
-			num = 0;
-			key = 100;
-			break;
-		case 5:
-			//5. View scoreboard of class.
-			//	view_scoreboard(class);
-			num = 0;
-			key = 100;
-			break;
-		default:
-			//6. Back to Menu
-			return;
-		}
+		choice = num;
+		break;
 	}
 }
 
-void print_subject_function(/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
+void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 6) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(12, 3); cout << " ____   _   _  ____       _  _____  ____  _____   _____  ____  ___  _____ ";
@@ -898,54 +758,17 @@ void print_subject_function(/*profile *&pstudent, subjects *&psubject, int &seme
 			if (i < 0) i = 5;
 			if (i > 5) i = 0;
 		}
-		switch (num) {
-		case 1:
-			//1. Add subject.
-			//	subject_edit(1);
-			
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. Remove subject.
-			//	subject_edit(2);
-			
-			num = 0;
-			key = 100;
-			break;
-		case 3:
-			//3. View list of subject.
-			//	view_subject();
-			
-			num = 0;
-			key = 100;
-			break;
-		case 4:
-			//4. Update mark.
-			//	subject_edit(4);
-			
-			num = 0;
-			key = 100;
-			break;
-		case 5:
-			//5. Update course information.
-			//  subject_edit(5);
-			num = 0;
-			key = 100;
-			break;
-		default:
-			//6. Back to Menu
-			return;
-		}
+		choice = num;
+		break;
 	}
 }
 
-void print_undergraduate_function(/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/) {
+void print_undergraduate_function(int choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/) {
 	int key = 100;
 	char temp[200];
 	int i = 0;
 	int num = 0;
-	while (num != 5) {
+	while (1) {
 		view_space();
 		set_color(14);
 		GoTo(12, 3); cout << " ____  _____  _   _  ____   _____  _   _  _____   _____  ____  ___  _____ ";
@@ -1019,36 +842,8 @@ void print_undergraduate_function(/*int &no, profile *&pstudent, subjects *&psub
 			if (i < 0) i = 4;
 			if (i > 4) i = 0;
 		}
-		switch (num) {
-		case 1:
-			//1. Import file csv.
-			//	student_edit(0);
-			num = 0;
-			key = 100;
-			break;
-		case 2:
-			//2. Add student manual.
-			//	student_edit(1);
-			
-			num = 0;
-			key = 100;
-			break;
-		case 3:
-			//3. Remove student manual.
-			//	student_edit(2);
-			num = 0;
-			key = 100;
-			break;
-		case 4:
-			//4. View list of student.
-			//	view_student(pstudent, psubject, semester);
-			num = 0;
-			key = 100;
-			break;
-		default:
-			//5. Back to Menu
-			return;
-		}
+		choice = num;
+		break;
 	}
 }
 
