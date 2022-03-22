@@ -136,19 +136,19 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> first_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> first_name, auxilary);
+		strcpy_s(newnode -> first_name, 100, auxilary);
 
 		cout << "\tLast name: ";
 		//cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> last_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> last_name, auxilary);
+		strcpy_s(newnode -> last_name, 100, auxilary);
 
 		cout << "\tGender: ";
 		//cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> gender = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> gender, auxilary);
+		strcpy_s(newnode -> gender, 100, auxilary);
 
 		cout << "\tSocial Id: ";
 		cin >> newnode -> social_id;
@@ -234,17 +234,17 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cin.ignore();
 		cin.getline(auxilary, 200);
 		newnode -> name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> name, auxilary);
+		strcpy_s(newnode -> name, 100, auxilary);
 
 		cout << "Id course:";
 		cin.getline(auxilary, 200);
 		newnode -> course_id = new char[(strlen(auxilary) + 1)];
-		strcpy_s(newnode -> course_id, auxilary);
+		strcpy_s(newnode -> course_id, 100, auxilary);
 
 		cout << "Teacher: ";
 		cin.getline(auxilary, 200);
 		newnode -> teacher_name = new char[strlen(auxilary) + 1];
-            strcpy_s(newnode->teacher_name, auxilary);
+            strcpy_s(newnode->teacher_name, 100, auxilary);
 
 		cout << "Num of creadits: ";
 		cin >> newnode -> num_of_credits;
@@ -261,7 +261,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			cin.ignore();
 			cin.getline(auxilary, 200);
 			newnode -> session[i].day = new char[strlen(auxilary) + 1];
-                  strcpy_s(newnode->session[i].day, auxilary);
+                  strcpy_s(newnode->session[i].day, 100, auxilary);
 			cout << "\t\tHour start:";
 			cin >> newnode -> session[i].hour_start;
 			cout << "\t\tMinute start:";
@@ -533,7 +533,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
 			}
-			strcpy_s(current -> classroom, auxilary);
+			strcpy_s(current -> classroom, 100, auxilary);
 			cout << "=> Import successfully!" << endl;
 		} else {
 			cout << "The id does not exits!!!" << endl;
@@ -718,20 +718,7 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
         else view_school_year();
 }
 
-//--------STUDENT FUNCTION SPACE-------------//
-void enroll_course(){
-	//show list of course
-}
-
-void remove_course(){
-	//show list of couse
-}
-
-
 //----------ACCOUNT------------//
-void login(int &roll, int &id_profile){
-
-}
 
 void logout(){
 
