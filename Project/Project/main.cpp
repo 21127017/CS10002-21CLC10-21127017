@@ -13,12 +13,11 @@ int main(){
 	while (true){
 		int role = 1, choice = 1;
 		login(role, id_profile);
-		if (role == 3) cout << "The account was not exits." << endl;
 		if (role == 1){
 			while (choice){
 				print_option_1(choice);
 				//cin >> choice;
-				if (choice == 6){
+				if (choice == 7){
 					role = 4;
 					break;
 				}

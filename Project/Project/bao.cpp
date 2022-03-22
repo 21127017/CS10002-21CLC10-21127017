@@ -847,28 +847,28 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 // 	return;
 // }
 
-void make_choice_2(int &choice, int &id_profile){
-	switch (choice){
-		case 0:
-			logout();
-			break;
-		case 1:
-			enroll_course();
-			break;
-		case 2:
-			remove_course();
-			break;
-		case 3:
-			view_list_of_course();
-			break;
-		case 4:
-			view_scoreboard();
-			break;
-		case 5: 
-			//View profile;
-			break;
-		case 6: 
-			break;
-	}
-	return;
-}
+//void make_choice_2(int &choice, int &id_profile){
+//	switch (choice){
+//		case 0:
+//			logout();
+//			break;
+//		case 1:
+//			enroll_course();
+//			break;
+//		case 2:
+//			remove_course();
+//			break;
+//		case 3:
+//			view_list_of_course();
+//			break;
+//		case 4:
+//			view_scoreboard();
+//			break;
+//		case 5: 
+//			//View profile;
+//			break;
+//		case 6: 
+//			break;
+//	}
+//	return;
+//}
