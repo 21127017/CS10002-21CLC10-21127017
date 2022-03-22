@@ -122,8 +122,13 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	//manual
 	if (num == 2){
 		cout << "\t\t>> ADD STUDENT MANUAL <<" << endl << endl;
+		if (!year || !semester) {
+		    cout << "You need to create year and semester first." << endl;
+		    system("pause");
+		    return;
+		}
 		profile *newnode = new profile;
-		char auxilary[50];
+		char auxilary[100];
 
 		newnode -> no = ++no;
 		cout << "\tStudent no: " << no << endl;
@@ -132,23 +137,26 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		cout << "\tStudent Id: ";
 		cin >> newnode -> id;
 
+		newnode->classroom = new char[10];
+		strcpy_s(newnode->classroom, 7, "Unknow");
+
 		cout << "\tFirst name: ";
 		cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode -> first_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> first_name, 50, auxilary);
+		strcpy_s(newnode -> first_name, strlen(auxilary) + 1, auxilary);
 
 		cout << "\tLast name: ";
 		//cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode -> last_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> last_name, 50, auxilary);
+		strcpy_s(newnode -> last_name, strlen(auxilary) + 1, auxilary);
 
 		cout << "\tGender: ";
 		//cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode -> gender = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> gender, 50, auxilary);
+		strcpy_s(newnode -> gender, strlen(auxilary) + 1, auxilary);
 
 		cout << "\tSocial Id: ";
 		cin >> newnode -> social_id;
@@ -234,17 +242,17 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode -> name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> name, 50, auxilary);
+		strcpy_s(newnode -> name, strlen(auxilary) + 1, auxilary);
 
 		cout << "Id course:";
 		cin.getline(auxilary, 50);
 		newnode -> course_id = new char[(strlen(auxilary) + 1)];
-		strcpy_s(newnode -> course_id, 50, auxilary);
+		strcpy_s(newnode -> course_id, strlen(auxilary) + 1, auxilary);
 
 		cout << "Teacher: ";
 		cin.getline(auxilary, 50);
 		newnode -> teacher_name = new char[strlen(auxilary) + 1];
-            strcpy_s(newnode->teacher_name, 50, auxilary);
+            strcpy_s(newnode->teacher_name, strlen(auxilary) + 1, auxilary);
 
 		cout << "Num of creadits: ";
 		cin >> newnode -> num_of_credits;
@@ -261,7 +269,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			cin.ignore();
 			cin.getline(auxilary, 50);
 			newnode -> session[i].day = new char[strlen(auxilary) + 1];
-                  strcpy_s(newnode->session[i].day, 50, auxilary);
+                  strcpy_s(newnode->session[i].day, strlen(auxilary) + 1, auxilary);
 			cout << "\t\tHour start:";
 			cin >> newnode -> session[i].hour_start;
 			cout << "\t\tMinute start:";
@@ -608,8 +616,8 @@ void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pcla
 	cout << "\tNow you need to create new class and new semester." << endl << endl;
 	system("pause");
 	semester = 0;
-	semester_edit(1, pstudent, psubject, semester, year);
-	class_edit(0, pstudent, pclassid, semester);
+	//semester_edit(1, pstudent, psubject, semester, year);
+	//class_edit(0, pstudent, pclassid, semester);
 }
 
 //----------STAFF MEMBER FUNCTION SPACE-------------//

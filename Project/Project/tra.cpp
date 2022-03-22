@@ -616,17 +616,17 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 			case 0:
 				memcpy(temp, "Create new class", 17);
 				designSquare(17, 11, 3, 30, temp, 11, 432);
-				num = 1;
+				num = 0;
 				break;
 			case 1:
 				memcpy(temp, "View list of class", 19);
 				designSquare(50, 11, 3, 30, temp, 11, 432);
-				num = 2;
+				num = 3;
 				break;
 			case 2:
 				memcpy(temp, "Add student to class", 21);
 				designSquare(17, 15, 3, 30, temp, 11, 432);
-				num = 3;
+				num = 1;
 				break;
 			case 3:
 				memcpy(temp, "View scoreboard of class", 25);
@@ -636,7 +636,7 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 			case 4:
 				memcpy(temp, "Remove student from class", 26);
 				designSquare(17, 19, 3, 30, temp, 11, 432);
-				num = 5;
+				num = 2;
 				break;
 			default:
 				memcpy(temp, "Back to menu", 13);
