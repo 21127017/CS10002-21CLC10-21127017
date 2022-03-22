@@ -11,8 +11,12 @@ int main(){
     pclassid = NULL;
 
 	while (true){
-		int role = 1, choice = 1;
-		login(role, id_profile);
+		int role = 0, choice = 1;
+		while (role == 3 || role == 0) {
+		    login(role, id_profile);
+		    GoTo(34, 18);
+		    system("pause");
+		}
 		if (role == 1){
 			while (choice){
 				print_option_1(choice);
