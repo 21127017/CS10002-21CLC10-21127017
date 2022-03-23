@@ -1,6 +1,6 @@
 #include "project.h"
 
-void ShowCur(bool CursorVisibility) // Show / Hide the cursor.
+void showcur(bool CursorVisibility) // Show / Hide the cursor.
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
