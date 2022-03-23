@@ -149,6 +149,7 @@ void exitProgram() {
 }
 
 void print_option_1(int &choice) { //Board for teacher
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -264,6 +265,7 @@ void print_option_1(int &choice) { //Board for teacher
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
 bool inputNewPass(char *&oldpassword) {
@@ -444,6 +446,7 @@ void login(int &role, int &id_profile) {
 }
 
 void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year*/) {
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -509,9 +512,11 @@ void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, c
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
 void print_semester_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -577,9 +582,11 @@ void print_semester_function(int &choice/*profile *&pstudent, subjects *&psubjec
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
 void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid, int &semester*/) {
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -669,9 +676,11 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
 void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/) {
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -761,9 +770,11 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
 void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/) {
+	showcur(0);
 	int key = 100;
 	char temp[200];
 	int i = 0;
@@ -845,8 +856,109 @@ void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subj
 		choice = num;
 		break;
 	}
+	showcur(1);
 }
 
-void announcement(char *content, bool title, int &num) {
+void announcement(char *content, int &num) {
+	showcur(0);
+	GoTo(24, 9);
+	cout << static_cast<char>(201);
+	for (int i = 0; i < 36; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(203) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(187);
 
+	GoTo(24, 10);
+
+	cout << static_cast<char>(186);
+	for (int j = 0; j < 36; j++) {
+		cout << " ";
+	}
+	cout << static_cast<char>(186) << " " << static_cast<char>(196) << " ";
+	cout << static_cast<char>(186) << " " << static_cast<char>(254) << " ";
+	cout << static_cast<char>(186) << " X ";
+	cout << static_cast<char>(186);
+
+	GoTo(24, 11);
+
+	cout << static_cast<char>(204);
+	for (int i = 0; i < 36; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(202) << static_cast<char>(205) << static_cast<char>(205) << static_cast<char>(205);
+	cout << static_cast<char>(185);
+
+	for (int i = 0; i < 8; i++) {
+		GoTo(24, 12 + i);
+		cout << static_cast<char>(186);
+		for (int j = 0; j < 48; j++) {
+			cout << " ";
+		}
+		cout << static_cast<char>(186) << endl;
+	}
+
+	GoTo(24, 20);
+	cout << static_cast<char>(200);
+	for (int i = 0; i < 48; i++)
+		cout << static_cast<char>(205);
+	cout << static_cast<char>(188);
+
+	set_color(14);
+	if (content != nullptr) {
+		//cout content of square
+		int len = strlen(content);
+		GoTo((24 + (51 - len) / 2), 13);
+		cout << content;
+	}
+	set_color(7);
+
+	int key = 100;
+	char temp[200];
+	int i = 0;
+
+	while (key != 5) {
+		memcpy(temp, "YES", 4);
+		designSquare(34, 16, 3, 10, temp, 7, 7);
+
+		memcpy(temp, "NO", 3);
+		designSquare(54, 16, 3, 10, temp, 7, 7);
+
+		switch (i) {
+		case 0:
+			memcpy(temp, "YES", 4);
+			designSquare(34, 16, 3, 10, temp, 4, 79);
+			num = 1;
+			break;
+		default:
+			memcpy(temp, "NO", 3);
+			designSquare(54, 16, 3, 10, temp, 4, 79);
+			num = 2;
+			break;
+		}
+
+		key = getkey();
+		switch (key) {
+		case 2:
+			i++;
+			break;
+		case 4:
+			i--;
+			break;
+		case 6:
+			i++;
+			break;
+		case 8:
+			i--;
+			break;
+		default:
+			break;
+		}
+
+		if (i < 0) i = 1;
+		if (i > 1) i = 0;
+	}
+	showcur(1);
 }
