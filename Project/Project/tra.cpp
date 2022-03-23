@@ -373,14 +373,14 @@ void login(int &role, int &id_profile) {
 	view_loginboard();
 	//input username from keyboard
 	char *username;
-	GoTo(46, 11);
+	GoTo(47, 11);
 	cin.getline(temp_string, 200);
 	username = new char[strlen(temp_string) + 1];
 	memcpy(username, temp_string, strlen(temp_string) + 1);
 
 	//input password from keyboard
 	char *password;
-	GoTo(46, 14);
+	GoTo(47, 14);
 	cin.getline(temp_string, 200);
 	password = new char[strlen(temp_string) + 1];
 	memcpy(password, temp_string, strlen(temp_string) + 1);
@@ -859,7 +859,7 @@ void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subj
 	showcur(1);
 }
 
-void announcement(char *content, int &num) {
+void announcement(char *content, bool yesno, int &num) {
 	showcur(0);
 	GoTo(24, 9);
 	cout << static_cast<char>(201);
@@ -914,51 +914,57 @@ void announcement(char *content, int &num) {
 		cout << content;
 	}
 	set_color(7);
+	if (yesno) {
+		int key = 100;
+		char temp[200];
+		int i = 0;
 
-	int key = 100;
-	char temp[200];
-	int i = 0;
-
-	while (key != 5) {
-		memcpy(temp, "YES", 4);
-		designSquare(34, 16, 3, 10, temp, 7, 7);
-
-		memcpy(temp, "NO", 3);
-		designSquare(54, 16, 3, 10, temp, 7, 7);
-
-		switch (i) {
-		case 0:
+		while (key != 5) {
 			memcpy(temp, "YES", 4);
-			designSquare(34, 16, 3, 10, temp, 4, 79);
-			num = 1;
-			break;
-		default:
+			designSquare(34, 16, 3, 10, temp, 7, 7);
+
 			memcpy(temp, "NO", 3);
-			designSquare(54, 16, 3, 10, temp, 4, 79);
-			num = 2;
-			break;
-		}
+			designSquare(54, 16, 3, 10, temp, 7, 7);
 
-		key = getkey();
-		switch (key) {
-		case 2:
-			i++;
-			break;
-		case 4:
-			i--;
-			break;
-		case 6:
-			i++;
-			break;
-		case 8:
-			i--;
-			break;
-		default:
-			break;
-		}
+			switch (i) {
+			case 0:
+				memcpy(temp, "YES", 4);
+				designSquare(34, 16, 3, 10, temp, 4, 79);
+				num = 1;
+				break;
+			default:
+				memcpy(temp, "NO", 3);
+				designSquare(54, 16, 3, 10, temp, 4, 79);
+				num = 2;
+				break;
+			}
 
-		if (i < 0) i = 1;
-		if (i > 1) i = 0;
+			key = getkey();
+			switch (key) {
+			case 2:
+				i++;
+				break;
+			case 4:
+				i--;
+				break;
+			case 6:
+				i++;
+				break;
+			case 8:
+				i--;
+				break;
+			default:
+				break;
+			}
+
+			if (i < 0) i = 1;
+			if (i > 1) i = 0;
+		}
+	} else {
+		GoTo(32, 17);
+		set_color(4);
+		system("pause");
+		set_color(7);
 	}
 	showcur(1);
 }

@@ -118,7 +118,7 @@ void view_list_of_course();
 
 void view_scoreboard();
 
-void announcement(char *content, int &num);
+void announcement(char *content, bool yesno, int &num);
 
 void exitProgram();
 

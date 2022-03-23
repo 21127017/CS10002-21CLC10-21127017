@@ -114,75 +114,99 @@ void view_scoreboard(){
 
 //--------EDIT SPACE----------------//
 void student_edit(int num, int &no, profile *&pstudent, int &semester, int &classroom, int &year){
-	system("cls");
-	if (num == 1){
+	view_space();
+	char temp[200];
+	if (num == 1) {
 		//read file csv
 		return;
 	}
 	//manual
-	if (num == 2){
-		cout << "\t\t>> ADD STUDENT MANUAL <<" << endl << endl;
+	if (num == 2) {
+		GoTo(36, 1);
+		cout << ">> ADD STUDENT MANUAL <<";
 		if (!year || !semester) {
-		    cout << "You need to create year and semester first." << endl;
-		    system("pause");
-		    return;
+			int num2 = 0;
+			memcpy(temp, "You need to create year and semester first.", 44);
+			announcement(temp, 0, num2);
+			return;
 		}
 		profile *newnode = new profile;
 		char auxilary[100];
 
-		newnode -> no = ++no;
-		cout << "\tStudent no: " << no << endl;
-		newnode -> psub2 = NULL;
+		newnode->no = ++no;
+		memcpy(temp, "Student no:   ", 15);
+		designSquare(25, 9, 3, 19, temp, 7, 7);
 
-		cout << "\tStudent Id: ";
-		cin >> newnode -> id;
+		memcpy(temp, "Student ID:           ", 23);
+		designSquare(46, 9, 3, 27, temp, 7, 7);
+		
+		memcpy(temp, "First name:                                ", 44);
+		designSquare(25, 12, 3, 48, temp, 7, 7);
+
+		memcpy(temp, "Last name:                                 ", 44);
+		designSquare(25, 15, 3, 48, temp, 7, 7);
+
+		memcpy(temp, "Gender:    ", 12);
+		designSquare(25, 18, 3, 16, temp, 7, 7);
+
+		memcpy(temp, "Social Id:             ", 24);
+		designSquare(43, 18, 3, 30, temp, 7, 7);
+
+		memcpy(temp, "Date of birth: Year:      Month:    Day:   ", 44);
+		designSquare(25, 21, 3, 48, temp, 7, 7);
+
+		GoTo(39, 10);
+		cout << no;
+		newnode->psub2 = NULL;
+
+		GoTo(60, 10);
+		cin >> newnode->id;
 
 		newnode->classroom = new char[10];
-		strcpy_s(newnode->classroom, 7, "Unknow");
+		strcpy_s(newnode->classroom, 8, "Unknown");
 
-		cout << "\tFirst name: ";
 		cin.ignore();
+		GoTo(39, 13);
 		cin.getline(auxilary, 50);
-		newnode -> first_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> first_name, strlen(auxilary) + 1, auxilary);
+		newnode->first_name = new char[strlen(auxilary) + 1];
+		strcpy_s(newnode->first_name, strlen(auxilary) + 1, auxilary);
 
-		cout << "\tLast name: ";
 		//cin.ignore();
+		GoTo(38, 16);
 		cin.getline(auxilary, 50);
-		newnode -> last_name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> last_name, strlen(auxilary) + 1, auxilary);
+		newnode->last_name = new char[strlen(auxilary) + 1];
+		strcpy_s(newnode->last_name, strlen(auxilary) + 1, auxilary);
 
-		cout << "\tGender: ";
 		//cin.ignore();
+		GoTo(35, 19);
 		cin.getline(auxilary, 50);
-		newnode -> gender = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> gender, strlen(auxilary) + 1, auxilary);
+		newnode->gender = new char[strlen(auxilary) + 1];
+		strcpy_s(newnode->gender, strlen(auxilary) + 1, auxilary);
 
-		cout << "\tSocial Id: ";
-		cin >> newnode -> social_id;
+		GoTo(57, 19);
+		cin >> newnode->social_id;
 
-		cout << "\tDate of birth:" << endl;
-		cout << "\t\tYear: ";
-		cin >> newnode -> dob.year;
-		cout << "\t\tMonth: ";
-		cin >> newnode -> dob.month;
-		cout << "\t\tDay: ";
-		cin >> newnode -> dob.day;
+		GoTo(48, 22);
+		cin >> newnode->dob.year;
 
-		newnode -> next = NULL;
-		if (pstudent == NULL) 
+		GoTo(60, 22);
+		cin >> newnode->dob.month;
+
+		GoTo(68, 22);
+		cin >> newnode->dob.day;
+
+		newnode->next = NULL;
+		if (pstudent == NULL)
 			pstudent = newnode;
 		else {
 			profile *current = pstudent;
-			while (current -> next != NULL) current = current -> next;
-			current -> next = newnode;
+			while (current->next != NULL) current = current->next;
+			current->next = newnode;
 		}
-		cout << endl << "\t=> Input successfully!" << endl << endl;
-		cout << "\tDo you want to input again?" << endl;
-		cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
-		int choice;
-		cin >> choice;
-		if (choice == 1) student_edit(1, no, pstudent, semester, classroom, year);
+		memcpy(temp, "Successfully! Do you want to input again?", 42);
+		int choice = 0;
+		announcement(temp, 1, choice);
+		if (choice == 1) student_edit(2, no, pstudent, semester, classroom, year);
 		return;
 	}
 	if (num == 3){
