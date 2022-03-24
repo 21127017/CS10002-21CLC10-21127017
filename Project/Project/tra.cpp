@@ -859,7 +859,7 @@ void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subj
 	showcur(1);
 }
 
-void announcement(char *content, bool yesno, int &num) {
+void announcement(char *content, bool yesno, int &num, int title) {
 	showcur(0);
 	GoTo(24, 9);
 	cout << static_cast<char>(201);
@@ -905,6 +905,18 @@ void announcement(char *content, bool yesno, int &num) {
 	for (int i = 0; i < 48; i++)
 		cout << static_cast<char>(205);
 	cout << static_cast<char>(188);
+
+	if (title == 1) {
+		set_color(10);
+		GoTo(26, 10);
+		cout << "Success !!!";
+		set_color(7);
+	} else if (title == -1) {
+		set_color(4);
+		GoTo(26, 10);
+		cout << "Failure !!!";
+		set_color(7);
+	}
 
 	set_color(14);
 	if (content != nullptr) {

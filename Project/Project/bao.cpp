@@ -127,7 +127,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		if (!year || !semester) {
 			int num2 = 0;
 			memcpy(temp, "You need to create year and semester first.", 44);
-			announcement(temp, 0, num2);
+			announcement(temp, 0, num2, -1);
 			return;
 		}
 		profile *newnode = new profile;
@@ -203,52 +203,49 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 			while (current->next != NULL) current = current->next;
 			current->next = newnode;
 		}
-		memcpy(temp, "Successfully! Do you want to input again?", 42);
+		memcpy(temp, "Do you want to input again?", 28);
 		int choice = 0;
-		announcement(temp, 1, choice);
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) student_edit(2, no, pstudent, semester, classroom, year);
 		return;
 	}
-	if (num == 3){
-		cout << "\t\t>> REMOVE STUDENT <<" << endl << endl;
-		if (pstudent == NULL){
-			cout << "\tNo result...." << endl << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
-			int choice;
-			cin >> choice;
+	if (num == 3) {
+		GoTo(39, 1);
+		cout << ">> REMOVE STUDENT <<";
+		if (pstudent == NULL) {
+			memcpy(temp, "No result! Do you want to input again?", 39);
+			int choice = 0;
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
 			return;
 		}
-		cout << "\tInput student id: ";
+		memcpy(temp, "Input student ID:           ", 29);
+		designSquare(32, 15, 3, 33, temp, 7, 7);
+		GoTo(52, 16);
 		int student_id;
 		cin >> student_id;
 		profile *cur = pstudent;
-		if (cur -> id == student_id){
-			pstudent = pstudent -> next;
+		if (cur->id == student_id) {
+			pstudent = pstudent->next;
 			delete cur;
 		} else {
 			profile *auxilary;
-			while (cur -> next != NULL && cur -> next -> id != student_id)
-				cur = cur -> next;
-			if (cur -> next == NULL){
-				cout << "\tCan't find this id. " << endl << endl;
-				cout << "\tDo you want to input again?" << endl;
-				cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
-				int choice;
-				cin >> choice;
+			while (cur->next != NULL && cur->next->id != student_id)
+				cur = cur->next;
+			if (cur->next == NULL) {
+				memcpy(temp, "ID doesn't exist. Do you want to input again?", 46);
+				int choice = 0;
+				announcement(temp, 1, choice, -1);
 				if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
 				return;
 			}
-			auxilary = cur -> next;
-			cur -> next = cur -> next -> next;
+			auxilary = cur->next;
+			cur->next = cur->next->next;
 			delete auxilary;
 		}
-		cout << "\t=> Delete complete!" << endl << endl;
-		cout << "\tDo you want to remove another student?" << endl;
-		cout << "\t1. Yes" << endl << "\t2. No" << endl << "\tInput: ";
+		memcpy(temp, "Do you want to remove another student?", 39);
 		int choice;
-		cin >> choice;
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) student_edit(3, no, pstudent, semester, classroom, year);
 	}
 }
