@@ -127,7 +127,7 @@ void output_to_csv_student(profile* &pstudent)
 	return;
 }
 
-bool output_to_csv_staff(staff* pstaff)
+void output_to_csv_staff(staff* pstaff)
 {
 	if (pstaff == NULL) return;
 	ofstream output;
