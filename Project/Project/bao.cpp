@@ -258,46 +258,71 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		GoTo(37, 1);
 		cout << ">> CREATE NEW COURSE <<";
 		subjects *newnode = new subjects;
-		newnode -> year = year;
-		newnode -> semester = semester;
+		newnode->year = year;
+		newnode->semester = semester;
 		char auxilary[50];
 
-		cout << "Course name: ";
+		memcpy(temp, "Course name:                              ", 43);
+		designSquare(13, 8, 3, 46, temp, 7, 7);
+
+		memcpy(temp, "Id course:            ", 23);
+		designSquare(59, 8, 3, 26, temp, 7, 7);
+
+		memcpy(temp, "Teacher:                                                            ", 69);
+		designSquare(13, 11, 3, 72, temp, 7, 7);
+
+		memcpy(temp, "Num of credits:              ", 30);
+		designSquare(13, 14, 3, 33, temp, 7, 7);
+
+		memcpy(temp, "Month start:          end:         ", 36);
+		designSquare(46, 14, 3, 39, temp, 7, 7);
+
+		designSquare(13, 17, 7, 72, 0, 7, 7);
+		GoTo(15, 18);
+		cout << "Input the session of this course: ";
+
+		GoTo(28, 9); // input course name
 		cin.ignore();
 		cin.getline(auxilary, 50);
-		newnode -> name = new char[strlen(auxilary) + 1];
-		strcpy_s(newnode -> name, strlen(auxilary) + 1, auxilary);
+		newnode->name = new char[strlen(auxilary) + 1];
+		strcpy_s(newnode->name, strlen(auxilary) + 1, auxilary);
 
-		cout << "Id course:";
+		GoTo(72, 9); //input id course
 		cin.getline(auxilary, 50);
-		newnode -> course_id = new char[(strlen(auxilary) + 1)];
-		strcpy_s(newnode -> course_id, strlen(auxilary) + 1, auxilary);
+		newnode->course_id = new char[(strlen(auxilary) + 1)];
+		strcpy_s(newnode->course_id, strlen(auxilary) + 1, auxilary);
 
-		cout << "Teacher: ";
+		GoTo(24, 12); //input teacher
 		cin.getline(auxilary, 50);
-		newnode -> teacher_name = new char[strlen(auxilary) + 1];
-            strcpy_s(newnode->teacher_name, strlen(auxilary) + 1, auxilary);
+		newnode->teacher_name = new char[strlen(auxilary) + 1];
+		strcpy_s(newnode->teacher_name, strlen(auxilary) + 1, auxilary);
 
-		cout << "Num of credits: ";
-		cin >> newnode -> num_of_credits;
+		GoTo(31, 15); //input num of credits
+		cin >> newnode->num_of_credits;
 
-		cout << "Month start: ";
-		cin >> newnode -> start;
-		cout << "Month end: ";
-		cin >> newnode -> end;
+		GoTo(61, 15);
+		cin >> newnode->start;
+		GoTo(75, 15);
+		cin >> newnode->end;
 
-		cout << "Input the session of this course: " << endl;
-		for (int i = 0; i < 2; ++i){
-			cout << "\tSession " << i + 1 << ":" << endl;
-			cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
+		for (int i = 0; i < 2; ++i) {
+			GoTo(15, (19 + 2 * i));
+			cout << "Session " << i + 1 << ": ";
+			cout << "Day (MON / TUE / WED / THU / FRI / SAT): ";
+
+			GoTo(67, (19 + 2 * i));
 			cin.ignore();
 			cin.getline(auxilary, 50);
-			newnode -> session[i].day = new char[strlen(auxilary) + 1];
-                  strcpy_s(newnode->session[i].day, strlen(auxilary) + 1, auxilary);
-			cout << "\t\tHour start:";
-			cin >> newnode -> session[i].hour_start;
-			cout << "\t\tMinute start:";
-			cin >> newnode -> session[i].minute_start;
+			newnode->session[i].day = new char[strlen(auxilary) + 1];
+			strcpy_s(newnode->session[i].day, strlen(auxilary) + 1, auxilary);
+
+			GoTo(26, (20 + 2 * i));
+			cout << "Hour start:     Minute start:";
+
+			GoTo(38, (20 + 2 * i));
+			cin >> newnode->session[i].hour_start;
+			GoTo(56, (20 + 2 * i));
+			cin >> newnode->session[i].minute_start;
 		}
 
 		newnode -> next = NULL;
@@ -308,11 +333,9 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			while (current -> next != NULL) current = current -> next;
 			current -> next = newnode;
 		}
-		cout << "=> Created successfully!" << endl;
-		cout << "Do you want to create another one?" << endl;
-		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
+		memcpy(temp, "Do you want to create another one?", 35);
 		int choice;
-		cin >> choice;
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) subject_edit(1, pstudent, psubject, semester, year);
 	}
 	if (num == 2){
