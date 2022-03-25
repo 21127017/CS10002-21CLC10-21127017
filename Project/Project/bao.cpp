@@ -339,7 +339,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		if (choice == 1) subject_edit(1, pstudent, psubject, semester, year);
 	}
 	if (num == 2){
-		cout << "\t\t>> REMOVE COURSE << " << endl << endl;
+		cout << ">> REMOVE COURSE <<" << endl << endl;
 		//show list of course in this semester
 		cout << "\tInput the id of course you want to delete: ";
 		char auxilary[50];
