@@ -269,43 +269,48 @@ void print_option_1(int &choice) { //Board for teacher
 }
 
 bool inputNewPass(char *&oldpassword) {
-	//input old password
+	
 	char temp_string[200], temp_str[200];
-Again:
-	cout << "Are you sure to change your password?";
-	cout << endl << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
+
+	memcpy(temp_str, "Are you sure to change your password?", 38);
 	int a;
-	cin >> a;
+	announcement(temp_str, 1, a, 0);
 	if (a != 1) return false;
 
-	cout << "Old password: ";
+	memcpy(temp_str, "Old password:             ", 27);
+	designSquare(34, 15, 3, 30, temp_str, 7, 7);
+
+	GoTo(50, 16);//input old password
 	cin.ignore();
 	cin.getline(temp_string, 200);
 
 	if (strcmp(temp_string, oldpassword) == 0) {
 		//Old password is true, input new password
-		cout << "New password: ";
+		memcpy(temp_str, "New password:                         ", 39);
+		designSquare(28, 8, 3, 42, temp_str, 7, 7);
+		memcpy(temp_str, "Confirm new password:                 ", 39);
+		designSquare(28, 12, 3, 42, temp_str, 7, 7);
+
+		GoTo(44, 9);
 		cin.getline(temp_string, 200);
-		cout << "Confirm new password: ";
+		GoTo(52, 13);
 		cin.getline(temp_str, 200);
 
 		if (strcmp(temp_string, temp_str) == 0) { //Ok
 			memcpy(oldpassword, temp_string, strlen(temp_string) + 1);
-			cout << "Successfully!";
+			memcpy(temp_str, "Your password has been changed!", 32);
+			announcement(temp_str, 0, a, 1);
 			return true;
 		} else {
-			cout << "Confirm error!";
-			cout << endl << "Do you want change your password again?";
-			cout << endl << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
+			memcpy(temp_str, "Do you want change your password again?", 40);
 			int choice;
-			cin >> choice;
-			if (choice == 1) {
-				goto Again;
-			} else
+			announcement(temp_str, 1, choice, -1);
+			if (choice != 1)
 				return false;
 		}
 	} else {
-		cout << "Wrong password";
+		memcpy(temp_str, "Wrong password!!!", 18);
+		announcement(temp_str, 0, a, -1);
 		return false;
 	}
 }
@@ -344,16 +349,20 @@ void changePassword(const int &changed_id) {
 	inp.close();
 
 	int k = changed_id - 1;
-	if (inputNewPass(inf[k].password)) {
-		ofstream out;
-		out.open("login_information.csv");
-		out << N << ",,," << endl;
-		for (int i = 0; i < N; i++) {
-			out << inf[i].role << "," << inf[i].username << "," << inf[i].password << "," << inf[i].user_id << endl;
+	bool check = 0;
+	do {
+		check = inputNewPass(inf[k].password);
+		if (check) {
+			ofstream out;
+			out.open("login_information.csv");
+			out << N << ",,," << endl;
+			for (int i = 0; i < N; i++) {
+				out << inf[i].role << "," << inf[i].username << "," << inf[i].password << "," << inf[i].user_id << endl;
+			}
+			out << "0,,,";
+			out.close();
 		}
-		out << "0,,,";
-		out.close();
-	}
+	} while (check);
 
 	for (int i = 0; i < N; i++) {
 		delete[] inf[i].username;
