@@ -1,5 +1,6 @@
 #include "project.h"
-
+using std::cout;
+using std::cin;
 /*
 void set_space(char tmp[], int space){
 	char gap[200] = "";
@@ -251,9 +252,11 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 }
 
 void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year){
-	system("cls");
+	view_space();
+	char temp[200];
 	if (num == 1){
-		cout << "\t\t>> CREATE NEW COURSE << " << endl;
+		GoTo(37, 1);
+		cout << ">> CREATE NEW COURSE <<";
 		subjects *newnode = new subjects;
 		newnode -> year = year;
 		newnode -> semester = semester;
@@ -275,7 +278,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		newnode -> teacher_name = new char[strlen(auxilary) + 1];
             strcpy_s(newnode->teacher_name, strlen(auxilary) + 1, auxilary);
 
-		cout << "Num of creadits: ";
+		cout << "Num of credits: ";
 		cin >> newnode -> num_of_credits;
 
 		cout << "Month start: ";
