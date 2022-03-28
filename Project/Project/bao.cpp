@@ -254,6 +254,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year){
 	view_space();
 	char temp[200];
+	int choice = 0;
 	if (num == 1){
 		GoTo(37, 1);
 		cout << ">> CREATE NEW COURSE <<";
@@ -334,15 +335,21 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			current -> next = newnode;
 		}
 		memcpy(temp, "Do you want to create another one?", 35);
-		int choice;
 		announcement(temp, 1, choice, 1);
 		if (choice == 1) subject_edit(1, pstudent, psubject, semester, year);
 	}
 	if (num == 2){
-		cout << ">> REMOVE COURSE <<" << endl << endl;
+		GoTo(39, 1);
+		cout << ">> REMOVE COURSE <<";
+
+
 		//show list of course in this semester
-		cout << "\tInput the id of course you want to delete: ";
+
+
+		memcpy(temp, "Input the id of course you want to delete:                ", 59);
+		designSquare(18, 17, 3, 62, temp, 7, 7);
 		char auxilary[50];
+		GoTo(63, 18);
 		cin.ignore();
 		cin.getline(auxilary, 50);
 		subjects *current = psubject;
@@ -353,29 +360,30 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			while (current -> next != NULL && strcmp(current -> next -> course_id, auxilary) != 0)
 				current = current -> next;
 			if (current -> next == NULL){
-				cout << "\tThe id was not exits." << endl << endl;
-				cout << "\tDo you want to input again?" << endl;
-				cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-				int choice;
-				cin >> choice;
+				
+				memcpy(temp, "Do you want to input again?", 28);
+				int choice = 0;
+				announcement(temp, 1, choice, -1);
 				if (choice == 1) subject_edit(2, pstudent, psubject, semester, year);
 				return;
 			} else {
 				subjects *tmp = current -> next;
 				current -> next = current -> next -> next;
 				delete tmp;
-				cout << "\tDelete course complete!" << endl;
 			}
 		}
-		cout << "\tDo you want to create another one?" << endl;
-		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-		int choice;
-		cin >> choice;
+		memcpy(temp, "Do you want to remove another one ?", 36);
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) subject_edit(2, pstudent, psubject, semester, year);
 	}
 	if (num == 4){
+
 		//Show list of course.
-		cout << "\tChoose a course you want to update score." << endl << "\tInput: ";
+
+		memcpy(temp, "Input the course id you want to update score:                ", 62);
+		designSquare(16, 17, 3, 65, temp, 7, 7);
+
+		GoTo(65, 18);
 		char auxilary[50];
 		cin.ignore();
 		cin.getline(auxilary, 50);
@@ -383,32 +391,33 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		while (current != NULL && strcmp(current -> course_id, auxilary) != 0)
 			current = current -> next;
 		if (current == NULL){
-			cout << "\tThe id was not exits." << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl;
-			cout << "\tInput:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "Do you want to input again?", 28);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) subject_edit(4, pstudent, psubject, semester, year);
 			return;
 		} else {
-			system("cls");
+			view_space();
 			int count = 0;
-			cout << "\t\t>> INPUT SCORE <<" << endl << endl;
+			GoTo(40, 1);
+			cout << ">> INPUT SCORE <<" << endl << endl;
 			profile *cur1 = pstudent;
 			while (cur1 != NULL){
 				subject2 *cur2 = cur1 -> psub2;
 				while (cur2 != NULL && strcmp(cur2 -> course_id, auxilary) != 0)
 					cur2 = cur2 -> next;
 				if (cur2 != NULL){
-					cout << "\tID: " << cur1 -> id << endl;
+					GoTo(37, 4 + count);
+					cout << "ID: " << cur1 -> id;
 					cout << "\tScore: ";
 					cin >> cur2 -> score;
 					++count;
 				}
 				cur1 = cur1 -> next;
 			}
-			if (count == 0) cout << "\tNo result." << endl;
+			if (count == 0) {
+				memcpy(temp, "No result.", 11);
+				announcement(temp, 0, choice, -1);
+			}
 		}
 	}
 	if (num == 5){
