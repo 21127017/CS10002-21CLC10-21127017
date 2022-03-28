@@ -8,6 +8,8 @@
 #include <iomanip>	
 #include "conio.h"
 
+#define sc(a) static_cast<char>(a)
+
 using namespace std;
 
 struct login_information {
@@ -97,10 +99,16 @@ void set_color(int code);
 int getkey();
 
 void GoTo(SHORT posX, SHORT posY);
+#define gt GoTo
 
 void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, int color1, int color2);
 
 void view_space();
+
+void draw_button(int value, int maxlist);
+void view_student_in_class(char *classid, profile *pstudent);
+void view_student_in_course(char *id_course, profile *p);
+void view_list_of_class(classrooms *pclassid, profile *pstudent);
 
 void view_loginboard();
 

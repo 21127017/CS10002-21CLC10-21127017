@@ -1,10 +1,8 @@
 ﻿# CS10002-21CLC10-21127017
-Công việc tuần 06(tính theo số lab ktlt th):
-- Bảo: Tối ưu code.
+Công việc tuần 07(tính theo số lab ktlt th):
+- Bảo: thiết kế danh sách.
 - Trà: Design.
-- Anh: Lưu trữ dữ liệu.
-- Hy: Design (Xem ở phần thiết kế).
-- Hiếu: Design (Xem ở phần thiết kế).
+- Anh: Lưu trữ dữ liệu (speed :v).
 
 Công việc đã hoàn thành:
 - Bảo:
@@ -24,6 +22,10 @@ Công việc đã hoàn thành:
     + Hàm thay đổi điểm của học sinh.
     + Hàm xem thông tin 1 môn học.
     + Hàm tạo khoảng cách khi in cột.
+    + view list of student in class.
+    + view list of class.
+    + view list of course.
+    + View list of student in a course.
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
@@ -37,8 +39,6 @@ Công việc đã hoàn thành:
     + Hàm hủy đăng kí môn học cho sinh viên
     + Hàm lưu thông tin học sinh
     + Hàm lưu trữ dữ liệu giảng viên.
-- Hy:
-- Hiếu: 
 
 
 Các công việc còn lại
@@ -65,19 +65,19 @@ PHẦN THIẾT KẾ:
     + In ra thông tin dựa vào 2 list đã truyền vào (Bố cục như hôm bữa trong zoom em có nói sơ qua).
     + Truyền vào biến &choice trả lại 1 hoặc 2 (1 là đổi pass 2 là back to menu).
 
-- Hàm view list of class (phần này mình hiện về danh sách các lớp có trong kì hiện tại):
+- Hàm view list of class (phần này mình hiện về danh sách các lớp có trong kì hiện tại): //Bao
     + Truyền vào *pclass, *pstudent, year, semester.
-    + Theo bố cục từ trái sang phải: STT, Tên lớp, Số lượng học sinh của mỗi lớp (phần này mấy anh chạy trâu cái list học sinh để đếm số học sinh có class là lớp mình đang xuất rồi đếm nha).
+    + Theo bố cục từ trái sang phải: STT, Tên lớp, Số lượng học sinh của mỗi lớp (phần này  chạy trâu cái list học sinh để đếm số học sinh có class là lớp mình đang xuất rồi đếm nha).
 
-- Hàm view list of student in class (phần này hiển thị danh sách học sinh của 1 lớp):
+- Hàm view list of student in class (phần này hiển thị danh sách học sinh của 1 lớp): //Bao
     + Truyền vào classid(biến này dùng để so với pstudent -> classroom để in học sinh ra), *pstudent.
     + Từ trái sang phải: STT, tên học sinh (first_name + last_name), id, ngày sinh (dob.year, dob.month, dob.day), giới tính.
 
-- Hàm view list of course:
+- Hàm view list of course:  // Bao
     + Truyền vào: *psubject, *pstudent
     + In từ trái sang phải: course_id, namne, teacher, num of creadits, Month start(start), month end(end), session[1], session[2], num of enroll / maximum (num of enroll được tính bằng cách chạy trâu list pstudent đếm xem đứa nào có học môn đấy).
 
-- View list of student in a course:
+- View list of student in a course: // Bao
     + Truyền biến id_subject, *pstudent
     (Mặc định là mình đã có id của môn học cần in là id_course, để in số học sinh mình cần so id_course với 
     pstudent -> sub2 -> course_id)
@@ -97,8 +97,6 @@ PHẦN THIẾT KẾ:
     + Truyền id_student, *pstudent, *psubject
     (So sáng id_student với pstudent -> id để tìm ra hs cần in, sau đó so sánh pstudent -> psub2 -> course_id với psubject -> courseid để in ra các thông tin về môn học)
     + STT, Tên Môn học, Id môn học, giảng viên, Month start, month end, num of creadits.
-
-
 
 - View a list of his/her scoreboard:
     + Truyền id_student, *pstudent, *psubject
