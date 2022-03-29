@@ -86,22 +86,23 @@ PHẦN THIẾT KẾ:
 - Export list of student in a course to cvs file:
     + Tương tự với view list of student, khác là thay vì xuất ra console mình in ra file CSV ^^!
 
-- View the scoreboard of a course:
+- View the scoreboard of a course: // Bao
     + Truyền biến id_course, *pstudent
     (Mặc định mình đã có môn học cần tra là id_course, mình so nó với pstudent -> psub2 -> course_id)
     + Từ trái sang phải: Tên hs (fisrt_name + last_name), id, classroom, psub2 -> score
 
 - View scoreboard of a class: update sau.
 
-- View list of enrolled course (in ra môn học đã đăng ký của một học sinh):
+- View list of enrolled course (in ra môn học đã đăng ký của một học sinh): // Bao
     + Truyền id_student, *pstudent, *psubject
     (So sáng id_student với pstudent -> id để tìm ra hs cần in, sau đó so sánh pstudent -> psub2 -> course_id với psubject -> courseid để in ra các thông tin về môn học)
     + STT, Tên Môn học, Id môn học, giảng viên, Month start, month end, num of creadits.
 
-- View a list of his/her scoreboard:
+- View a list of his/her scoreboard: // Bao
     + Truyền id_student, *pstudent, *psubject
     (dùng id_student so với pstudent -> id để kiếm học sinh cần in)
     + Chạy list psub2 in tên môn học, tín chỉ, Month start, month end, điểm số .
-    (lấy tên môn học bằng cách tra course_id từ psub2 với course_id từ psubject)
+    (lấy tên môn học bằng cách tra course_id từ psub2 với course_id từ psubject).
+    + Con update
 
 
