@@ -277,3 +277,19 @@ void output_to_csv_subject(subjects* psubject)
 	output.close();
 	return;
 }
+
+void output_to_csv_class(classrooms *pclass)
+{
+	classrooms* pCur;
+	ofstream output;
+	output.open("classinfo.csv", ios::out);
+	while (pCur != NULL)
+	{
+		output << classroom;
+		list_student* pCurList = classroom->id_student;
+		while (id_student != NULL)
+			output  << "," << classroom->id_student->id;
+		output << endl;
+	}
+	output.close();
+}
