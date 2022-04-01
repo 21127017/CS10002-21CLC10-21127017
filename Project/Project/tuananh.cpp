@@ -285,10 +285,10 @@ void output_to_csv_class(classrooms *pclass)
 	output.open("classinfo.csv", ios::out);
 	while (pCur != NULL)
 	{
-		output << classroom;
-		list_student* pCurList = classroom->id_student;
+		output << pCur->classroom;
+		list_student* pCurList = pCur->id_student;
 		while (id_student != NULL)
-			output  << "," << classroom->id_student->id;
+			output  << "," << pCur->id_student->id;
 		output << endl;
 	}
 	output.close();
