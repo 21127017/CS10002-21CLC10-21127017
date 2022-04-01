@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <string>
 #include <windows.h>
 #include <iomanip>	
 #include "conio.h"
