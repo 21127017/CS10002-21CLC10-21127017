@@ -29,6 +29,7 @@ Công việc đã hoàn thành:
     + View a list of his/her scoreboard.
     + View list of enrolled course.
     + View the scoreboard of a course.
+    + Profile
 - Trà:
     + Thiết kế giao diện login
     + Đăng nhập, đổi mật khẩu
@@ -52,7 +53,7 @@ Các công việc còn lại
 
 ----------------------------------------------------------------------------
 PHẦN THIẾT KẾ:
-- Profile:
+- Profile: // Bao
     + Truyền vào role, *pstudent, *staff.
     + Tụi em xác định vai trò là gv hay học sinh bằng biến role, cụ thể nếu role = 1 là gv, role = 2 là hs.
     + In ra thông tin dựa vào 2 list đã truyền vào (Bố cục như hôm bữa trong zoom em có nói sơ qua).

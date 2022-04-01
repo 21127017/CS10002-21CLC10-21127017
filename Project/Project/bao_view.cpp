@@ -30,6 +30,124 @@ void draw_button(int line, int value, int maxlist){
 	return;
 }
 
+void print_information(char *x1, char *x2, int x, int y, int color){
+	int n1 = strlen(x1);
+	int n2 = strlen(x2);
+	designSquare(x, y, 3, 12, x1, color, color);
+	set_color(7);
+	gt(x + 13, y + 1); cout << " " << x2 << " ";
+	set_color(color);
+	gt(x + 13, y);
+	for (int i = 1; i <= 30; ++i) 
+		cout << sc(196);
+	gt(x + 13, y + 2);
+	for (int i = 1; i <= 30; ++i)
+		cout << sc(196);
+	set_color(7);
+}
+
+void view_profile(){
+	view_space();
+	
+	int line = 2; 
+	gt(60, line++); cout << sc(203);
+	for (int i = 1; i <= 27; ++i){
+		gt(60, line++); cout << sc(186);
+	}
+	gt(60, line); cout << sc(202);
+
+	line = 3;
+	set_color(14);
+	gt(61, line++); cout << "............  ..::::::..  ............";
+	gt(61, line++); cout << ".......... .:^~!!!!!!!!~^.  ..........";
+	gt(61, line++); cout << "......... :~!!!!!!!!!!!!!!~. .........";
+	gt(61, line++); cout << "........ :!!!!!!!!!!!!!!!!!!. ........";
+	gt(61, line++); cout << ".........~!!!!!!!!!!!!!!!!!!~.........";
+	gt(61, line++); cout << "....... .!!!!!!!!!!!!!!!!!!!!.........";
+	gt(61, line++); cout << ".........~!!!!!!!!!!!!!!!!!!~.........";
+	gt(61, line++); cout << "........ :!!!!!!!!!!!!!!!!!~. ........";
+	gt(61, line++); cout << "........  .^!!!!!!!!!!!!!!^. .........";
+	gt(61, line++); cout << "......  .:^:::^~!!!!!!~^::^^:.  ......";
+	gt(61, line++); cout << ".... .:~!!!!!~^::::::::^~!!!!!^:  ....";
+	gt(61, line++); cout << "... :~!!!!!!!!!!!!!!!!!!!!!!!!!!^. ...";
+	gt(61, line++); cout << ".. ^!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^ ..";
+	gt(61, line++); cout << ". ^!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^ .";
+	gt(61, line++); cout << ". !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! .";
+	gt(61, line++); cout << ". !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! .";
+	//gt(61, line++); cout << " :^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^. ";
+	//gt(61, line++); cout << "";
+	set_color(7);
+
+	line = 19;
+	gt(60, line); cout << sc(204);
+	for (int i = 0; i < 38; ++i) cout << sc(205);
+	cout << sc(185);
+	
+	int color = 11, spacex = 6;
+	line = 4;
+	set_color(color);
+	gt(spacex, line++); cout <<" ____  _             _            _   ";// " _____         ___ _ _";     
+	gt(spacex, line++); cout <<"/ ___|| |_ _   _  __| | ___ _ __ | |_ ";// "|  _  |___ ___|  _|_| |___ ";
+	gt(spacex, line++); cout <<"\\___ \\| __| | | |/ _` |/ _ \\ '_ \\| __|";// "|   __|  _| . |  _| | | -_|";
+	gt(spacex, line++); cout <<" ___) | |_| |_| | (_| |  __/ | | | |_ ";// "|__|  |_| |___|_| |_|_|___|";
+	gt(spacex, line++); cout <<"|____/ \\__|\\__,_|\\__,_|\\___|_| |_|\\__|";//
+	set_color(7);                        
+
+	char *auxilary1 = new char[7];
+	char *auxilary2 = new char[18];
+	line += 2;
+	strcpy_s(auxilary1, 5, "Name");
+	strcpy_s(auxilary2, 30, "Vo Nguyen Gia Bao");
+	print_information(auxilary1, auxilary2, spacex, ++line, color);
+
+	line += 3;
+	strcpy_s(auxilary1, 7, "Gender");
+	strcpy_s(auxilary2, 5, "Male");
+	print_information(auxilary1, auxilary2, spacex, line, color);
+
+	line += 3;
+	strcpy_s(auxilary1, 4, "ID");
+	strcpy_s(auxilary2, 10, "21127017");
+	print_information(auxilary1, auxilary2, spacex, line, color);
+
+	line += 3;
+	strcpy_s(auxilary1, 6, "Year");
+	strcpy_s(auxilary2, 11, "21/01/2003");
+	print_information(auxilary1, auxilary2, spacex, line, color);
+
+	line += 3;
+	strcpy_s(auxilary1, 11, "Social ID");
+	strcpy_s(auxilary2, 11, "352637777");
+	print_information(auxilary1, auxilary2, spacex, line, color);
+
+	int key = 0, i = 1, height = 26, width = 5;
+	spacex = 67;
+	showcur(0);
+	while (key != 13)
+	{
+		strcpy_s(auxilary1, 16, "Change Password");
+		designSquare(spacex, 20, width, height, auxilary1, 7, 7);
+
+		strcpy_s(auxilary1, 16, "Back to Menu");
+		designSquare(spacex, 25, width, height, auxilary1, 7, 7);
+
+		if (i == 1){
+			strcpy_s(auxilary1, 16, "Change Password");
+			designSquare(spacex, 20, width, height, auxilary1, 11, 432);	
+		} else {
+			strcpy_s(auxilary1, 16, "Back to Menu");
+			designSquare(spacex, 25, width, height, auxilary1, 11, 432);
+		}
+
+		key = getch();
+		if (key == 72) i -=1;
+		if (key == 80) i +=1;
+		if (i == 0) i = 2;
+		if (i == 3) i = 1;
+	}
+	showcur(1);
+}
+
 void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubject){
 	//8 6 10 30 7 5 18
 	showcur(0);
@@ -669,6 +787,102 @@ void view_student_in_course(char *id_course, profile *p){
 }
 
 void view_list_of_class(classrooms *pclassid, profile *pstudent){
+	/*
+	gt(31, line); cout << sc(186);
+	gt(36, line); cout << sc(186);
+	gt(48, line); cout << sc(186);
+	gt(58, line); cout << sc(186);
+	gt(65, line); cout << sc(186);
+	4 11 9 6
+	*/
+
+	showcur(0);
+	int maxlist = 80; // duyet pstudent
+	int line = 5;
+	gt(31, line); cout << sc(201);
+	for (int i = 1; i < 35; ++i)
+		cout << sc(205);
+
+	gt(36, line); cout << sc(203);
+	gt(48, line); cout << sc(203);
+	gt(58, line); cout << sc(203);
+	gt(65, line); cout << sc(187);
+
+	++line;
+	gt(31, line); cout << sc(186);
+	cout << " No ";
+	gt(36, line); cout << sc(186);
+	cout << "   Class   ";
+	gt(48, line); cout << sc(186);
+	cout << "   Num   ";
+	gt(58, line); cout << sc(186);
+	cout << " Year ";
+	gt(65, line); cout << sc(186);
+
+	gt(31, line); cout << sc(186);
+	gt(36, line); cout << sc(186);
+	gt(48, line); cout << sc(186);
+	gt(58, line); cout << sc(186);
+	gt(65, line); cout << sc(186);
+
+	++line;
+	gt(31, line); cout << sc(204);
+	for (int i = 1; i < 35; ++i)
+		cout << sc(205);
+	gt(36, line); cout << sc(206);
+	gt(48, line); cout << sc(206);
+	gt(58, line); cout << sc(206);
+	gt(65, line); cout << sc(185);
+	int value = 1;
+	int tmp = line;
+	while (true){
+		line = tmp;
+		showcur(0);
+		// Mo code cho nay
+		//classrooms *p = pclassid;
+		//for (int i = 1; i <= value; ++i)
+		//	p = p -> next;
+		//
+
+		int test = 8;
+		for (int i = 1; i <= test; ++i){
+			++line;
+			//code
+			gt(31, line); cout << sc(186) << " " << ((value < 10) ? "0" : "") << value;
+			gt(36, line); cout << sc(186);// << "  " << p -> classroom;
+			gt(48, line); cout << sc(186);// << "  " << count << "/" << count;
+			gt(58, line); cout << sc(186);// << " " << p -> year;
+			gt(65, line); cout << sc(186);
+
+			++line;
+			if (i != test){
+				gt(31, line); cout << sc(204);
+				for (int j = 1; j < 35; ++j)
+					cout << sc(205);
+				gt(36, line); cout << sc(206);
+				gt(48, line); cout << sc(206);
+				gt(58, line); cout << sc(206);
+				gt(65, line); cout << sc(185);
+			} else {
+				gt(31, line); cout << sc(200);
+				for (int j = 1; j < 35; ++j)
+					cout << sc(205);
+				gt(36, line); cout << sc(202);
+				gt(48, line); cout << sc(202);
+				gt(58, line); cout << sc(202);
+				gt(65, line); cout << sc(188);
+			}
+			//p = p -> next;
+			//if (p == NULL) break;
+		}
+		draw_button(25, value, maxlist);
+		char key = getch();
+		if (key == 77) value = (value + 8 < maxlist) ? value + 8 : value;
+		if (key == 75) value = (value - 8 > 0) ? value - 8 : value;
+		if (key == 27) return;
+	}
+	showcur(1);
+}
 	/*
 	gt(31, line); cout << sc(186);
 	gt(36, line); cout << sc(186);
