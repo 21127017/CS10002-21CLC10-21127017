@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bao.cpp" />
+    <ClCompile Include="bao_view.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="tra.cpp" />
     <ClCompile Include="tuananh.cpp" />

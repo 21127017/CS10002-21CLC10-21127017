@@ -67,7 +67,8 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 	set_color(color2);
 	if (content != nullptr) {
 		//cout content of square
-		int len = strlen(content);
+		int len;
+		len = static_cast<int>(strlen(content));
 		GoTo((posX + (width - len) / 2), (posY + (height - 1) / 2));
 		cout << content;
 	}
@@ -313,6 +314,7 @@ bool inputNewPass(char *&oldpassword) {
 		announcement(temp_str, 0, a, -1);
 		return false;
 	}
+	return 0;
 }
 
 void changePassword(const int &changed_id) {
@@ -930,7 +932,7 @@ void announcement(char *content, bool yesno, int &num, int title) {
 	set_color(14);
 	if (content != nullptr) {
 		//cout content of square
-		int len = strlen(content);
+		int len = static_cast<int>(strlen(content));
 		GoTo((24 + (51 - len) / 2), 13);
 		cout << content;
 	}

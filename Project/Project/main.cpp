@@ -12,7 +12,8 @@ int main(){
 
 	while (true){
 		int role = 0, choice = 1;
-		while (role == 3 || role == 0) {
+
+		if (role == 3 || role == 0) {
 		    login(role, id_profile);
 		    GoTo(34, 18);
 		    system("pause");
@@ -22,7 +23,6 @@ int main(){
 				showcur(0);
 				print_option_1(choice);
 				showcur(1);
-				//cin >> choice;
 				if (choice == 7){
 					role = 4;
 					break;

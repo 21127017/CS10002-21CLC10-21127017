@@ -801,7 +801,8 @@ void semester_function(profile *&pstudent, subjects *&psubject, int &semester, i
     print_semester_function(num);
     showcur(1);
     //cin >> num;
-    if (num == 1) semester_edit(0, pstudent, psubject, semester, year);
+	if (num == 1) semester_edit(0, pstudent, psubject, semester, year);
+	else view_semester();
 
 }
 
@@ -820,7 +821,6 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
     showcur(0);
     print_year_function(num);
     showcur(1);
-    //cin >> num;
     if (num == 1) school_year_edit(pstudent, psubject, pclassid, classroom, semester, year);
         else view_school_year();
 }
