@@ -3,7 +3,8 @@ Công việc tuần 07(tính theo số lab ktlt th):
 - Bảo: thiết kế danh sách.
 - Trà: Design.
 - Anh: Lưu trữ dữ liệu (speed :v).
-            ~~Gần xong rồi cố lên mn ơi!!!
+
+**********Gần xong rồi cố lên mn ơi!!!
 
 Công việc đã hoàn thành:
 - Bảo:

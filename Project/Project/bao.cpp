@@ -421,45 +421,52 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		}
 	}
 	if (num == 5){
-		cout << "\t\t>> UPDATE SCORE <<" << endl << endl;
+		GoTo(40, 1);
+		cout << ">> UPDATE SCORE <<";
 		if (pstudent == NULL || psubject == NULL){
-			cout << "Error. You need to create data first." << endl;
-			system("pause");
+			memcpy(temp, "You need to create data first.", 31);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
+
+
 		//show list of course
-		cout << "Input the Course_id: ";
+
+
+		memcpy(temp, "Input the Course Id:                ", 37);
 		char auxilary[50];
+		designSquare(29, 15, 3, 40, temp, 7, 7);
+
+		GoTo(52, 16);
 		cin.ignore();
 		cin.getline(auxilary, 50);
+
 		subjects *cur1 = psubject;
 		while (cur1 != NULL && strcmp(cur1 -> course_id, auxilary) != 0)
 			cur1 = cur1 -> next;
 		if (cur1 == NULL){
-			cout << "\tThe id was not exits." << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl;
-			cout << "\tInput:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "Do you want to input again?", 28);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 			return;
 		}
-		system("cls");
+
+		view_space();
+
 		// show list student in course.
-		cout << "Input student id you want to update:";
+
+
+		memcpy(temp, "Input student id you want to update:              ", 51);
+		designSquare(22, 15, 3, 54, temp, 7, 7);
 		int student_id;
+		GoTo(62, 16);
 		cin >> student_id;
 		profile *cur2 = pstudent;
 		while (cur2 != NULL && cur2 -> id != student_id)
 			cur2 = cur2 -> next;
 		if (cur2 == NULL){
-			cout << "\tThe id was not exits." << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl;
-			cout << "\tInput:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "Do you want to input again?", 28);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 			return;
 		}
@@ -467,48 +474,50 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		while (cur3 != NULL && strcmp(cur3 -> course_id, auxilary) != 0)
 			cur3 = cur3 -> next;
 		if (cur3 == NULL) {
-			cout << "\tThe id was not exits." << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl;
-			cout << "\tInput:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "Do you want to input again?", 28);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 			return;
 		}
-		cout << "Old score: " << cur3 -> score << endl;
-		cout << "Input new score:";
+		designSquare(37, 14, 4, 24, 0, 7, 7);
+		GoTo(39, 15);
+		cout << "Old score: " << cur3 -> score;
+		GoTo(39, 16);
+		cout << "Input new score: ";
 		cin >> cur3 -> score;
-		cout << "\tDo you want to do another update?" << endl;
-		cout << "\t1. Yes" << endl << "\t2. No" << endl;
-		cout << "\tInput:";
-		int choice;
-		cin >> choice;
+
+		memcpy(temp, "Do you want to do another update?", 34); 
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 		return;
 	}
 	if (num == 6){
-		cout << "\t\t>> UPDATE COURSE INFORMATION <<" << endl << endl;
+		GoTo(33, 1);
+		cout << ">> UPDATE COURSE INFORMATION <<";
+
 		if (psubject == NULL){
-			cout << "\tCan't updated. You have no course to update." << endl;
-			system("pause");
+			memcpy(temp, "Can't updated. You have no course to update.", 45);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
+
+
 		//show list of course
-		cout << "Input id of course you want to delete:";
+
+		memcpy(temp, "Input the Course Id:                ", 37);
 		char auxilary[50];
+		designSquare(29, 15, 3, 40, temp, 7, 7);
+
+		GoTo(52, 16);
 		cin.ignore();
 		cin.getline(auxilary, 50);
+
 		subjects *cur = psubject;
 		while (cur != NULL && strcmp(cur -> course_id, auxilary) != 0)
 			cur = cur -> next;
 		if (cur == NULL){
-			cout << "\tThe id was not exits." << endl << endl;
-			cout << "\tDo you want to input again?" << endl;
-			cout << "\t1. Yes" << endl << "\t2. No" << endl;
-			cout << "\tInput:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "Do you want to input again?", 28);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) subject_edit(6, pstudent, psubject, semester, year);
 			return;
 		}
@@ -518,15 +527,20 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 }
 
 void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semester){ 
-	system("cls");
+	view_space();
+	char temp[200];
+	int choice = 0;
 	if (num == 0){
-		cout << ">> CREATE NEW CLASS <<" << endl;
+		GoTo(38, 1);
+		cout << ">> CREATE NEW CLASS <<";
 		if (semester != 1){
-			cout << "you can't create new class because it's not the 1st semester of the year." << endl;
-			system("pause");
+			memcpy(temp, "It's not the 1st semester of the year", 38);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
-		cout << "\t Name of class: ";
+		memcpy(temp, "Name of class:             ", 28);
+		designSquare(33, 15, 3, 31, temp, 7, 7);
+		GoTo(50, 16);
 	  	classrooms *newnode = new classrooms;
 	  	char auxilary[50];
 	  	cin.ignore();
@@ -541,35 +555,38 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 	  		while (current->next != NULL) current = current->next;
 	    	current->next = newnode;
 	  	}
-	  	cout << "Do you want to create another class?" << endl;
-	  	cout << "\t1. Sure!" << endl << "\t2.No." << endl << "\tInput: ";
-	  	int choice;
-	  	cin >> choice;
+		memcpy(temp, "Do you want to create another class?", 37);
+		announcement(temp, 1, choice, 1);
 	  	if (choice == 1) class_edit(0, pstudent, pclassid, semester);
 	}
 	if (num == 2){
 		//remove
-		cout << ">> REMOVE CLASS <<" << endl;
+		GoTo(39, 1);
+		cout << ">> REMOVE CLASS <<";
 		if (pclassid == NULL){
-			cout << "You can't use remove function becasue there is zero classroom in this semester." << endl;
-			system("pause");
+			memcpy(temp, "There isn't any classroom in this semester.", 44);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
 	}
 	if  (num == 1){
-		cout << "\t\t>> ADD STUDENT TO CLASS <<" << endl;
+		GoTo(35, 1);
+		cout << ">> ADD STUDENT TO CLASS <<";
 		if (pclassid == NULL){
-			cout << "There is no class in this semester." << endl;
-			system("pause");
+			memcpy(temp, "There is no class in this semester.", 36);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
 		if (pstudent == NULL){
-			cout << "You don't have any student to add to class." << endl;
-			system("pause");
+			memcpy(temp, "You don't have any student to add to class.", 44);
+			announcement(temp, 0, choice, -1);
 			return;
 		}
-		cout << "Input student id: ";
+
+		memcpy(temp, "Input student id:             ", 31);
 		int tmp;
+		designSquare(32, 13, 3, 34, temp, 7, 7);
+		GoTo(52, 14);
 		cin >> tmp;
 		profile *current = pstudent;
 		while (current != NULL){
@@ -578,7 +595,9 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		}
 		if (current != NULL && current -> id == tmp){
 			char auxilary[50];
-			cout << "Input student classroom:";
+			memcpy(temp, "Input classroom id:           ", 31);
+			designSquare(32, 16, 3, 34, temp, 7, 7);
+			GoTo(54, 17);
 			cin.ignore();
 			cin.getline(auxilary, 50);
 			classrooms *pclass = pclassid;
@@ -588,89 +607,95 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				pclass = pclass -> next;
 			}
 			if (pclass == NULL){
-				cout << "=> Import failed!" << endl;
-				cout << "The class was not exits." << endl;
-				cout << "Do you want to add again?" << endl;
-				cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-				int choice;
-				cin >> choice;
+				memcpy(temp, "Import failed! Do you want to add again?", 41);
+				announcement(temp, 1, choice, -1);
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
 			}
 			strcpy_s(current -> classroom, 50, auxilary);
-			cout << "=> Import successfully!" << endl;
 		} else {
-			cout << "The id does not exits!!!" << endl;
-			cout << "Do you want to input again?" << endl;
-			cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "ID doesn't exist. Do you want to add again?", 44);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 			return;
 		}
-		cout << "Do you want to add another student?" << endl;
-		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-		int choice;
-		cin >> choice;
+		memcpy(temp, "Do you want to add another student?", 36);
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 	}
   	return;
 }
 
 void semester_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year){
-	system("cls");
-	cout << "\t\t>> CREATE NEW SEMESTER << " << endl;
+	view_space();
+	char temp[200] = "";
+	int choice = 0;
+
+	GoTo(36, 1);
+	cout << ">> CREATE NEW SEMESTER <<";
 	if (semester == 0 && year == 0){
-		cout << "Error!" << endl;
-		cout << "Please create new school year first." << endl;
-		system("pause");
+		memcpy(temp, "Please create new school year first.", 37);
+		announcement(temp, 0, choice, -1);
 		return;
 	}
 	if (semester == 3){
-		cout << "You can't create the new one because there are only 3 semester in a year." << endl;
-		cout << "Create new year if you want to go to next semester." << endl;
-		system("pause");
+		memcpy(temp, "There are only 3 semester in a year.", 37);
+		announcement(temp, 0, choice, -1);
 		return;
 	}
-	cout << "Do you want to create new semester?" << endl;
-	if (semester != 0) 
-		cout << "(Notice that all class in semester " << semester << " can't operate anymore)." << endl;
-	cout << "1. I'm sure with that." << endl;
-	cout << "2. No, i changed my mind." << endl;
-	cout << "Input: ";
-	int choice;
-	cin >> choice;
+	memcpy(temp, "Do you want to create a new semester?", 38);
+	announcement(temp, 1, choice, 0);
+	if (semester != 0 && choice == 1) {
+		designSquare(22, 14, 4, 53, 0, 7, 7);
+		GoTo(24, 15);
+		cout << "All class in semester " << semester << " can't be operated anymore";
+		GoTo(34, 16);
+		system("pause");
+	}
 	if (choice == 2) return;
 	++semester;
-	cout << "=> Created successfully!" << endl;
-	cout << "\tNow is Year: " << year << " Semester: " << semester << endl;
-	cout << "\tLet's create new course for this semester!" << endl << endl;
+
+	view_space();
+	GoTo(36, 1);
+	cout << ">> CREATE NEW SEMESTER <<";
+	GoTo(28, 16);
+	cout << "Created successfully!";
+	GoTo(28, 17);
+	cout << "Now is Year: " << year << " Semester: " << semester;
+	GoTo(28, 18);
+	cout << "Let's create new course for this semester!";
+	GoTo(28, 19);
 	system("pause");
+
 	subject_edit(0, pstudent, psubject, semester, year);
 }
 
 void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year){
-	system("cls");
-	cout << "\t\t>> CREATE NEW SCHOOL YEAR << " << endl << endl;
+	view_space();
+	char temp[200] = "";
+	int choice = 0;
+
+	GoTo(35, 1);
+	cout << ">> CREATE NEW SCHOOL YEAR <<";
 	if (semester != 3 && year != 0){
-		cout << "\tNow is just semester " << semester << "/3. You can't create new one." << endl << endl;
-		system("pause");
+		memcpy(temp, "Now is just semester ", 22);
+		temp[22] = semester - '0';
+		temp[23] = '/';
+		temp[24] = '3';
+		temp[25] = '\0';
+		announcement(temp, 0, choice, -1);
 		return;
 	}
-	cout << "\tDo you want to create new school year?" << endl;
-	cout << "\t1. I'm sure with that." << endl;
-	cout << "\t2. No, i changed my mind." << endl << endl;
-	cout << "\tInput: ";
-	int choice;
-	cin >> choice;
+	memcpy(temp, "Do you want to create new school year?", 39);
+	announcement(temp, 1, choice, 0);
 	if (choice == 2) return;
 	++year;
 	classroom = 0;
 	delete_class(pclassid);
-	cout << endl;
-	cout << "\tYou have successfully initialized new school year!" << endl;
-	cout << "\tNow you need to create new class and new semester." << endl << endl;
-	system("pause");
+
+
+	memcpy(temp, "Now you need to create new class and semester", 46);
+	announcement(temp, 0, choice, 1);
 	semester = 0;
 	//semester_edit(1, pstudent, psubject, semester, year);
 	//class_edit(0, pstudent, pclassid, semester);

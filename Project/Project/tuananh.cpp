@@ -127,7 +127,7 @@ void output_to_csv_student(profile* &pstudent)
 	return;
 }
 
-bool output_to_csv_staff(staff* pstaff)
+void output_to_csv_staff(staff* pstaff)
 {
 	if (pstaff == NULL) return;
 	ofstream output;
@@ -135,13 +135,13 @@ bool output_to_csv_staff(staff* pstaff)
 	staff* pCur = pstaff;
 	while (pCur != NULL)
 	{
-		output << staff->name << ","
-			   << staff->dob.day << ","
-			   << staff->dob.month << ","
-			   << staff->dob.year << ","
-			   << staff->role << ","
-			   << staff->gender << ","
-			   << staff->social_id << ",";
+		output << pCur->name << ","
+			   << pCur->dob.day << ","
+			   << pCur->dob.month << ","
+			   << pCur->dob.year << ","
+			   << pCur->role << ","
+			   << pCur->gender << ","
+			   << pCur->social_id << ",";
 		output << endl;
 		pCur = pCur->next;
 	}
@@ -247,4 +247,49 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	return false;
 }
 
+void output_to_csv_subject(subjects* psubject)
+{
+	if (psubject == NULL)
+		return;
+	ofstream output;
+	output.open("subjectinfo.csv", ios::out);
+	subjects* pCur = psubject;
+	while (pCur != NULL)
+	{
+		output << pCur->year << ","
+			   << pCur->semester << ","
+			   << pCur->course_id << ","
+			   << pCur->teacher_name << ","
+			   << pCur->num_of_credits << ","
+			   << pCur->name << ","
+			   << pCur->start << ","
+			   << pCur->end << ","
+			   << pCur->day_of_week;
+			   << pCur->session[0]->day << ","
+			   << pCur->session[0]->hour_start << ","
+			   << pCur->session[0]->minute_start << ","
+			   << pCur->session[1]->day << ","
+			   << pCur->session[1]->hour_start << ","
+			   << pCur->session[1]->minute_start;
+		output << endl;
+		pCur = pCur->next;
+	}
+	output.close();
+	return;
+}
 
+void output_to_csv_class(classrooms *pclass)
+{
+	classrooms* pCur;
+	ofstream output;
+	output.open("classinfo.csv", ios::out);
+	while (pCur != NULL)
+	{
+		output << classroom;
+		list_student* pCurList = classroom->id_student;
+		while (id_student != NULL)
+			output  << "," << classroom->id_student->id;
+		output << endl;
+	}
+	output.close();
+}
