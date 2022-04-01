@@ -991,3 +991,114 @@ void announcement(char *content, bool yesno, int &num, int title) {
 	}
 	showcur(1);
 }
+
+void print_option_2(int &choice){
+	showcur(0);
+ 	//system("cls");
+ 	//cout << "Choose your action: " << endl;
+ 	//cout << "\t0. Log out." << endl;
+	//
+	// just ->>> COURSE num == 1
+ 	//cout << "\t1. Enroll Course." << endl;
+ 	//cout << "\t2. Remove Course." << endl;
+ 	//cout << "\t3. View list of course." << endl;
+	// 
+ 	//cout << "\t2. View scoreboard." << endl;
+ 	//cout << "\t3. View my profile." << endl;
+ 	//cout << "\t4 Exit program." << endl;
+	// GUIDE -> num == 5
+ 	//return;
+
+	int key = 100;
+	char temp[200];
+	int i = 0;
+	int num = 0;
+	while (1) {
+		view_space();
+		set_color(14);
+		GoTo(34, 3); cout << " __  __  _____  _   _  _   _ ";
+		GoTo(34, 4); cout << "|  \\/  || ____|| \\ | || | | |";
+		GoTo(34, 5); cout << "| |\\/| ||  _|  |  \\| || | | |";
+		GoTo(34, 6); cout << "| |  | || |___ | |\\  || |_| |";
+		GoTo(34, 7); cout << "|_|  |_||_____||_| \\_| \\___/ ";
+		set_color(7);
+
+		while (key != 5) {
+			memcpy(temp, "Profile", 8);
+			designSquare(27, 12, 3, 20, temp, 7, 7);
+
+			memcpy(temp, "Guide", 6);
+			designSquare(27, 16, 3, 20, temp, 7, 7);
+
+			memcpy(temp, "Logout", 7);
+			designSquare(27, 20, 3, 20, temp, 7, 7);
+
+			memcpy(temp, "Course", 7);
+			designSquare(51, 12, 3, 20, temp, 7, 7);
+
+			memcpy(temp, "Scoreboard", 11);
+			designSquare(51, 16, 3, 20, temp, 7, 7);
+
+			memcpy(temp, "Exit program", 13);
+			designSquare(51, 20, 3, 20, temp, 7, 7);
+
+			switch (i) {
+			case 0:
+				memcpy(temp, "Profile", 8);
+				designSquare(27, 12, 3, 20, temp, 11, 432);
+				num = 3;
+				break;
+			case 1:
+				memcpy(temp, "Course", 7);
+				designSquare(51, 12, 3, 20, temp, 11, 432);
+				num = 1;
+				break;
+			case 2:
+				memcpy(temp, "Guide", 6);
+				designSquare(27, 16, 3, 20, temp, 11, 432);
+				num = 5;
+				break;
+			case 3:
+				memcpy(temp, "Scoreboard", 11);
+				designSquare(51, 16, 3, 20, temp, 11, 432);
+				num = 2;
+				break;
+			case 4:
+				memcpy(temp, "Logout", 7);
+				designSquare(27, 20, 3, 20, temp, 11, 432);
+				num = 0;
+				break;
+			default:
+				memcpy(temp, "Exit program", 13);
+				designSquare(51, 20, 3, 20, temp, 11, 432);
+				num = 4;
+				break;
+			}
+
+			key = getkey();
+			switch (key) {
+			case 2:
+				i += 2;
+				break;
+			case 4:
+				i--;
+				break;
+			case 6:
+				i++;
+				break;
+			case 8:
+				i -= 2;
+				break;
+			default:
+				break;
+			}
+
+			if (i < 0) i = 5;
+			if (i > 5) i = 0;
+		}
+
+		choice = num;
+		break;
+	}
+	showcur(1);
+ }

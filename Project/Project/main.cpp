@@ -32,8 +32,7 @@ int main(){
 			}
 		} else if (role == 2) {
 			while (choice){
-				//print_option_2(choice);
-				//cin >> choice;
+				print_option_2(choice);
 				if (choice == 5){
 					role = 4;
 					break;

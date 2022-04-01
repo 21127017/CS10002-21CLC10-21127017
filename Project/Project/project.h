@@ -184,7 +184,7 @@ void print_option_1(int &choice);
 
 void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &id_profile);
 
-//void print_option_2(choice);
+void print_option_2(int &choice);
 
 void make_choice_2(int &choice, int &id_profile);
 
