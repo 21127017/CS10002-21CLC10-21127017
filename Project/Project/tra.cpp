@@ -30,7 +30,7 @@ int getkey() {
 
 void GoTo(SHORT posX, SHORT posY) {
 	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD Position;
+	COORD Position = {posX, posY};
 	Position.X = posX;
 	Position.Y = posY;
 
@@ -394,7 +394,7 @@ void login(int &role, int &id_profile) {
 	password = new char[strlen(temp_string) + 1];
 	memcpy(password, temp_string, strlen(temp_string) + 1);
 
-	login_information inf;
+	login_information inf = {0, 0, 0, 0};
 	inp >> N >> temp_char >> temp_char >> temp_char;
 	inp.ignore();
 	while (!inp.eof()) {
