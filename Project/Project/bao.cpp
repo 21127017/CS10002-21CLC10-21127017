@@ -570,7 +570,8 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		}
 	}
 	if  (num == 1){
-		cout << "\t\t>> ADD STUDENT TO CLASS <<" << endl;
+		GoTo(35, 1);
+		cout << ">> ADD STUDENT TO CLASS <<";
 		if (pclassid == NULL){
 			memcpy(temp, "There is no class in this semester.", 36);
 			announcement(temp, 0, choice, -1);
@@ -581,8 +582,11 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			announcement(temp, 0, choice, -1);
 			return;
 		}
-		cout << "Input student id: ";
+
+		memcpy(temp, "Input student id:             ", 31);
 		int tmp;
+		designSquare(32, 13, 3, 34, temp, 7, 7);
+		GoTo(52, 14);
 		cin >> tmp;
 		profile *current = pstudent;
 		while (current != NULL){
@@ -591,7 +595,9 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		}
 		if (current != NULL && current -> id == tmp){
 			char auxilary[50];
-			cout << "Input student classroom:";
+			memcpy(temp, "Input classroom id:           ", 31);
+			designSquare(32, 16, 3, 34, temp, 7, 7);
+			GoTo(54, 17);
 			cin.ignore();
 			cin.getline(auxilary, 50);
 			classrooms *pclass = pclassid;
@@ -601,30 +607,20 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				pclass = pclass -> next;
 			}
 			if (pclass == NULL){
-				cout << "=> Import failed!" << endl;
-				cout << "The class was not exits." << endl;
-				cout << "Do you want to add again?" << endl;
-				cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-				int choice;
-				cin >> choice;
+				memcpy(temp, "Import failed! Do you want to add again?", 41);
+				announcement(temp, 1, choice, -1);
 				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 				return;
 			}
 			strcpy_s(current -> classroom, 50, auxilary);
-			cout << "=> Import successfully!" << endl;
 		} else {
-			cout << "The id does not exits!!!" << endl;
-			cout << "Do you want to input again?" << endl;
-			cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-			int choice;
-			cin >> choice;
+			memcpy(temp, "ID doesn't exist. Do you want to add again?", 44);
+			announcement(temp, 1, choice, -1);
 			if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 			return;
 		}
-		cout << "Do you want to add another student?" << endl;
-		cout << "\t1. Sure!" << endl << "\t2. No." << endl << "\t=> Input:";
-		int choice;
-		cin >> choice;
+		memcpy(temp, "Do you want to add another student?", 36);
+		announcement(temp, 1, choice, 1);
 		if (choice == 1) class_edit(1, pstudent, pclassid, semester);
 	}
   	return;
