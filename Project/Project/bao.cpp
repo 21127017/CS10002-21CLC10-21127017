@@ -283,7 +283,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cout << "Input the session of this course: ";
 
 		GoTo(28, 9); // input course name
-		cin.ignore();
+		//cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode->name = new char[strlen(auxilary) + 1];
 		strcpy_s(newnode->name, strlen(auxilary) + 1, auxilary);
@@ -922,7 +922,7 @@ void delete_class(classrooms *&pclassid) {
 // }
 
 void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, 
-	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &id_profile){
+	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id){
 	switch (choice){
 		case 0:
 			logout();
@@ -943,7 +943,7 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 			undergraduate_function(no, pstudent, psubject, semester, classroom, year);
 			break;
 		case 6:
-			//view profile
+			view_profile(user_id, pstudent);
 			break;
 		case 7:
 			break;

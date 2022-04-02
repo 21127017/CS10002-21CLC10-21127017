@@ -63,6 +63,7 @@ struct subject2 {
 };
 
 struct profile {
+      int user_id;
 	char *classroom;
 	int year;
 	int enrolled_subject_no;
@@ -106,7 +107,14 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 
 void view_space();
 
+char *int_to_char(int x);
 void draw_button(int value, int maxlist);
+void print_information(char *x1, char *x2, int x, int y, int color);
+void view_profile(int user_id, profile *p);
+void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubject);
+void view_student_enroll_course(int id_student, profile *pstudent);
+void view_scoreboard_of_course(char *id_course, profile *pstudent);
+void view_list_of_course(subjects *psubject, profile *pstudent);
 void view_student_in_class(char *classid, profile *pstudent);
 void view_student_in_course(char *id_course, profile *p);
 void view_list_of_class(classrooms *pclassid, profile *pstudent);
@@ -182,9 +190,9 @@ bool inputNewPass(char *&oldpassword);
 //-----------INPUT SPACE-----------//
 void print_option_1(int &choice);
 
-void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &id_profile);
+void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id);
 
-void print_option_2(int &choice);
+//void print_option_2(choice);
 
 void make_choice_2(int &choice, int &id_profile);
 
