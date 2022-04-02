@@ -37,7 +37,7 @@ int main(){
 					role = 4;
 					break;
 				}
-				//make_choice_2(choice, id_profile);
+				make_choice_2(choice, id_profile);
 			}
 		}
 		if (role == 4) break;

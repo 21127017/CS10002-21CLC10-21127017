@@ -56,7 +56,7 @@ void print_information(char *x1, char *x2, int x, int y, int color){
 
 void view_profile(int user_id, profile *p){
 	while (p != NULL){
-		if (p -> user_id == user_id) break;
+		if (p -> id == user_id) break;
 		p = p -> next;
 	}
 	view_space();
@@ -105,13 +105,13 @@ void view_profile(int user_id, profile *p){
 	gt(spacex, line++); cout <<"|____/ \\__|\\__,_|\\__,_|\\___|_| |_|\\__|";//
 	set_color(7);                        
 
-	char *auxilary1 = new char[10];
+	char *auxilary1 = new char[15];
 	char *auxilary2 = new char[30];
 	line += 2;
 	strcpy_s(auxilary1, 5, "Name");
 	strcpy_s(auxilary2, 30, "Vo Nguyen Gia Bao");
-	strcpy_s(auxilary2, 30, p -> last_name);
-	strcat_s(auxilary2, 30, p -> first_name);
+	strcpy_s(auxilary2, 25, p -> last_name);
+	strcat_s(auxilary2, 25, p -> first_name);
 	print_information(auxilary1, auxilary2, spacex, ++line, color);
 
 	line += 3;
