@@ -2,12 +2,22 @@
 using std::cout;
 using std::cin;
 
-char *int_to_char(int x){
-	string tmp = to_string(x);
-	char const *auxilary = tmp.c_str();
-	char *result = new char[strlen(auxilary) + 1];
-	memcpy(result, auxilary, strlen(auxilary));
-	return result;
+char *int_to_char(long long x){
+	int tmp = x, count = 0, base = 1;
+	while (tmp != 0){
+		++count;
+		tmp /= 10;
+		base = base * 10;
+	}
+	base = base / 10;
+	char *auxilary = new char[count + 1];
+	int i = 0;
+	while (base != 0){
+		auxilary[i++] = (x / base) % 10 + 48;
+		base = base / 10;
+	}
+	//auxilary[i] = '\n';
+	return auxilary;
 }
 
 void draw_button(int line, int value, int maxlist){
@@ -55,6 +65,7 @@ void print_information(char *x1, char *x2, int x, int y, int color){
 }
 
 void view_profile(int user_id, profile *p){
+      if (p == NULL) return;
 	while (p != NULL){
 		if (p -> id == user_id) break;
 		p = p -> next;
@@ -105,7 +116,7 @@ void view_profile(int user_id, profile *p){
 	gt(spacex, line++); cout <<"|____/ \\__|\\__,_|\\__,_|\\___|_| |_|\\__|";//
 	set_color(7);                        
 
-	char *auxilary1 = new char[15];
+	char *auxilary1 = new char[25];
 	char *auxilary2 = new char[30];
 	line += 2;
 	strcpy_s(auxilary1, 5, "Name");
@@ -118,32 +129,35 @@ void view_profile(int user_id, profile *p){
 	strcpy_s(auxilary1, 7, "Gender");
 	//strcpy_s(auxilary2, 5, "Male");
 	print_information(auxilary1, p -> gender, spacex, line, color);
-	
+	strcpy_s(auxilary2, 2, "?");
 	line += 3;
-	strcpy_s(auxilary1, 4, "ID");
+	//strcpy_s(auxilary1, 4, "ID");
 	//strcpy_s(auxilary2, 10, "21127017");
-	print_information(auxilary1, int_to_char(p -> id), spacex, line, color);
+	print_information(auxilary1, auxilary2, spacex, line, color);
+	gt(20, line + 1); cout << p -> id;
 
 	line += 3;
-	strcpy_s(auxilary1, 6, "Year");
-	strcpy_s(auxilary2, 11, int_to_char(p -> dob.day));
-	strcat_s(auxilary2, 1, "/");
-	strcat_s(auxilary2, 3, int_to_char(p -> dob.month));
-	strcat_s(auxilary2, 1, "/");
-	strcat_s(auxilary2, 5, int_to_char(p -> dob.year));
+	/*strcpy_s(auxilary1, 6, "Year");
+	strcpy_s(auxilary2, 5, int_to_char(p -> dob.day));
+	strcat_s(auxilary2, 2, "/");
+	strcat_s(auxilary2, 5, int_to_char(p -> dob.month));
+	strcat_s(auxilary2, 2, "/");
+	strcat_s(auxilary2, 6, int_to_char(p -> dob.year));*/
 	print_information(auxilary1, auxilary2, spacex, line, color);
+	gt(20, line + 1); cout << p -> dob.day << "/" << p -> dob.month << "/" << p -> dob.year;
 
 	line += 3;
 	strcpy_s(auxilary1, 11, "Social ID");
 	//strcpy_s(auxilary2, 11, "352637777");
-	print_information(auxilary1, int_to_char(p -> social_id), spacex, line, color);
+	print_information(auxilary1, auxilary2, spacex, line, color);
+	gt(20, line + 1); cout << p -> social_id;
 
 	int key = 0, i = 1, height = 26, width = 5;
 	spacex = 67;
 	showcur(0);
 	while (key != 13)
 	{
-		strcpy_s(auxilary1, 16, "Change Password");
+		strcpy_s(auxilary1, 17, "Change Password");
 		designSquare(spacex, 20, width, height, auxilary1, 7, 7);
 
 		strcpy_s(auxilary1, 16, "Back to Menu");

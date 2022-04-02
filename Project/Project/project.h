@@ -107,7 +107,7 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 
 void view_space();
 
-char *int_to_char(int x);
+char *int_to_char(long long x);
 void draw_button(int value, int maxlist);
 void print_information(char *x1, char *x2, int x, int y, int color);
 void view_profile(int user_id, profile *p);
