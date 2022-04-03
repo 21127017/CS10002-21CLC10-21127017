@@ -119,7 +119,6 @@ void view_list_of_course(subjects *psubject, profile *pstudent);
 void view_student_in_class(char *classid, profile *pstudent);
 void view_student_in_course(char *id_course, profile *p);
 void view_list_of_class(classrooms *pclassid, profile *pstudent);
-void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 
 void view_loginboard();
 
@@ -176,9 +175,10 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
 bool read_csv_student(profile* &pstudent);
-bool enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject) ;
-void enroll_course();
 
+void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
+int enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject) ;
+void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *psubject);
 void remove_course();
 
 
@@ -198,6 +198,6 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classro
 
 void print_option_2(int &choice);
 
-void make_choice_2(int &choice, int &user_id);
+void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id);
 
 #endif

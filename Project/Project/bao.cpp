@@ -135,6 +135,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		}
 		profile *newnode = new profile;
 		char auxilary[100];
+		newnode -> year = year;
 
 		newnode->no = ++no;
 		memcpy(temp, "Student no:   ", 15);
@@ -285,7 +286,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cout << "Input the session of this course: ";
 
 		GoTo(28, 9); // input course name
-		//cin.ignore();
+		cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode->name = new char[strlen(auxilary) + 1];
 		strcpy_s(newnode->name, strlen(auxilary) + 1, auxilary);
@@ -327,6 +328,8 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			GoTo(56, (20 + 2 * i));
 			cin >> newnode->session[i].minute_start;
 		}
+		newnode -> year = year;
+		newnode -> semester = semester;
 
 		newnode -> next = NULL;
 		if (psubject == NULL) 
@@ -545,7 +548,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 		GoTo(50, 16);
 	  	classrooms *newnode = new classrooms;
 	  	char auxilary[50];
-	  	cin.ignore();
+	  	//cin.ignore();
 	  	cin.getline(auxilary, 50);
 	  	newnode->classroom = new char[strlen(auxilary) + 1];
 	  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
@@ -966,13 +969,15 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 // 	return;
 // }
 
-void make_choice_2(int &choice, int &user_id){
+void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, 
+	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id){
 	switch (choice){
 		case 0:
 			logout();
 			break;
 		case 1:
 			//enroll_course();
+			//design_enroll_course(semester, year, 21127017, pstudent, psubject);
 			break;
 		case 2:
 			//remove_course();

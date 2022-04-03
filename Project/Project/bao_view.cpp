@@ -919,6 +919,7 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 	//10 30 7 5 5 5 5 6
+	if (p == NULL) return;
 	showcur(0);
 	view_space();
 	int line = 4;
@@ -962,9 +963,9 @@ void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 
 	showcur(0);
 
-	while (p -> year != year && p -> semester != semester)
+	while (p != NULL && (p -> year != year || p -> semester != semester))
 		p = p -> next;
-
+	if (p == NULL) return;
 	for (int t = 1; t <= 8; ++t){
 		++line;
 		gt( 9, line); cout << sc(186) << p -> course_id;
@@ -1022,8 +1023,8 @@ void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 	set_color(2);
 	cout << "*Look at the table and input the id course you want.";
 	set_color(7);
-	char *content = new char[20];
-	memcpy(content, "Course id", 20);
+	char *content = new char[11];
+	memcpy(content, "Course id", 11);
 	char *unknow = new char[2];
 	memcpy(unknow, " ", 2);
 	print_information(content, unknow, 30 , 24, 14);
@@ -1032,4 +1033,5 @@ void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 	cin >> auxilary;
 	delete[] content;
 	delete[] unknow;
+	return;
 }
