@@ -3,7 +3,8 @@ using std::cout;
 using std::cin;
 
 char *int_to_char(long long x){
-	int tmp = x, count = 0, base = 1;
+	long long tmp = x;
+	int count = 0, base = 1;
 	while (tmp != 0){
 		++count;
 		tmp /= 10;
@@ -1006,7 +1007,7 @@ void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 			gt(90, line); cout << sc(188);
 		}
 		p = p -> next;
-		if (p -> semester != semester || p -> year != year){
+		if (p == NULL || p -> semester != semester || p -> year != year){
 			gt( 9, line); cout << sc(200);
 			gt(20, line); cout << sc(202);
 			gt(51, line); cout << sc(202);
@@ -1023,9 +1024,9 @@ void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
 	set_color(2);
 	cout << "*Look at the table and input the id course you want.";
 	set_color(7);
-	char *content = new char[11];
-	memcpy(content, "Course id", 11);
-	char *unknow = new char[2];
+	char *content = new char[15];
+	memcpy(content, "Course id", 10);
+	char *unknow = new char[3];
 	memcpy(unknow, " ", 2);
 	print_information(content, unknow, 30 , 24, 14);
 	gt(44, 25);

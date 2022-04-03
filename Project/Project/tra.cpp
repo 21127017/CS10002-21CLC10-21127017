@@ -1046,7 +1046,7 @@ void print_option_2(int &choice){
 			case 0:
 				memcpy(temp, "Profile", 8);
 				designSquare(27, 12, 3, 20, temp, 11, 432);
-				num = 3;
+				num = 5;
 				break;
 			case 1:
 				memcpy(temp, "Course", 7);

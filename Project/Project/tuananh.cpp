@@ -157,7 +157,7 @@ void output_to_csv_staff(staff* pstaff)
 // return true if it successfully added the course.
 // return false if: invalid course/student id, subject already found.
 //---> Update: Because this function have many case, so we change the bool to int.
-int enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject) 
+void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res) 
 {	
 	char *enroll = new char[100];
 	show_enroll_course(psubject, semester, year, enroll);
@@ -172,7 +172,8 @@ int enroll_course(int semester, int year, int studentid, profile* &pstudent, sub
 	
 	if (p_sub_cur == NULL){
 		delete[] enroll;
-		return 1;
+		res  = 1;
+		return;
 	}
 	
 	profile* p_pro_cur = pstudent;
@@ -185,7 +186,8 @@ int enroll_course(int semester, int year, int studentid, profile* &pstudent, sub
 	
 	if (p_pro_cur == NULL){
 		delete[] enroll;
-		return 2;
+		res =  2;
+		return;
 	}
 	
 	subject2* p_sub2_cur = p_pro_cur->psub2;
@@ -194,43 +196,53 @@ int enroll_course(int semester, int year, int studentid, profile* &pstudent, sub
 	{
 		if (!strcmp(enroll, p_sub2_cur->course_id)){
 			delete[] enroll;
-			return 3;
+			res = 3;
+			return;
 		}
 		if (p_sub2_cur->next == NULL)
 			break;
 		p_sub2_cur = p_sub2_cur->next;
 	}
 	subject2 *newnode = new subject2;
-	newnode -> course_id = new char[strlen(enroll) + 1];
+	newnode -> course_id = new char[strlen(enroll) + 2];
 	memcpy(newnode -> course_id, enroll, strlen(enroll) + 1);
 	newnode -> score = 0;
-	p_sub2_cur -> next = newnode;
-	return 4;
+	if (p_sub2_cur == NULL)
+		p_sub2_cur = newnode;
+	else
+		p_sub2_cur -> next = newnode;
+	res = 4;
+	return;
 }
 
 void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *&psubject) {
-	int res = enroll_course(semester, year, studentid, pstudent, psubject);
+	int res;
+	enroll_course(semester, year, studentid, pstudent, psubject, res);
 	/*
 	1: "Can't found the id."
 	2: ...truong hop nay khong xay ra duoc :v
 	3: "You are already in this course."
 	4: "Register successfully!!!!"
-	
+	*/
 	switch (res) {
 		case 1:
-			//
+			cout << "Can't found the id.";
 			break;
 		case 2:
 			//
 			break;
 		case 3:
-			//
+			cout << "You are already in this course.";
 			break;
 		case 4:
+			cout << "Register successfully!!!!";
 			break;
-	}*/
+		default:
+			break;
+	}
 
 	// "Do you want to register another course?" -Yes/No
+	return;
 }
 
 // arguments: course id + student id + the heads of the student and subject lists.

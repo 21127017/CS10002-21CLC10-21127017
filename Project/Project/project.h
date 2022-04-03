@@ -177,8 +177,8 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 bool read_csv_student(profile* &pstudent);
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
-int enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject) ;
-void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *psubject);
+void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);
+void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *&psubject);
 void remove_course();
 
 
@@ -198,6 +198,6 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject, classro
 
 void print_option_2(int &choice);
 
-void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id);
+void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &semester, int &year, int &user_id);
 
 #endif

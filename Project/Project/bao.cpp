@@ -969,15 +969,16 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 // 	return;
 // }
 
-void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, 
-	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id){
+void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &semester, int &year, int &user_id){
 	switch (choice){
 		case 0:
 			logout();
 			break;
 		case 1:
 			//enroll_course();
-			//design_enroll_course(semester, year, 21127017, pstudent, psubject);
+			design_enroll_course(semester, year, user_id, pstudent, psubject);
+			//int res;
+			//enroll_course(semester, year, user_id, pstudent, psubject, res);
 			break;
 		case 2:
 			//remove_course();
@@ -989,7 +990,7 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject,
 			//view_scoreboard();
 			break;
 		case 5: 
-			view_profile(user_id, NULL);
+			view_profile(user_id, pstudent);
 			break;
 		case 6: 
 			break;
