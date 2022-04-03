@@ -20,7 +20,7 @@ bool read_csv_student(profile* &pstudent)
 	{
 		while(!input.eof())
 		{
-			if (pstudent == NULL)
+			/*if (pstudent == NULL)
 			{
 				pstudent = new profile;
 				pCur = pstudent;
@@ -29,7 +29,8 @@ bool read_csv_student(profile* &pstudent)
 			{
 				pCur->next = new profile;
 				pCur = pCur->next;
-			}
+			}*/
+		      profile *pCur = new profile;
 			char tmp[200];
 			char a; // just a fodder to skip the "," in the csv
 			input >> pCur -> no;
@@ -83,6 +84,10 @@ bool read_csv_student(profile* &pstudent)
 				pNew -> next = pCur -> psub2;
 				pCur -> psub2 = pNew;
 			}
+			if (pstudent == NULL)
+			    pstudent = pCur;
+			else
+			    pstudent -> next = pCur;
 		}
 		input.close();
 		return true;
@@ -110,12 +115,12 @@ void output_to_csv_student(profile* &pstudent)
 		       << pCur->dob.month << ","
 		       << pCur->dob.year << ","
 		       << pCur->social_id << ","
-		       << pCur->enrolled_subject_no << ","
-		subject2* p_cursub_2 = pCur->psub2;
+		       << pCur->enrolled_subject_no << ",";
+		subject2  *p_cursub_2 = pCur->psub2;
 		while (p_cursub_2 != NULL)
 		{
 			output << p_cursub_2->course_id;
-			if (p_cursub->next != NULL)
+			if (p_cursub_2->next != NULL)
 				output << ",";
 			else
 				output << endl;
@@ -151,9 +156,11 @@ void output_to_csv_staff(staff* pstaff)
 // arguments: course id + student id + the heads of the student and subject lists.
 // return true if it successfully added the course.
 // return false if: invalid course/student id, subject already found.
-bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psubject) 
+bool enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject) 
 {	
-	subjects* p_sub_cur = psubject;
+	char *enroll = new char[100];
+	show_enroll_course(psubject, semester, year, enroll);
+	subjects *p_sub_cur = psubject;
 
 	while(p_sub_cur != NULL)
 	{
@@ -180,14 +187,19 @@ bool enroll_course(char* enroll, int studentid, profile* &pstudent, subjects psu
 	
 	while (p_sub2_cur != NULL)
 	{
-		if (!strcmp(enroll, p_sub2_cur->course_id))
+		if (!strcmp(enroll, p_sub2_cur->course_id)){
+			cout << "You are already in this course." << endl;
 			return false;
+		}
 		if (p_sub2_cur->next == NULL)
 			break;
 		p_sub2_cur = p_sub2_cur->next;
 	}
-	p_sub2_cur->next = new Node;
-	p_sub2_cur->course_id = enroll;
+	subject2 *newnode = new subject2;
+	newnode -> course_id = new char[strlen(enroll) + 1];
+	memcpy(newnode -> course_id, enroll, strlen(enroll) + 1);
+	newnode -> score = 0;
+	p_sub2_cur -> next = newnode;
 	return true;
 }
 
@@ -264,13 +276,12 @@ void output_to_csv_subject(subjects* psubject)
 			   << pCur->name << ","
 			   << pCur->start << ","
 			   << pCur->end << ","
-			   << pCur->day_of_week;
-			   << pCur->session[0]->day << ","
-			   << pCur->session[0]->hour_start << ","
-			   << pCur->session[0]->minute_start << ","
-			   << pCur->session[1]->day << ","
-			   << pCur->session[1]->hour_start << ","
-			   << pCur->session[1]->minute_start;
+			   << pCur->session[0].day << ","
+			   << pCur->session[0].hour_start << ","
+			   << pCur->session[0].minute_start << ","
+			   << pCur->session[1].day << ","
+			   << pCur->session[1].hour_start << ","
+			   << pCur->session[1].minute_start;
 		output << endl;
 		pCur = pCur->next;
 	}
@@ -278,18 +289,18 @@ void output_to_csv_subject(subjects* psubject)
 	return;
 }
 
-void output_to_csv_class(classrooms *pclass)
-{
-	classrooms* pCur;
-	ofstream output;
-	output.open("classinfo.csv", ios::out);
-	while (pCur != NULL)
-	{
-		output << pCur->classroom;
-		list_student* pCurList = pCur->id_student;
-		while (id_student != NULL)
-			output  << "," << pCur->id_student->id;
-		output << endl;
-	}
-	output.close();
-}
+//void output_to_csv_class(classrooms *pclass)
+//{
+//	classrooms* pCur;
+//	ofstream output;
+//	output.open("classinfo.csv", ios::out);
+//	while (pCur != NULL)
+//	{
+//		output << pCur->classroom;
+//		list_student* pCurList = pCur->id_student;
+//		while (pCur -> id_student != NULL)
+//			output  << "," << pCur->id_student->id;
+//		output << endl;
+//	}
+//	output.close();
+//}

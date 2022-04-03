@@ -119,8 +119,10 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	char temp[200];
 	if (num == 1) {
 		//read file csv
+		read_csv_student(pstudent);
 		return;
 	}
+	
 	//manual
 	if (num == 2) {
 		GoTo(36, 1);

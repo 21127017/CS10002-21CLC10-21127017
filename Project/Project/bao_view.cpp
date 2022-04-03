@@ -916,3 +916,120 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 	}
 	showcur(1);
 }
+
+void show_enroll_course(subjects *p, int semester, int year, char *&auxilary){
+	//10 30 7 5 5 5 5 6
+	showcur(0);
+	view_space();
+	int line = 4;
+	gt(10, line); 
+	for (int i = 1; i <= 81; ++i)
+		cout << sc(205);
+	gt( 9, line); cout << sc(201);
+	gt(20, line); cout << sc(203);
+	gt(51, line); cout << sc(203);
+	gt(59, line); cout << sc(203);
+	gt(65, line); cout << sc(203);
+	gt(71, line); cout << sc(203);
+	gt(77, line); cout << sc(203);
+	gt(83, line); cout << sc(203);
+	gt(90, line); cout << sc(187);
+
+	++line;
+	gt( 9, line); cout << sc(186) << "Course ID";
+	gt(20, line); cout << sc(186) << "             Name";
+	gt(51, line); cout << sc(186) << "Creadit";
+	gt(59, line); cout << sc(186) << "Start";
+	gt(65, line); cout << sc(186) << " End";
+	gt(71, line); cout << sc(186) << "Sess1";
+	gt(77, line); cout << sc(186) << "Sess2";
+	gt(83, line); cout << sc(186) << "Enroll";
+	gt(90, line); cout << sc(186);
+
+	++line;
+	gt(10, line);
+	for (int i = 1; i <= 81; ++i)
+		cout << sc(205);
+	gt( 9, line); cout << sc(204);
+	gt(20, line); cout << sc(206);
+	gt(51, line); cout << sc(206);
+	gt(59, line); cout << sc(206);
+	gt(65, line); cout << sc(206);
+	gt(71, line); cout << sc(206);
+	gt(77, line); cout << sc(206);
+	gt(83, line); cout << sc(206);
+	gt(90, line); cout << sc(185);
+
+	showcur(0);
+
+	while (p -> year != year && p -> semester != semester)
+		p = p -> next;
+
+	for (int t = 1; t <= 8; ++t){
+		++line;
+		gt( 9, line); cout << sc(186) << p -> course_id;
+		gt(20, line); cout << sc(186) << p -> name;
+		gt(51, line); cout << sc(186) << p -> num_of_credits;
+		gt(59, line); cout << sc(186) << p -> start;
+		gt(65, line); cout << sc(186) << p -> end;
+		gt(71, line); cout << sc(186) << p -> session[0].day;
+		gt(77, line); cout << sc(186) << p -> session[1].day;
+		gt(83, line); cout << sc(186) << p -> maximum << "/" << 50;
+		gt(90, line); cout << sc(186);
+		++line;
+		if (t != 8){
+			gt(10, line);
+			for (int i = 1; i <= 81; ++i)
+				cout << sc(205);
+			gt( 9, line); cout << sc(204);
+			gt(20, line); cout << sc(206);
+			gt(51, line); cout << sc(206);
+			gt(59, line); cout << sc(206);
+			gt(65, line); cout << sc(206);
+			gt(71, line); cout << sc(206);
+			gt(77, line); cout << sc(206);
+			gt(83, line); cout << sc(206);
+			gt(90, line); cout << sc(185);
+		} else {
+			gt(10, line);
+			for (int i = 1; i <= 81; ++i)
+				cout << sc(205);
+			gt( 9, line); cout << sc(200);
+			gt(20, line); cout << sc(202);
+			gt(51, line); cout << sc(202);
+			gt(59, line); cout << sc(202);
+			gt(65, line); cout << sc(202);
+			gt(71, line); cout << sc(202);
+			gt(77, line); cout << sc(202);
+			gt(83, line); cout << sc(202);
+			gt(90, line); cout << sc(188);
+		}
+		p = p -> next;
+		if (p -> semester != semester || p -> year != year){
+			gt( 9, line); cout << sc(200);
+			gt(20, line); cout << sc(202);
+			gt(51, line); cout << sc(202);
+			gt(59, line); cout << sc(202);
+			gt(65, line); cout << sc(202);
+			gt(71, line); cout << sc(202);
+			gt(77, line); cout << sc(202);
+			gt(83, line); cout << sc(202);
+			gt(90, line); cout << sc(188);
+			break;
+		}
+	}
+	gt(10, 3); 
+	set_color(2);
+	cout << "*Look at the table and input the id course you want.";
+	set_color(7);
+	char *content = new char[20];
+	memcpy(content, "Course id", 20);
+	char *unknow = new char[2];
+	memcpy(unknow, " ", 2);
+	print_information(content, unknow, 30 , 24, 14);
+	gt(44, 25);
+	showcur(1);
+	cin >> auxilary;
+	delete[] content;
+	delete[] unknow;
+}
