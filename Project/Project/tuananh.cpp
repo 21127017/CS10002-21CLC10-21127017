@@ -9,91 +9,153 @@ void showcur(bool CursorVisibility) // Show / Hide the cursor.
 
 // someone help me debug this please. The function reads through 
 // stuffs just fine until the subjects part, then it refuses to work
-bool read_csv_student(profile* &pstudent)
-{
-	// csv format: no -> id -> classroom -> year 
-	// -> names -> gender -> dob -> socialid -> no. of subjects -> subjects
-	profile* pCur = pstudent;
-	ifstream input;
-	input.open("studentinfo.csv");
-	if (input.is_open())
-	{
-		while(!input.eof())
-		{
-			/*if (pstudent == NULL)
-			{
-				pstudent = new profile;
-				pCur = pstudent;
-			}
-			else
-			{
-				pCur->next = new profile;
-				pCur = pCur->next;
-			}*/
-		      profile *pCur = new profile;
-			char tmp[200];
-			char a; // just a fodder to skip the "," in the csv
-			input >> pCur -> no;
-			input.get(a);
+// bool read_csv_student(profile* &pstudent)
+// {	
+// 	char tmp[200];
+// 	char a; 
+// 	// csv format: no -> id -> classroom -> year 
+// 	// -> names -> gender -> dob -> socialid -> no. of subjects -> subjects
+// 	profile* pCur = pstudent;
+// 	ifstream input;
+// 	input.open("studentinfo.csv");
+// 	if (input.is_open())
+// 	{
+// 		while(!input.eof())
+// 		{
+// 			/*if (pstudent == NULL)
+// 			{
+// 				pstudent = new profile;
+// 				pCur = pstudent;
+// 			}
+// 			else
+// 			{
+// 				pCur->next = new profile;
+// 				pCur = pCur->next;
+// 			}*/
+// 		      profile *pCur = new profile;
+// 			// just a fodder to skip the "," in the csv
+// 			input >> pCur -> no;
+// 			input.get(a);
 			
-			input >> pCur -> id;
-			input.get(a);
+// 			input >> pCur -> id;
+// 			input.get(a);
 			
-			input.getline(tmp, 200, ',');
-			pCur -> classroom = new char[strlen(tmp) + 1];
-			memcpy(pCur -> classroom, tmp, strlen(tmp) +1);
+// 			input.getline(tmp, 200, ',');
+// 			pCur -> classroom = new char[strlen(tmp) + 1];
+// 			memcpy(pCur -> classroom, tmp, strlen(tmp) +1);
 			
-			input >> pCur -> year;
-			input.get(a);
+// 			input >> pCur -> year;
+// 			input.get(a);
 			
-			input.getline(tmp, 200, ',');
-			pCur -> first_name = new char[strlen(tmp) + 1];
-			memcpy(pCur -> first_name, tmp, strlen(tmp) + 1);
+// 			input.getline(tmp, 200, ',');
+// 			pCur -> first_name = new char[strlen(tmp) + 1];
+// 			memcpy(pCur -> first_name, tmp, strlen(tmp) + 1);
 			
-			input.getline(tmp, 200, ',');
-			pCur -> last_name = new char[strlen(tmp) + 1];
-			memcpy(pCur -> last_name, tmp, strlen(tmp) + 1);
+// 			input.getline(tmp, 200, ',');
+// 			pCur -> last_name = new char[strlen(tmp) + 1];
+// 			memcpy(pCur -> last_name, tmp, strlen(tmp) + 1);
 			
-			input.getline(tmp, 200, ',');
-			pCur -> gender = new char[strlen(tmp) + 1];
-			memcpy(pCur -> gender, tmp, strlen(tmp) + 1);
+// 			input.getline(tmp, 200, ',');
+// 			pCur -> gender = new char[strlen(tmp) + 1];
+// 			memcpy(pCur -> gender, tmp, strlen(tmp) + 1);
 			
-			input >> pCur -> dob.day;
-			input.get(a);
-			input >> pCur -> dob.month;
-			input.get(a);
-			input >> pCur -> dob.year;
-			input.get(a);
+// 			input >> pCur -> dob.day;
+// 			input.get(a);
+// 			input >> pCur -> dob.month;
+// 			input.get(a);
+// 			input >> pCur -> dob.year;
+// 			input.get(a);
 			
-			input >> pCur -> social_id;
-			input.get(a);
+// 			input >> pCur -> social_id;
+// 			input.get(a);
 			
-			input >> pCur-> enrolled_subject_no;
-			input.get(a);
+// 			input >> pCur-> enrolled_subject_no;
+// 			input.get(a);
 			
-			int n = pCur -> enrolled_subject_no;
-			for (int i = 1; i <= n; i++)
-			{
-				if (i != n)
-					input.getline(tmp, 200, ',');
-				else
-					input.getline(tmp, 200, '\n');
+// 			int n = pCur -> enrolled_subject_no;
+// 			for (int i = 1; i <= n; i++)
+// 			{
+// 				if (i != n)
+// 					input.getline(tmp, 200, ',');
+// 				else
+// 					input.getline(tmp, 200, '\n');
 					
-				subject2 *pNew = new subject2;
-				memcpy(pNew -> course_id, tmp, strlen(tmp) + 1);
-				pNew -> next = pCur -> psub2;
-				pCur -> psub2 = pNew;
+// 				subject2 *pNew = new subject2;
+// 				memcpy(pNew -> course_id, tmp, strlen(tmp) + 1);
+// 				pNew -> next = pCur -> psub2;
+// 				pCur -> psub2 = pNew;
+// 			}
+// 			if (pstudent == NULL)
+// 			    pstudent = pCur;
+// 			else
+// 			    pstudent -> next = pCur;
+// 		}
+// 		input.close();
+// 		return true;
+// 	}
+// 	else
+// 		return false;
+// }
+
+void read_csv_student(profile *&pstudent) {
+	ifstream inp;
+	char tmp[200];
+	char a;
+	inp.open("studentinfo.csv");
+	profile *current = nullptr;
+	if (inp.is_open()) {
+		while (!inp.eof()) {
+			if (!pstudent) {
+				pstudent = new profile;
+				current = pstudent;
+			} else {
+				current->next = new profile;
+				current = current->next;
 			}
-			if (pstudent == NULL)
-			    pstudent = pCur;
-			else
-			    pstudent -> next = pCur;
+			inp >> current->no >> a >> current->id >> a;
+
+			inp.getline(tmp, 200, ',');
+			current->classroom = new char[strlen(tmp) + 1];
+			memcpy(current->classroom, tmp, strlen(tmp) + 1);
+
+			inp >> a >> current->year >> a;
+
+			inp.getline(tmp, 200, ',');
+			current->first_name = new char[strlen(tmp) + 1];
+			memcpy(current->first_name, tmp, strlen(tmp) + 1);
+
+			inp.getline(tmp, 200, ',');
+			current->last_name = new char[strlen(tmp) + 1];
+			memcpy(current->last_name, tmp, strlen(tmp) + 1);
+
+			inp.getline(tmp, 200, ',');
+			current->gender = new char[strlen(tmp) + 1];
+			memcpy(current->gender, tmp, strlen(tmp) + 1);
+
+			inp >> current->dob.day >> a >> current->dob.month >> a >> current->dob.year >> a >> current->social_id >> a;
+			inp >> current->enrolled_subject_no >> a;
+
+			int num = current->enrolled_subject_no;
+			if (!num)
+				continue;
+			current->psub2 = new subject2;
+			subject2 *cur = current->psub2;
+
+			for (int i = 0; i < (num - 1); i++) {
+				inp.getline(tmp, 200, ',');
+				cur->course_id = new char[strlen(tmp) + 1];
+				memcpy(cur->course_id, tmp, strlen(tmp) + 1);
+				cur->next = new subject2;
+				cur = cur->next;
+			}
+
+			inp.getline(tmp, 200, ',');
+			cur->course_id = new char[strlen(tmp) + 1];
+			memcpy(cur->course_id, tmp, strlen(tmp) + 1);
+			inp.ignore();
 		}
-		input.close();
-		return true;
 	}
-	else
-		return false;
+	inp.close();
 }
 
 void output_to_csv_student(profile* &pstudent)

@@ -64,7 +64,7 @@ struct subject2 {
 };
 
 struct profile {
-      int user_id;
+    int user_id;
 	char *classroom;
 	int year;
 	int enrolled_subject_no;
@@ -177,7 +177,7 @@ void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, c
 void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
-bool read_csv_student(profile* &pstudent);
+void read_csv_student(profile* &pstudent);
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);
