@@ -140,6 +140,9 @@ void announcement(char *content, bool yesno, int &num, int title);
 
 void exitProgram();
 
+void view_guide();
+void print_course_function(int &choice);
+
 //-----------DELETE LINKED LIST-----------//
 void delete_student(profile *&pstudent);
 void delete_subject(subjects *&psubject);

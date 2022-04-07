@@ -1102,3 +1102,87 @@ void print_option_2(int &choice){
 	}
 	showcur(1);
  }
+
+ void view_guide() {
+	 view_space();
+	 GoTo(47, 1); cout << "Guide";
+	 //cho chot data da
+ }
+
+ void print_course_function(int &choice) {
+	 showcur(0);
+	 int key = 100;
+	 char temp[200];
+	 int i = 0;
+	 int num = 0;
+	 while (1) {
+		 view_space();
+		 set_color(14);
+		 GoTo(31, 3); cout << "  ____ ___  _   _ ____  ____  _____ ";
+		 GoTo(31, 4); cout << " / ___/ _ \\| | | |  _ \\/ ___|| ____|";
+		 GoTo(31, 5); cout << "| |  | | | | | | | |_) \\___ \\|  _|  ";
+		 GoTo(31, 6); cout << "| |__| |_| | |_| |  _ < ___) | |___ ";
+		 GoTo(31, 7); cout << " \\____\\___/ \\___/|_| \\_\\____/|_____|";
+		 set_color(7);
+		 while (key != 5) {
+			 memcpy(temp, "View list of course", 20);
+			 designSquare(34, 11, 3, 30, temp, 7, 7);
+
+			 memcpy(temp, "Enroll course", 14);
+			 designSquare(34, 15, 3, 30, temp, 7, 7);
+
+			 memcpy(temp, "Remove course", 14);
+			 designSquare(34, 19, 3, 30, temp, 7, 7);
+
+			 memcpy(temp, "Back to menu", 13);
+			 designSquare(34, 23, 3, 30, temp, 7, 7);
+
+			 switch (i) {
+			 case 0:
+				 memcpy(temp, "View list of course", 20);
+				 designSquare(34, 11, 3, 30, temp, 11, 432);
+				 num = 0;
+				 break;
+			 case 1:
+				 memcpy(temp, "Enroll course", 14);
+				 designSquare(34, 15, 3, 30, temp, 11, 432);
+				 num = 1;
+				 break;
+			 case 2:
+				 memcpy(temp, "Remove course", 14);
+				 designSquare(34, 19, 3, 30, temp, 11, 432);
+				 num = 2;
+				 break;
+			 default:
+				 memcpy(temp, "Back to menu", 13);
+				 designSquare(34, 23, 3, 30, temp, 11, 432);
+				 num = 3;
+				 break;
+			 }
+
+			 key = getkey();
+			 switch (key) {
+			 case 2:
+				 i++;
+				 break;
+			 case 4:
+				 i--;
+				 break;
+			 case 6:
+				 i++;
+				 break;
+			 case 8:
+				 i--;
+				 break;
+			 default:
+				 break;
+			 }
+
+			 if (i < 0) i = 3;
+			 if (i > 3) i = 0;
+		 }
+		 choice = num;
+		 break;
+	 }
+	 showcur(1);
+ }
