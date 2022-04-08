@@ -136,23 +136,28 @@ void read_csv_student(profile *&pstudent) {
 			inp >> current->enrolled_subject_no >> a;
 
 			int num = current->enrolled_subject_no;
-			if (!num)
+			if (!num) {
+				current->psub2 = nullptr;
 				continue;
-			current->psub2 = new subject2;
-			subject2 *cur = current->psub2;
+			} else {
+				current->psub2 = new subject2;
+				subject2 *cur = current->psub2;
 
-			for (int i = 0; i < (num - 1); i++) {
+				for (int i = 0; i < (num - 1); i++) {
+					inp.getline(tmp, 200, ',');
+					cur->course_id = new char[strlen(tmp) + 1];
+					memcpy(cur->course_id, tmp, strlen(tmp) + 1);
+					cur->next = new subject2;
+					cur = cur->next;
+				}
+
 				inp.getline(tmp, 200, ',');
 				cur->course_id = new char[strlen(tmp) + 1];
 				memcpy(cur->course_id, tmp, strlen(tmp) + 1);
-				cur->next = new subject2;
-				cur = cur->next;
+				inp.ignore();
 			}
 
-			inp.getline(tmp, 200, ',');
-			cur->course_id = new char[strlen(tmp) + 1];
-			memcpy(cur->course_id, tmp, strlen(tmp) + 1);
-			inp.ignore();
+			current->next = nullptr;
 		}
 	}
 	inp.close();
@@ -222,7 +227,7 @@ void output_to_csv_staff(staff* pstaff)
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res) 
 {	
 	char *enroll = new char[100];
-	show_enroll_course(psubject, semester, year, enroll);
+	//show_enroll_course(psubject, semester, year, enroll);
 	subjects *p_sub_cur = psubject;
 
 	while(p_sub_cur != NULL)
@@ -316,7 +321,7 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 
 	while(p_sub_cur != NULL)
 	{
-		if (!strcmp(remove, p_sub_cur -> course_id))
+		if (!strcmp(remove, p_sub_cur->course_id))
 			break;
 		p_sub_cur = p_sub_cur -> next;
 	}

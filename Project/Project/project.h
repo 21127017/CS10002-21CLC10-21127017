@@ -28,7 +28,6 @@ struct sessions {
 	char *day;
 	int hour_start;
 	int minute_start;
-	
 };
 
 struct list_student {
@@ -54,7 +53,7 @@ struct subjects {
 	int end;
 	int day_of_week;
 	sessions session[2];
-	subjects *next;
+	subjects *next = nullptr;
 };
 
 struct subject2 {
