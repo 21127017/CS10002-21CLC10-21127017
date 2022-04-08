@@ -101,6 +101,7 @@ subject2 *newSubject(char *course_id) {
     subject2 *temp = new subject2;
     temp->course_id = new char[strlen(course_id) + 1];
     memcpy(temp->course_id, course_id, strlen(course_id) + 1);
+	temp->score = 0;
     temp->next = nullptr;
     return temp;
 }
@@ -147,7 +148,7 @@ void read_csv_student(profile *&pstudent) {
     ifstream inp;
     char tmp[200];
     char a;
-    inp.open("file.txt");
+    inp.open("studentinfo.txt");
 
     profile *current = pstudent;
 

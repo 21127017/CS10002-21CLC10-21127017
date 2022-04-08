@@ -6,9 +6,9 @@ int main(){
     profile *pstudent;
     subjects *psubject;
     classrooms *pclassid;
-    pstudent = NULL;
-    psubject = NULL;
-    pclassid = NULL;
+    pstudent = nullptr;
+    psubject = nullptr;
+    pclassid = nullptr;
 
 	while (true){
 		int role = 0, choice = 1;

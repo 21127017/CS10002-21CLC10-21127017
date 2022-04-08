@@ -63,7 +63,6 @@ struct subject2 {
 };
 
 struct profile {
-    int user_id;
 	char *classroom;
 	int year;
 	int enrolled_subject_no;
