@@ -285,6 +285,8 @@ void enroll_course(int semester, int year, int studentid, profile* &pstudent, su
 void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *&psubject) {
 	int res;
 	enroll_course(semester, year, studentid, pstudent, psubject, res);
+	char tmp[200] = "";
+	int choice = 0;
 	/*
 	1: "Can't found the id."
 	2: ...truong hop nay khong xay ra duoc :v
@@ -293,22 +295,24 @@ void design_enroll_course(int semester, int year, int studentid, profile *&pstud
 	*/
 	switch (res) {
 		case 1:
-			cout << "Can't found the id.";
-			break;
-		case 2:
-			//
+			memcpy(tmp, "Can't found the id.", 20);
+			announcement(tmp, 0, choice, -1);
 			break;
 		case 3:
-			cout << "You are already in this course.";
+			memcpy(tmp, "You are already in this course.", 32);
+			announcement(tmp, 0, choice, -1);
 			break;
 		case 4:
-			cout << "Register successfully!!!!";
+			memcpy(tmp, "Register successfully!", 23);
+			announcement(tmp, 0, choice, 1);
 			break;
 		default:
 			break;
 	}
 
-	// "Do you want to register another course?" -Yes/No
+	memcpy(tmp, "Do you want to register another course?", 40);
+	announcement(tmp, 1, choice, 0);
+	if (choice == 1) design_enroll_course(semester, year, studentid, pstudent, psubject);
 	return;
 }
 
