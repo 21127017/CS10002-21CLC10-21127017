@@ -30,6 +30,9 @@
     <ClCompile Include="bao_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Read_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h">

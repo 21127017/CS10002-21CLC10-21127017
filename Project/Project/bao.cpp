@@ -832,10 +832,6 @@ void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassi
 
 //----------ACCOUNT------------//
 
-void logout(){
-
-}
-
 //-----DELETE SPACE-----//
 void delete_student(profile *&pstudent){
 	/*
@@ -930,7 +926,6 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 	classrooms *&pclassid, int &no, int &classroom, int &semester, int &year, int &user_id){
 	switch (choice){
 		case 0:
-			logout();
 			break;
 		case 1:
 			year_function(pstudent, psubject, pclassid, classroom, semester, year);
@@ -952,6 +947,9 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 			break;
 		case 7:
 			break;
+		default:
+			view_guide();
+			break;
 	}
 	return;
 }
@@ -970,29 +968,41 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 // }
 
 void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &semester, int &year, int &user_id){
+	int c = 0;
 	switch (choice){
 		case 0:
-			logout();
 			break;
 		case 1:
-			//enroll_course();
-			design_enroll_course(semester, year, user_id, pstudent, psubject);
-			//int res;
-			//enroll_course(semester, year, user_id, pstudent, psubject, res);
+			showcur(0);
+			print_course_function(c);
+			showcur(1);
+			switch (c) {
+			case 0:
+				//view_list_of_course();
+				break;
+			case 1:
+				//enroll_course();
+				design_enroll_course(semester, year, user_id, pstudent, psubject);
+				//int res;
+				//enroll_course(semester, year, user_id, pstudent, psubject, res);
+				break;
+			case 2:
+				//remove_course();
+				break;
+			default:
+				break;
+			}
 			break;
 		case 2:
-			//remove_course();
-			break;
-		case 3:
-			//view_list_of_course();
-			break;
-		case 4:
 			//view_scoreboard();
 			break;
-		case 5: 
+		case 3: 
 			view_profile(user_id, pstudent);
 			break;
-		case 6: 
+		case 4: 
+			break;
+		default: 
+			view_guide();
 			break;
 	}
 	return;

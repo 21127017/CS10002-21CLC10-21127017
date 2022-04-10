@@ -66,7 +66,7 @@ void print_information(char *x1, char *x2, int x, int y, int color){
 }
 
 void view_profile(int user_id, profile *p){
-      if (p == NULL) return;
+    if (p == NULL) return;
 	while (p != NULL){
 		if (p -> id == user_id) break;
 		p = p -> next;

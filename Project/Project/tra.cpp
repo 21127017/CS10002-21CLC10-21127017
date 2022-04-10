@@ -215,7 +215,7 @@ void print_option_1(int &choice) { //Board for teacher
 				num = 2;
 				break;
 			case 4:
-				memcpy(temp, "Subject", 8);
+				memcpy(temp, "Course", 7);
 				designSquare(27, 18, 3, 20, temp, 11, 432);
 				num = 4;
 				break;
@@ -1046,7 +1046,7 @@ void print_option_2(int &choice){
 			case 0:
 				memcpy(temp, "Profile", 8);
 				designSquare(27, 12, 3, 20, temp, 11, 432);
-				num = 5;
+				num = 3;
 				break;
 			case 1:
 				memcpy(temp, "Course", 7);
@@ -1185,4 +1185,14 @@ void print_option_2(int &choice){
 		 break;
 	 }
 	 showcur(1);
+ }
+
+ bool logout() {
+	 char temp[200] = "";
+	 int choice = 0;
+	 memcpy(temp, "Do you want to log out?", 24);
+	 announcement(temp, 1, choice, 0);
+	 if (choice == 1) {
+		 return true;
+	 } else return false;
  }

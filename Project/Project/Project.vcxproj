@@ -142,6 +142,7 @@
     <ClCompile Include="bao.cpp" />
     <ClCompile Include="bao_view.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Read_file.cpp" />
     <ClCompile Include="tra.cpp" />
     <ClCompile Include="tuananh.cpp" />
   </ItemGroup>

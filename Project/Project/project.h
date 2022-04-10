@@ -53,7 +53,7 @@ struct subjects {
 	int end;
 	int day_of_week;
 	sessions session[2];
-	subjects *next = nullptr;
+	subjects *next;
 };
 
 struct subject2 {
@@ -175,7 +175,8 @@ void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, c
 void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
-void read_csv_student(profile* &pstudent);
+
+void read_csv_student(profile *&pstudent);
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);
@@ -186,7 +187,7 @@ void remove_course();
 //----------ACCOUNT------------//
 void login(int &role, int &id_profile);
 
-void logout();
+bool logout();
 
 void changePassword(const int &changed_id);
 

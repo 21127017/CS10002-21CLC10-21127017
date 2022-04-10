@@ -27,17 +27,22 @@ int main(){
 					role = 4;
 					break;
 				}
-				if (choice == 0) break;
 				make_choice_1(choice, pstudent, psubject, pclassid, no, classroom, semester, year, id_profile);
+				if (choice == 0)
+					if (logout()) break;
+					else choice = 1;
 			}
 		} else if (role == 2) {
 			while (choice){
 				print_option_2(choice);
-				if (choice == 5){
+				if (choice == 4){
 					role = 4;
 					break;
 				}
 				make_choice_2(choice, pstudent, psubject, semester, year, id_profile);
+				if (choice == 0)
+					if (logout()) break;
+					else choice = 1;
 			}
 		}
 		if (role == 4) break;
