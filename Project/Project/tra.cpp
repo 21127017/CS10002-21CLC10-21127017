@@ -624,7 +624,7 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 			memcpy(temp, "View list of class", 19);
 			designSquare(50, 11, 3, 30, temp, 7, 7);
 
-			memcpy(temp, "View scoreboard of class", 25);
+			memcpy(temp, "View scoreboard of class", 25); // view student in class
 			designSquare(50, 15, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "Back to menu", 13);
@@ -723,7 +723,7 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 
 			memcpy(temp, "Back to menu", 13);
 			designSquare(50, 19, 3, 30, temp, 7, 7);
-
+			//student in course num = 6
 			switch (i) {
 			case 0:
 				memcpy(temp, "Add new course", 15);

@@ -188,12 +188,15 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	view_space();
 
 	gt(4, 5); cout << "RESULT:";
-	designSquare(12, 4, 3, 14, NULL, 7, 7);//Cread 58
-	designSquare(28, 4, 3, 10, NULL, 7, 7);//Average 74
-	designSquare(40, 4, 3, 10, NULL, 7, 7);//GPA 86
+	char *auxilary1 = new char[10];
+	strcpy_s(auxilary1, 10, "Creadit");
+	designSquare(12, 4, 3, 14, auxilary1, 7, 7);//Creadit 58
+	strcpy_s(auxilary1, 10, "Average");
+	designSquare(28, 4, 3, 10, auxilary1, 7, 7);//Average 74
+	strcpy_s(auxilary1, 10, "GPA");
+	designSquare(40, 4, 3, 10, auxilary1, 7, 7);//GPA 86
 
 	int line = 7;
-	int maxlist = 80;
 	gt(5, line); 
 	for (int i = 1; i < 92; ++i)
 		cout << sc(205);
@@ -227,34 +230,56 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	gt(62, line); cout << sc(206);
 	gt(70, line); cout << sc(206);
 	gt(76, line); cout << sc(206);
-	gt(95, line); cout << sc(185);	
+	gt(95, line); cout << sc(185);
+
+	profile *auxilary = pstudent;
+	while (auxilary != NULL){
+		if (auxilary -> id == id_student) break;			
+		auxilary = auxilary -> next;
+	}
+	
+	int maxlist = 0, creadit = 0;
+	double score = 0, gpa = 0;
+	subject2 *pp = auxilary->psub2;
+	while (pp != NULL) {
+		++maxlist;
+		subjects *ppp = psubject;
+		while (ppp != NULL && strcmp(ppp->course_id, pp->course_id) != 0)
+			ppp = ppp->next;
+		creadit += ppp->num_of_credits;
+		score += pp->score * ppp->num_of_credits;
+		pp = pp->next;
+	}
+
+	score /= creadit;
+	gpa = score * 0.4;
+
+	gt(58, 4); cout << creadit;
+	gt(74, 4); cout << setprecision(2) << fixed << score;
+	gt(86, 4); cout << setprecision(2) << fixed << gpa;
 
 	int tmp = line;
 	int value = 1;
 	while (true){
 		line = tmp;
 		showcur(0);
-		
-		/*
-		profile *auxilary = pstudent;
-		while (auxilary != NULL){
-			if (auxilary -> id == id_student) break;
-			auxilary = auxilary -> next;
-		}
 
 		subject2 *cur = auxilary -> psub2;
 		for (int i = 1; i < value; ++i)
 			cur = cur -> next;
-		*/
+
+		subjects *p = psubject;
+		while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
+			p = p->next;
 	
 		for (int t = 1; t <= 8; ++t){
 			++line;
-			gt( 4, line); cout << sc(186);
-			gt(13, line); cout << sc(186);
-			gt(20, line); cout << sc(186);
-			gt(31, line); cout << sc(186);
-			gt(62, line); cout << sc(186);
-			gt(70, line); cout << sc(186);
+			gt( 4, line); cout << sc(186) << p -> semester;
+			gt(13, line); cout << sc(186) << p -> year;
+			gt(20, line); cout << sc(186) << p -> course_id;
+			gt(31, line); cout << sc(186) << p -> name;
+			gt(62, line); cout << sc(186) << p -> num_of_credits;
+			gt(70, line); cout << sc(186) << cur -> score;
 			gt(76, line); cout << sc(186);
 			gt(95, line); cout << sc(186);
 			
@@ -284,7 +309,18 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 				gt(76, line); cout << sc(202);
 				gt(95, line); cout << sc(188);
 			}
-			//cur = cur -> next;
+			cur = cur -> next;
+			if (cur == NULL) {
+				gt( 4, line); cout << sc(200);
+				gt(13, line); cout << sc(202);
+				gt(20, line); cout << sc(202);
+				gt(31, line); cout << sc(202);
+				gt(62, line); cout << sc(202);
+				gt(70, line); cout << sc(202);
+				gt(76, line); cout << sc(202);
+				gt(95, line); cout << sc(188);
+				break;
+			}
 		}
 		
 
@@ -297,12 +333,11 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	showcur(1);
 }
 
-void view_student_enroll_course(int id_student, profile *pstudent){
+void view_student_enroll_course(int id_student, profile *pstudent, subjects *psubject){
 	// 4 30 10 20 7 6 8
 	showcur(0);
 	view_space();
 	int line = 5;
-	int maxlist = 80;
 	gt(4, line); 
 	for (int i = 1; i < 93; ++i)
 		cout << sc(205);
@@ -338,33 +373,63 @@ void view_student_enroll_course(int id_student, profile *pstudent){
 	gt(86, line); cout << sc(206);
 	gt(95, line); cout << sc(185);	
 
+	profile *auxilary = pstudent;
+	while (auxilary != NULL){
+		if (auxilary -> id == id_student) break;
+		auxilary = auxilary -> next;
+	}
+
+	if (auxilary == NULL) {
+		gt( 3, line); cout << sc(200);
+		gt( 8, line); cout << sc(202);
+		gt(39, line); cout << sc(202);
+		gt(50, line); cout << sc(202);
+		gt(71, line); cout << sc(202);
+		gt(79, line); cout << sc(202);
+		gt(86, line); cout << sc(202);
+		gt(95, line); cout << sc(188);
+	}
+
+	int maxlist = 0;
+	subject2 *curtmp = auxilary -> psub2;
+	while (curtmp != NULL) {
+		curtmp = curtmp->next;
+		++maxlist;
+	}
+
 	int tmp = line;
 	int value = 1;
 	while (true){
 		line = tmp;
 		showcur(0);
-		
-		/*
-		profile *auxilary = pstudent;
-		while (auxilary != NULL){
-			if (auxilary -> id == id_student) break;
-			auxilary = auxilary -> next;
-		}
-
 		subject2 *cur = auxilary -> psub2;
 		for (int i = 1; i < value; ++i)
 			cur = cur -> next;
-		*/
+		subjects *p = psubject;
+		while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
+			p = p->next;
+
+		if (p == NULL) {
+			gt( 3, line); cout << sc(200);
+			gt( 8, line); cout << sc(202);
+			gt(39, line); cout << sc(202);
+			gt(50, line); cout << sc(202);
+			gt(71, line); cout << sc(202);
+			gt(79, line); cout << sc(202);
+			gt(86, line); cout << sc(202);
+			gt(95, line); cout << sc(188);
+			break;
+		}
 	
 		for (int t = 1; t <= 8; ++t){
 			++line;
-			gt( 3, line); cout << sc(186);
-			gt( 8, line); cout << sc(186);
-			gt(39, line); cout << sc(186);
-			gt(50, line); cout << sc(186);
-			gt(71, line); cout << sc(186);
-			gt(79, line); cout << sc(186);
-			gt(86, line); cout << sc(186);
+			gt( 3, line); cout << sc(186) << t;
+			gt( 8, line); cout << sc(186) << p -> name;
+			gt(39, line); cout << sc(186) << p -> course_id;
+			gt(50, line); cout << sc(186) << p -> teacher_name;
+			gt(71, line); cout << sc(186) << p -> num_of_credits;
+			gt(79, line); cout << sc(186) << p -> year;
+			gt(86, line); cout << sc(186) << p -> semester;
 			gt(95, line); cout << sc(186);
 			
 			++line;
@@ -393,7 +458,18 @@ void view_student_enroll_course(int id_student, profile *pstudent){
 				gt(86, line); cout << sc(202);
 				gt(95, line); cout << sc(188);
 			}
-			//cur = cur -> next;
+			cur = cur -> next;
+			if (cur == NULL) {
+				gt( 3, line); cout << sc(200);
+				gt( 8, line); cout << sc(202);
+				gt(39, line); cout << sc(202);
+				gt(50, line); cout << sc(202);
+				gt(71, line); cout << sc(202);
+				gt(79, line); cout << sc(202);
+				gt(86, line); cout << sc(202);
+				gt(95, line); cout << sc(188);
+				break;
+			}
 		}
 		
 
@@ -405,13 +481,13 @@ void view_student_enroll_course(int id_student, profile *pstudent){
 	}
 	showcur(1);
 }
-
+//khong nho o dau
 void view_scoreboard_of_course(char *id_course, profile *pstudent){
 	// 4 30 10 9 5
 	showcur(0);
 	view_space();
-	int line = 5;
 	int maxlist = 80;
+	int line = 5;
 	gt(19, line); 
 	for (int i = 1; i < 64; ++i)
 		cout << sc(205);
@@ -523,13 +599,12 @@ void view_scoreboard_of_course(char *id_course, profile *pstudent){
 	}
 	showcur(1);
 }
-
-void view_list_of_course(subjects *psubject, profile *pstudent){
+//danh sach lop hoc
+void view_list_of_course(subjects *psubject, profile *pstudent, int semester, int year){
 	//10 30 7 5 5 5 5 6
 	showcur(0);
 	view_space();
 	int line = 5;
-	int maxlist = 80;
 	gt(10, line); 
 	for (int i = 1; i <= 81; ++i)
 		cout << sc(205);
@@ -567,45 +642,63 @@ void view_list_of_course(subjects *psubject, profile *pstudent){
 	gt(77, line); cout << sc(206);
 	gt(83, line); cout << sc(206);
 	gt(90, line); cout << sc(185);
+	
+	int maxlist = 0;
+	subjects *p = psubject;
+	while (p != NULL) {
+		if (p->year == year && p->semester == semester)
+			++maxlist;
+		p = p->next;
+	}
 
 	int tmp = line;
 	int value = 1;
 	while (true){
 		line = tmp;
 		showcur(0);
-
-		/*
 		subjects *cur = psubject;
-		for (int i = 1; i < value; ++i)
-			cur = cur -> next;
-
-		*/
+		for (int i = 1; i < value; ++i) {
+			while (cur != NULL && (cur->year != year || cur->semester != semester))
+				cur = cur->next;
+			if (cur == NULL) {
+				gt( 9, line); cout << sc(200);
+				gt(20, line); cout << sc(202);
+				gt(51, line); cout << sc(202);
+				gt(59, line); cout << sc(202);
+				gt(65, line); cout << sc(202);
+				gt(71, line); cout << sc(202);
+				gt(77, line); cout << sc(202);
+				gt(83, line); cout << sc(202);
+				gt(90, line); cout << sc(188);
+				break;
+			}
+			cur = cur->next;
+		}
 
 		for (int t = 1; t <= 8; ++t){
-			/*
-			profile *cur1 = pstudent;
-			int count = 0;
-			while (cur1 != NULL){
-				subject2 *auxilary = cur1 -> psub2;
-				while (auxilary != NULL){
-					if (strcmp(auxilary -> course_id, cur ->course_id) == 0){
-						++count;
-						break;
-					}
-					auxilary = auxilary -> next;
-				}
-				cur1 = cur1 -> next;
+			while (cur != NULL && (cur->year != year || cur->semester != semester))
+				cur = cur->next;
+			if (cur == NULL) {
+				gt( 9, line); cout << sc(200);
+				gt(20, line); cout << sc(202);
+				gt(51, line); cout << sc(202);
+				gt(59, line); cout << sc(202);
+				gt(65, line); cout << sc(202);
+				gt(71, line); cout << sc(202);
+				gt(77, line); cout << sc(202);
+				gt(83, line); cout << sc(202);
+				gt(90, line); cout << sc(188);
+				break;
 			}
-			*/
 			++line;
-			gt( 9, line); cout << sc(186);
-			gt(20, line); cout << sc(186);
-			gt(51, line); cout << sc(186);
-			gt(59, line); cout << sc(186);
-			gt(65, line); cout << sc(186);
-			gt(71, line); cout << sc(186);
-			gt(77, line); cout << sc(186);
-			gt(83, line); cout << sc(186);
+			gt( 9, line); cout << sc(186) << cur -> course_id;
+			gt(20, line); cout << sc(186) << cur -> name;
+			gt(51, line); cout << sc(186) << cur -> num_of_credits;
+			gt(59, line); cout << sc(186) << cur -> start;
+			gt(65, line); cout << sc(186) << cur -> end;
+			gt(71, line); cout << sc(186) << cur -> session[0].day;
+			gt(77, line); cout << sc(186) << cur -> session[1].day;
+			gt(83, line); cout << sc(186) << cur -> maximum << "/" << 50;
 			gt(90, line); cout << sc(186);
 
 			++line;
@@ -636,6 +729,19 @@ void view_list_of_course(subjects *psubject, profile *pstudent){
 				gt(83, line); cout << sc(202);
 				gt(90, line); cout << sc(188);
 			}
+			cur = cur->next;
+			if (cur == NULL) {
+				gt( 9, line); cout << sc(200);
+				gt(20, line); cout << sc(202);
+				gt(51, line); cout << sc(202);
+				gt(59, line); cout << sc(202);
+				gt(65, line); cout << sc(202);
+				gt(71, line); cout << sc(202);
+				gt(77, line); cout << sc(202);
+				gt(83, line); cout << sc(202);
+				gt(90, line); cout << sc(188); 
+				break;
+			}
 		}
 
 		draw_button(25, value, maxlist);
@@ -658,7 +764,6 @@ void view_student_in_class(char *classid, profile *pstudent){
 	showcur(0);
 	view_space();
 	int line = 5;
-	int maxlist = 80;
 	gt(20, line); 
 	for (int i = 1; i <= 68; ++i)
 		cout << sc(205);
@@ -686,6 +791,14 @@ void view_student_in_class(char *classid, profile *pstudent){
 	gt(66, line); cout << sc(206);
 	gt(79, line); cout << sc(206);
 	gt(87, line); cout << sc(185);
+	
+	int maxlist = 0;
+	profile *p = pstudent;
+	while (p != NULL) {
+		if (strcmp(p->classroom, classid) == 0)
+			++maxlist;
+		p = p->next;
+	}
 
 	int tmp = line;
 	int value = 1;
@@ -694,22 +807,19 @@ void view_student_in_class(char *classid, profile *pstudent){
 		showcur(0);
 
 		profile *cur = pstudent;
-		//while (true/*cur != NULL*/)
-		for (int x = 0; x < 8; ++x)
-		{
-			int count = value;
-			//if (strcmp(cur -> classroom, classid) == 0){
-				if (count < value + 8 && count >= value) {
-					++line;
-					gt(19, line); cout << sc(186) << " " << ((value < 10) ? "0" : "") << value;
-					gt(24, line); cout << sc(186);//
-					gt(55, line); cout << sc(186);//
-					gt(66, line); cout << sc(186);//
-					gt(79, line); cout << sc(186);//
-					gt(87, line); cout << sc(186);//
-				}
-				++count;
-			//}
+		for (int i = 1; i < value; ++i) {
+			while (cur != NULL && strcmp(cur->classroom, classid) != 0)
+				cur = cur->next;
+			cur = cur->next;
+		}
+		for (int x = 0; x < 8; ++x){
+			++line;
+			gt(19, line); cout << sc(186) << x + 1;
+			gt(24, line); cout << sc(186) << cur -> last_name << " " << cur -> first_name;//
+			gt(55, line); cout << sc(186) << cur -> id;//
+			gt(66, line); cout << sc(186) << cur -> dob.day << "/" << cur -> dob.month << "/" << cur -> dob.year;//
+			gt(79, line); cout << sc(186) << cur -> gender;//
+			gt(87, line); cout << sc(186);//
 			++line;
 			if (x == 7/*count == value + 8*/){
 				gt(19, line); cout << sc(200);
@@ -740,11 +850,10 @@ void view_student_in_class(char *classid, profile *pstudent){
 	showcur(1);
 }
 
-//lam lai ham nay
+
 void view_student_in_course(char *id_course, profile *p){
 	//head table
 	//2 20 8 3 10
-	int maxlist = 80;
 	GoTo(24, 5);
 	cout << static_cast<char>(201);
 	for (int i = 1; i <= 47; ++i)
@@ -773,15 +882,45 @@ void view_student_in_course(char *id_course, profile *p){
 	GoTo(57, 7); cout << static_cast<char>(206);
 	GoTo(61, 7); cout << static_cast<char>(206);
 	GoTo(72, 7); cout << static_cast<char>(185);
+	
+	int maxlist = 0;
+	profile *pp = p;
+	while (pp != NULL) {
+		subject2 *ppp = pp->psub2;
+		while (ppp != NULL) {
+			if (strcmp(ppp->course_id, id_course) == 0) {
+				++maxlist;
+				break;
+			}
+			ppp = ppp->next;
+		}
+		pp = pp->next;
 
+	}
 	//code
 	int value = 1;
 	int endline = 7;
 	int tmp = endline;
 	while (true){
 		endline = tmp;
-		while (p != NULL){
-			subject2 *cur = p -> psub2;
+		profile *curx = p;
+		for (int i = 1; i < value; ++i) {
+			while (curx != NULL) {
+				subject2 *cur1 = curx -> psub2;
+				bool dd = 0;
+				while (cur1 != NULL) {
+					if (strcmp(id_course, cur1->course_id) == 0) {
+						dd = 1;
+						break;
+					}
+				}
+				if (dd) break;
+			}
+			curx = curx -> next;
+		}
+		int count = 0;
+		while (curx != NULL && count < 8){
+			subject2 *cur = curx -> psub2;
 			bool dd = 0;
 			while (cur != NULL){
 				if (strcmp(id_course, cur -> course_id) == 0){
@@ -790,16 +929,16 @@ void view_student_in_course(char *id_course, profile *p){
 				}
 				if (dd){
 					++endline;
-					int no = 0;
-					GoTo(24, endline); cout << static_cast<char>(186) << no++ << static_cast<char>(186) 
-						<< p -> last_name << " " << p -> first_name;
-					GoTo(48, endline); cout << static_cast<char>(186) << p -> id;
-					GoTo(57, endline); cout << static_cast<char>(186) << p -> gender;
+					GoTo(24, endline); cout << static_cast<char>(186) << count++ << static_cast<char>(186) 
+						<< curx -> last_name << " " << curx -> first_name;
+					GoTo(48, endline); cout << static_cast<char>(186) << curx -> id;
+					GoTo(57, endline); cout << static_cast<char>(186) << curx -> gender;
 					GoTo(61, endline); cout << static_cast<char>(186) 
-						<< p -> dob.day << "/" << p ->dob.month << "/" << p -> dob.year;
+						<< curx -> dob.day << "/" << curx ->dob.month << "/" << curx -> dob.year;
 					GoTo(72, endline); cout << static_cast<char>(186);
 				}
 			}
+			curx = curx->next;
 		}
 		draw_button(25, value, maxlist);
 		char key = _getch();
@@ -830,8 +969,7 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 	4 11 9 6
 	*/
 
-	showcur(0);
-	int maxlist = 80; // duyet pstudent
+	showcur(0); // duyet pstudent
 	int line = 5;
 	gt(31, line); cout << sc(201);
 	for (int i = 1; i < 35; ++i)
@@ -867,25 +1005,39 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 	gt(48, line); cout << sc(206);
 	gt(58, line); cout << sc(206);
 	gt(65, line); cout << sc(185);
+	
+	int maxlist = 0;
+	classrooms *pp = pclassid;
+	while (pp != NULL) {
+		++maxlist;
+		pp = pp->next;
+	}
+
 	int value = 1;
 	int tmp = line;
 	while (true){
 		line = tmp;
 		showcur(0);
 		// Mo code cho nay
-		//classrooms *p = pclassid;
-		//for (int i = 1; i <= value; ++i)
-		//	p = p -> next;
-		//
+		classrooms *p = pclassid;
+		for (int i = 1; i < value; ++i)
+			p = p -> next;
 
 		int test = 8;
 		for (int i = 1; i <= test; ++i){
 			++line;
 			//code
-			gt(31, line); cout << sc(186) << " " << ((value < 10) ? "0" : "") << value;
-			gt(36, line); cout << sc(186);// << "  " << p -> classroom;
-			gt(48, line); cout << sc(186);// << "  " << count << "/" << count;
-			gt(58, line); cout << sc(186);// << " " << p -> year;
+			int count = 0;
+			profile *cur = pstudent;
+			while (cur != NULL) {
+				if (strcmp(cur->classroom, p->classroom) == 0)
+					++count;
+				cur = cur->next;
+			}
+			gt(31, line); cout << sc(186) << " " << i;
+			gt(36, line); cout << sc(186) << "  " << p -> classroom;
+			gt(48, line); cout << sc(186) << "   " << count;
+			gt(58, line); cout << sc(186) << " " << p -> year;
 			gt(65, line); cout << sc(186);
 
 			++line;
@@ -906,8 +1058,14 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 				gt(58, line); cout << sc(202);
 				gt(65, line); cout << sc(188);
 			}
-			//p = p -> next;
-			//if (p == NULL) break;
+			p = p -> next;
+			if (p == NULL) {
+				gt(36, line); cout << sc(202);
+				gt(48, line); cout << sc(202);
+				gt(58, line); cout << sc(202);
+				gt(65, line); cout << sc(188);
+				break;
+			}
 		}
 		draw_button(25, value, maxlist);
 		char key = _getch();

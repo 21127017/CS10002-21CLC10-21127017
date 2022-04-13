@@ -37,6 +37,7 @@ struct list_student {
 
 struct classrooms {
 	char *classroom;
+	int year;
 	list_student *id_student = new list_student;
 	classrooms *next;
 };
@@ -109,14 +110,14 @@ void view_space();
 char *int_to_char(long long x);
 void draw_button(int value, int maxlist);
 void print_information(char *x1, char *x2, int x, int y, int color);
-void view_profile(int user_id, profile *p);
-void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubject);
-void view_student_enroll_course(int id_student, profile *pstudent);
+void view_profile(int user_id, profile *p);//
+void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubject);//
+void view_student_enroll_course(int id_student, profile *pstudent);//
 void view_scoreboard_of_course(char *id_course, profile *pstudent);
-void view_list_of_course(subjects *psubject, profile *pstudent);
-void view_student_in_class(char *classid, profile *pstudent);
-void view_student_in_course(char *id_course, profile *p);
-void view_list_of_class(classrooms *pclassid, profile *pstudent);
+void view_list_of_course(subjects *psubject, profile *pstudent, int semester, int year);//
+void view_student_in_class(char *classid, profile *pstudent);//
+void view_student_in_course(char *id_course, profile *p);//
+void view_list_of_class(classrooms *pclassid, profile *pstudent);//
 
 void view_loginboard();
 

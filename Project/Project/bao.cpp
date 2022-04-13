@@ -50,7 +50,7 @@ void view_student(profile *&pstudent, subjects *&ps, int &semester){
 			}
 		}
 		p = p -> next;
-		cout << endl;
+		cout << endl << endl;
 	}
 	system("pause");
 }
@@ -749,14 +749,24 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 	cout << "\t2. Remove course." << endl;
 	cout << "\t3. View list of course." << endl;
 	cout << "\t4. Update mark" << endl;
-	cout << "\t5. Update course information." << endl << endl;*/
+	cout << "\t5. Update course information." << endl << endl;
+	6.student in course
+	*/
     int num;
     showcur(0);
     print_subject_function(num);
     showcur(1);
     //cin >> num;
-    if (num != 3) subject_edit(num, pstudent, psubject, semester, year);
-        else view_subject(psubject);
+    if (num == 3) view_list_of_course(psubject, pstudent, semester, year);
+    else if (num == 6) {
+	    //DEGISN
+	    char *id_course = new char[100];
+	    cout << "Input course id";
+	    cin >> id_course;
+	    //
+	    view_student_in_course(id_course, pstudent);
+    }
+	else subject_edit(num, pstudent, psubject, semester, year);
 }
 
 void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
@@ -776,7 +786,7 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	cout << "\t1. Add student to class." << endl;
 	cout << "\t2. Remove student from class" << endl;
 	cout << "\t3. View list of class." << endl;
-	cout << "\t4. View scoreboard of class." << endl << endl;
+	cout << "\t4. View student of class." << endl << endl;
 	cout << "\tInput: ";*/
     
     int num;
@@ -785,9 +795,15 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
     showcur(1);
     //cin >> num;
     if (num == 3) 
-    	view_class();
-    else if (num == 4) 
-    	view_scoreboard(); 
+    	view_list_of_class(pclassid, pstudent);
+    else if (num == 4) {
+	    //DESIGN
+	    char *classid = new char[200];
+	    cout << "Input class id";
+	    cin >> classid;
+	    //DEN CHET
+	    view_student_in_class(classid, pstudent);
+    }
     else 
     	class_edit(num, pstudent, pclassid, semester);
 }
@@ -979,6 +995,7 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &se
 			switch (c) {
 			case 0:
 				//view_list_of_course();
+				view_list_of_course(psubject, pstudent, semester, year);
 				break;
 			case 1:
 				//enroll_course();
@@ -989,12 +1006,16 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &se
 			case 2:
 				//remove_course();
 				break;
+			case 3:
+				//view_student_enroll_course(user_id, pstudent);
+				break;
 			default:
 				break;
 			}
 			break;
 		case 2:
 			//view_scoreboard();
+			view_student_scoreboard(user_id, pstudent, psubject);
 			break;
 		case 3: 
 			view_profile(user_id, pstudent);
