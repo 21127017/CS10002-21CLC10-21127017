@@ -120,7 +120,8 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 	if (num == 1) {
 		//read file csv
 		read_csv_student(pstudent);
-		system("pause");
+		memcpy(temp, "Read file successfully!", 24);
+		announcement(temp, 0, num, 1);
 		return;
 	}
 	//manual
@@ -752,6 +753,7 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 	cout << "\t5. Update course information." << endl << endl;
 	6.student in course
 	*/
+	char temp[200] = "";
     int num;
     showcur(0);
     print_subject_function(num);
@@ -760,8 +762,11 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
     if (num == 3) view_list_of_course(psubject, pstudent, semester, year);
     else if (num == 6) {
 	    //DEGISN
+		view_space();
 	    char *id_course = new char[100];
-	    cout << "Input course id";
+		memcpy(temp, "Input course id:           ", 28);
+		designSquare(34, 12, 3, 32, temp, 7, 7);
+		GoTo(53, 13);
 	    cin >> id_course;
 	    //
 	    view_student_in_course(id_course, pstudent);
@@ -788,7 +793,7 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	cout << "\t3. View list of class." << endl;
 	cout << "\t4. View student of class." << endl << endl;
 	cout << "\tInput: ";*/
-    
+	char temp[200] = "";
     int num;
     showcur(0);
     print_class_function(num);
@@ -798,8 +803,11 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
     	view_list_of_class(pclassid, pstudent);
     else if (num == 4) {
 	    //DESIGN
+		view_space();
 	    char *classid = new char[200];
-	    cout << "Input class id";
+	    memcpy(temp, "Input class id:           ", 27);
+		designSquare(34, 12, 3, 31, temp, 7, 7);
+		GoTo(52, 13);
 	    cin >> classid;
 	    //DEN CHET
 	    view_student_in_class(classid, pstudent);

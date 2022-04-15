@@ -181,7 +181,7 @@ void print_option_1(int &choice) { //Board for teacher
 			memcpy(temp, "Class", 6);
 			designSquare(51, 18, 3, 20, temp, 7, 7);
 
-			memcpy(temp, "Subject", 8);
+			memcpy(temp, "Course", 7);
 			designSquare(27, 18, 3, 20, temp, 7, 7);
 
 			memcpy(temp, "Student", 8);
@@ -278,23 +278,22 @@ bool inputNewPass(char *&oldpassword) {
 	announcement(temp_str, 1, a, 0);
 	if (a != 1) return false;
 
-	memcpy(temp_str, "Old password:             ", 27);
-	designSquare(34, 15, 3, 30, temp_str, 7, 7);
-
-	GoTo(50, 16);//input old password
-	cin.ignore();
+	view_space();
+	memcpy(temp_str, "Old password:                         ", 39);
+	designSquare(28, 8, 3, 42, temp_str, 7, 7);
+	GoTo(44, 9);//input old password
 	cin.getline(temp_string, 200);
 
 	if (strcmp(temp_string, oldpassword) == 0) {
 		//Old password is true, input new password
 		memcpy(temp_str, "New password:                         ", 39);
-		designSquare(28, 8, 3, 42, temp_str, 7, 7);
-		memcpy(temp_str, "Confirm new password:                 ", 39);
 		designSquare(28, 12, 3, 42, temp_str, 7, 7);
+		memcpy(temp_str, "Confirm new password:                 ", 39);
+		designSquare(28, 16, 3, 42, temp_str, 7, 7);
 
-		GoTo(44, 9);
+		GoTo(44, 13);
 		cin.getline(temp_string, 200);
-		GoTo(52, 13);
+		GoTo(52, 17);
 		cin.getline(temp_str, 200);
 
 		if (strcmp(temp_string, temp_str) == 0) { //Ok
@@ -317,7 +316,7 @@ bool inputNewPass(char *&oldpassword) {
 	return 0;
 }
 
-void changePassword(const int &changed_id) {
+void changePassword(int changed_id) {
 	ifstream inp;
 	inp.open("login_information.csv");
 
@@ -349,8 +348,14 @@ void changePassword(const int &changed_id) {
 		i++;
 	}
 	inp.close();
+	int k;
+	for (int i = 0; i <= N; i++) {
+		if (inf[i].user_id == changed_id) {
+			k = i;
+			break;
+		}
+	}
 
-	int k = changed_id - 1;
 	bool check = 0;
 	do {
 		check = inputNewPass(inf[k].password);
@@ -363,8 +368,9 @@ void changePassword(const int &changed_id) {
 			}
 			out << "0,,,";
 			out.close();
+			break;
 		}
-	} while (check);
+	} while (1);
 
 	for (int i = 0; i < N; i++) {
 		delete[] inf[i].username;
@@ -624,7 +630,7 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 			memcpy(temp, "View list of class", 19);
 			designSquare(50, 11, 3, 30, temp, 7, 7);
 
-			memcpy(temp, "View scoreboard of class", 25); // view student in class
+			memcpy(temp, "View student in class", 22); // view student in class
 			designSquare(50, 15, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "Back to menu", 13);
@@ -647,7 +653,7 @@ void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid
 				num = 1;
 				break;
 			case 3:
-				memcpy(temp, "View scoreboard of class", 25);
+				memcpy(temp, "View student in class", 22);
 				designSquare(50, 15, 3, 30, temp, 11, 432);
 				num = 4;
 				break;
@@ -707,53 +713,60 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 		set_color(7);
 		while (key != 5) {
 			memcpy(temp, "Add new course", 15);
-			designSquare(17, 11, 3, 30, temp, 7, 7);
+			designSquare(17, 10, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "Remove course", 14);
-			designSquare(17, 15, 3, 30, temp, 7, 7);
+			designSquare(17, 14, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "View list of course", 20);
-			designSquare(17, 19, 3, 30, temp, 7, 7);
+			designSquare(17, 18, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "Update mark", 12);
-			designSquare(50, 11, 3, 30, temp, 7, 7);
+			designSquare(50, 10, 3, 30, temp, 7, 7);
 
 			memcpy(temp, "Update course information", 26);
-			designSquare(50, 15, 3, 30, temp, 7, 7);
+			designSquare(50, 14, 3, 30, temp, 7, 7);
 
+			memcpy(temp, "View student in course", 23);
+			designSquare(50, 18, 3, 30, temp, 7, 7);
+				
 			memcpy(temp, "Back to menu", 13);
-			designSquare(50, 19, 3, 30, temp, 7, 7);
-			//student in course num = 6
+			designSquare(34, 22, 3, 30, temp, 7, 7);
 			switch (i) {
 			case 0:
 				memcpy(temp, "Add new course", 15);
-				designSquare(17, 11, 3, 30, temp, 11, 432);
+				designSquare(17, 10, 3, 30, temp, 11, 432);
 				num = 1;
 				break;
 			case 1:
 				memcpy(temp, "Update mark", 12);
-				designSquare(50, 11, 3, 30, temp, 11, 432);
+				designSquare(50, 10, 3, 30, temp, 11, 432);
 				num = 2;
 				break;
 			case 2:
 				memcpy(temp, "Remove course", 14);
-				designSquare(17, 15, 3, 30, temp, 11, 432);
+				designSquare(17, 14, 3, 30, temp, 11, 432);
 				num = 3;
 				break;
 			case 3:
 				memcpy(temp, "Update course information", 26);
-				designSquare(50, 15, 3, 30, temp, 11, 432);
+				designSquare(50, 14, 3, 30, temp, 11, 432);
 				num = 4;
 				break;
 			case 4:
 				memcpy(temp, "View list of course", 20);
-				designSquare(17, 19, 3, 30, temp, 11, 432);
+				designSquare(17, 18, 3, 30, temp, 11, 432);
 				num = 5;
+				break;
+			case 5:
+				memcpy(temp, "View student in course", 23);
+				designSquare(50, 18, 3, 30, temp, 11, 432);
+				num = 6;
 				break;
 			default:
 				memcpy(temp, "Back to menu", 13);
-				designSquare(50, 19, 3, 30, temp, 11, 432);
-				num = 6;
+				designSquare(34, 22, 3, 30, temp, 11, 432);
+				num = 7;
 				break;
 			}
 
@@ -775,8 +788,8 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 				break;
 			}
 
-			if (i < 0) i = 5;
-			if (i > 5) i = 0;
+			if (i < 0) i = 6;
+			if (i > 6) i = 0;
 		}
 		choice = num;
 		break;
@@ -1126,37 +1139,45 @@ void print_option_2(int &choice){
 		 set_color(7);
 		 while (key != 5) {
 			 memcpy(temp, "View list of course", 20);
-			 designSquare(34, 11, 3, 30, temp, 7, 7);
+			 designSquare(34, 10, 3, 30, temp, 7, 7);
 
 			 memcpy(temp, "Enroll course", 14);
-			 designSquare(34, 15, 3, 30, temp, 7, 7);
+			 designSquare(34, 14, 3, 30, temp, 7, 7);
 
 			 memcpy(temp, "Remove course", 14);
-			 designSquare(34, 19, 3, 30, temp, 7, 7);
+			 designSquare(34, 18, 3, 30, temp, 7, 7);
+
+			 memcpy(temp, "View list enrolled courses", 27);
+			 designSquare(34, 22, 3, 30, temp, 7, 7);
 
 			 memcpy(temp, "Back to menu", 13);
-			 designSquare(34, 23, 3, 30, temp, 7, 7);
+			 designSquare(34, 26, 3, 30, temp, 7, 7);
 
 			 switch (i) {
 			 case 0:
 				 memcpy(temp, "View list of course", 20);
-				 designSquare(34, 11, 3, 30, temp, 11, 432);
+				 designSquare(34, 10, 3, 30, temp, 11, 432);
 				 num = 0;
 				 break;
 			 case 1:
 				 memcpy(temp, "Enroll course", 14);
-				 designSquare(34, 15, 3, 30, temp, 11, 432);
+				 designSquare(34, 14, 3, 30, temp, 11, 432);
 				 num = 1;
 				 break;
 			 case 2:
 				 memcpy(temp, "Remove course", 14);
-				 designSquare(34, 19, 3, 30, temp, 11, 432);
+				 designSquare(34, 18, 3, 30, temp, 11, 432);
 				 num = 2;
+				 break;
+			 case 3:
+				 memcpy(temp, "View list enrolled courses", 27);
+				 designSquare(34, 22, 3, 30, temp, 11, 432);
+				 num = 3;
 				 break;
 			 default:
 				 memcpy(temp, "Back to menu", 13);
-				 designSquare(34, 23, 3, 30, temp, 11, 432);
-				 num = 3;
+				 designSquare(34, 26, 3, 30, temp, 11, 432);
+				 num = 4;
 				 break;
 			 }
 
@@ -1178,8 +1199,8 @@ void print_option_2(int &choice){
 				 break;
 			 }
 
-			 if (i < 0) i = 3;
-			 if (i > 3) i = 0;
+			 if (i < 0) i = 4;
+			 if (i > 4) i = 0;
 		 }
 		 choice = num;
 		 break;

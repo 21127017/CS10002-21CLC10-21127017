@@ -190,7 +190,7 @@ void login(int &role, int &id_profile);
 
 bool logout();
 
-void changePassword(const int &changed_id);
+void changePassword(int changed_id);
 
 bool inputNewPass(char *&oldpassword);
 
