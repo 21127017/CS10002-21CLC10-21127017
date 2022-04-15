@@ -127,3 +127,5 @@ void read_csv_student(profile *&pstudent) {
     }
     inp.close();
 }
+
+//read csv subject

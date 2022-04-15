@@ -9,7 +9,7 @@ int main(){
     pstudent = nullptr;
     psubject = nullptr;
     pclassid = nullptr;
-
+	read_csv_student(pstudent);
 	while (true){
 		int role = 0, choice = 1;
 

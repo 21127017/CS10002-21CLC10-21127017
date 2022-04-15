@@ -192,7 +192,7 @@ bool logout();
 
 void changePassword(int changed_id);
 
-bool inputNewPass(char *&oldpassword);
+int inputNewPass(char *&oldpassword);
 
 //-----------INPUT SPACE-----------//
 void print_option_1(int &choice);

@@ -269,14 +269,14 @@ void print_option_1(int &choice) { //Board for teacher
 	showcur(1);
 }
 
-bool inputNewPass(char *&oldpassword) {
+int inputNewPass(char *&oldpassword) {
 	
 	char temp_string[200], temp_str[200];
 
 	memcpy(temp_str, "Are you sure to change your password?", 38);
 	int a;
 	announcement(temp_str, 1, a, 0);
-	if (a != 1) return false;
+	if (a != 1) return 0;
 
 	view_space();
 	memcpy(temp_str, "Old password:                         ", 39);
@@ -300,20 +300,20 @@ bool inputNewPass(char *&oldpassword) {
 			memcpy(oldpassword, temp_string, strlen(temp_string) + 1);
 			memcpy(temp_str, "Your password has been changed!", 32);
 			announcement(temp_str, 0, a, 1);
-			return true;
+			return 1;
 		} else {
 			memcpy(temp_str, "Do you want change your password again?", 40);
 			int choice;
 			announcement(temp_str, 1, choice, -1);
 			if (choice != 1)
-				return false;
+				return -1;
 		}
 	} else {
 		memcpy(temp_str, "Wrong password!!!", 18);
 		announcement(temp_str, 0, a, -1);
-		return false;
+		return -1;
 	}
-	return 0;
+	return -1;
 }
 
 void changePassword(int changed_id) {
@@ -330,6 +330,7 @@ void changePassword(int changed_id) {
 	login_information *inf = new login_information[N + 1]; //allocate N slots
 
 	int i = 0;
+	int k;
 	while (!inp.eof()) {
 		inp >> inf[i].role;
 		if (inf[i].role == 0) break;
@@ -344,22 +345,16 @@ void changePassword(int changed_id) {
 		memcpy(inf[i].password, temp_string, strlen(temp_string) + 1);
 
 		inp >> inf[i].user_id;
+		if (changed_id == inf[i].user_id) k = i;
 		inp.ignore();
 		i++;
 	}
 	inp.close();
-	int k;
-	for (int i = 0; i <= N; i++) {
-		if (inf[i].user_id == changed_id) {
-			k = i;
-			break;
-		}
-	}
 
-	bool check = 0;
+	int check = 0;
 	do {
 		check = inputNewPass(inf[k].password);
-		if (check) {
+		if (check == 1) {
 			ofstream out;
 			out.open("login_information.csv");
 			out << N << ",,," << endl;
@@ -368,6 +363,8 @@ void changePassword(int changed_id) {
 			}
 			out << "0,,,";
 			out.close();
+			break;
+		} else if (check == 0) {
 			break;
 		}
 	} while (1);
