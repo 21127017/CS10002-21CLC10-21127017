@@ -738,22 +738,22 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 			case 1:
 				memcpy(temp, "Update mark", 12);
 				designSquare(50, 10, 3, 30, temp, 11, 432);
-				num = 2;
+				num = 4;
 				break;
 			case 2:
 				memcpy(temp, "Remove course", 14);
 				designSquare(17, 14, 3, 30, temp, 11, 432);
-				num = 3;
+				num = 2;
 				break;
 			case 3:
 				memcpy(temp, "Update course information", 26);
 				designSquare(50, 14, 3, 30, temp, 11, 432);
-				num = 4;
+				num = 5;
 				break;
 			case 4:
 				memcpy(temp, "View list of course", 20);
 				designSquare(17, 18, 3, 30, temp, 11, 432);
-				num = 5;
+				num = 3;
 				break;
 			case 5:
 				memcpy(temp, "View student in course", 23);

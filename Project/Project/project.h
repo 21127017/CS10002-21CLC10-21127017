@@ -152,7 +152,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 
 void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year);
 
-void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semester);
+void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semester, int &year);
 
 void semester_edit(int num, profile *&pstudent, subjects *&psubject, int &semester, int &year);
 
@@ -167,7 +167,7 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 void subject_function(profile *&pstudent, subjects *&psubject, int &semester, int &year);
 
 void print_class_function(int &choice/*profile *&pstudent, classrooms *&pclassid, int &semester*/);
-void class_function(profile *&pstudent, classrooms *&pclassid, int &semester);
+void class_function(profile *&pstudent, classrooms *&pclassid, int &semester, int &year);
 
 void print_semester_function(int &choice/*profile *&pstudent, subjects *&psubject, int &semester, int &year*/);
 void semester_function(profile *&pstudent, subjects *&psubject, int &semester, int &year);

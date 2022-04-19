@@ -426,7 +426,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			}
 		}
 	}
-	if (num == 5){
+	if (num == 6){
 		GoTo(40, 1);
 		cout << ">> UPDATE SCORE <<";
 		if (pstudent == NULL || psubject == NULL){
@@ -497,7 +497,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		if (choice == 1) subject_edit(5, pstudent, psubject, semester, year);
 		return;
 	}
-	if (num == 6){
+	if (num == 5){
 		GoTo(33, 1);
 		cout << ">> UPDATE COURSE INFORMATION <<";
 
@@ -532,7 +532,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 	return;
 }
 
-void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semester){ 
+void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semester, int &year){ 
 	view_space();
 	char temp[200];
 	int choice = 0;
@@ -553,6 +553,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 	  	cin.getline(auxilary, 50);
 	  	newnode->classroom = new char[strlen(auxilary) + 1];
 	  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
+		newnode->year = year;
 	  	newnode->next = NULL;
 	  	if (pclassid == NULL)
 	    	pclassid = newnode;
@@ -563,7 +564,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 	  	}
 		memcpy(temp, "Do you want to create another class?", 37);
 		announcement(temp, 1, choice, 1);
-	  	if (choice == 1) class_edit(0, pstudent, pclassid, semester);
+	  	if (choice == 1) class_edit(0, pstudent, pclassid, semester, year);
 	}
 	if (num == 2){
 		//remove
@@ -615,19 +616,19 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			if (pclass == NULL){
 				memcpy(temp, "Import failed! Do you want to add again?", 41);
 				announcement(temp, 1, choice, -1);
-				if (choice == 1) class_edit(1, pstudent, pclassid, semester);
+				if (choice == 1) class_edit(1, pstudent, pclassid, semester, year);
 				return;
 			}
 			strcpy_s(current -> classroom, 50, auxilary);
 		} else {
 			memcpy(temp, "ID doesn't exist. Do you want to add again?", 44);
 			announcement(temp, 1, choice, -1);
-			if (choice == 1) class_edit(1, pstudent, pclassid, semester);
+			if (choice == 1) class_edit(1, pstudent, pclassid, semester, year);
 			return;
 		}
 		memcpy(temp, "Do you want to add another student?", 36);
 		announcement(temp, 1, choice, 1);
-		if (choice == 1) class_edit(1, pstudent, pclassid, semester);
+		if (choice == 1) class_edit(1, pstudent, pclassid, semester, year);
 	}
   	return;
 }
@@ -774,7 +775,7 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 	else subject_edit(num, pstudent, psubject, semester, year);
 }
 
-void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
+void class_function(profile *&pstudent, classrooms *&pclassid, int &semester, int &year){
 	//1. Create new class (1 - 10).
 	//	class_edit(0, NULL);
 	//2. Add student to class.
@@ -813,7 +814,7 @@ void class_function(profile *&pstudent, classrooms *&pclassid, int &semester){
 	    view_student_in_class(classid, pstudent);
     }
     else 
-    	class_edit(num, pstudent, pclassid, semester);
+    	class_edit(num, pstudent, pclassid, semester, year);
 }
 
 void semester_function(profile *&pstudent, subjects *&psubject, int &semester, int &year){
@@ -958,7 +959,7 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 			semester_function(pstudent, psubject, semester, year);
 			break;
 		case 3:
-			class_function(pstudent, pclassid, semester);
+			class_function(pstudent, pclassid, semester, year);
 			break;
 		case 4:
 			subject_function(pstudent, psubject, semester, year);

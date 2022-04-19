@@ -778,7 +778,7 @@ void view_student_in_class(char *classid, profile *pstudent){
 	gt(19, line); cout << sc(186) << " No"; 
 	gt(24, line); cout << sc(186) << "           Full Name";
 	gt(55, line); cout << sc(186) << "    ID";
-	gt(66, line); cout << sc(186) << "    Birth";
+	gt(66, line); cout << sc(186) << "     DOB";
 	gt(79, line); cout << sc(186) << "  Gen";
 	gt(87, line); cout << sc(186);
 
@@ -791,6 +791,18 @@ void view_student_in_class(char *classid, profile *pstudent){
 	gt(66, line); cout << sc(206);
 	gt(79, line); cout << sc(206);
 	gt(87, line); cout << sc(185);
+
+	if (pstudent == NULL) {
+		gt(19, line); cout << sc(200);
+		gt(24, line); cout << sc(202);
+		gt(55, line); cout << sc(202);
+		gt(66, line); cout << sc(202);
+		gt(79, line); cout << sc(202);
+		gt(87, line); cout << sc(188);
+		gt(24, line + 1); cout << "No result." << endl;
+		system("pause");
+		return;
+	}
 	
 	int maxlist = 0;
 	profile *p = pstudent;
@@ -803,7 +815,36 @@ void view_student_in_class(char *classid, profile *pstudent){
 	int tmp = line;
 	int value = 1;
 	while (true){
-		line = tmp;
+		view_space();
+		line = 5;
+		gt(20, line); 
+		for (int i = 1; i <= 68; ++i)
+			cout << sc(205);
+		gt(19, line); cout << sc(201);
+		gt(24, line); cout << sc(203);
+		gt(55, line); cout << sc(203);
+		gt(66, line); cout << sc(203);
+		gt(79, line); cout << sc(203);
+		gt(87, line); cout << sc(187);
+
+		++line;
+		gt(19, line); cout << sc(186) << " No"; 
+		gt(24, line); cout << sc(186) << "           Full Name";
+		gt(55, line); cout << sc(186) << "    ID";
+		gt(66, line); cout << sc(186) << "     DOB";
+		gt(79, line); cout << sc(186) << "  Gen";
+		gt(87, line); cout << sc(186);
+
+		++line;
+		gt(19, line); cout << sc(204);
+		for (int i = 1; i <= 68; ++i)
+			cout << sc(205);
+		gt(24, line); cout << sc(206);
+		gt(55, line); cout << sc(206);
+		gt(66, line); cout << sc(206);
+		gt(79, line); cout << sc(206);
+		gt(87, line); cout << sc(185);
+		//line = tmp;
 		showcur(0);
 
 		profile *cur = pstudent;
@@ -812,7 +853,20 @@ void view_student_in_class(char *classid, profile *pstudent){
 				cur = cur->next;
 			cur = cur->next;
 		}
+
 		for (int x = 0; x < 8; ++x){
+			while (cur != NULL && strcmp(cur->classroom, classid) != 0)
+				cur = cur->next;
+
+			if (cur == NULL) {
+				gt(19, line); cout << sc(200);
+				gt(24, line); cout << sc(202);
+				gt(55, line); cout << sc(202);
+				gt(66, line); cout << sc(202);
+				gt(79, line); cout << sc(202);
+				gt(87, line); cout << sc(188);
+				break;
+			}
 			++line;
 			gt(19, line); cout << sc(186) << x + 1;
 			gt(24, line); cout << sc(186) << cur -> last_name << " " << cur -> first_name;//
@@ -839,6 +893,16 @@ void view_student_in_class(char *classid, profile *pstudent){
 				gt(66, line); cout << sc(206);
 				gt(79, line); cout << sc(206);
 				gt(87, line); cout << sc(185);
+			}
+			cur = cur->next;
+			if (cur == NULL) {
+				gt(19, line); cout << sc(200);
+				gt(24, line); cout << sc(202);
+				gt(55, line); cout << sc(202);
+				gt(66, line); cout << sc(202);
+				gt(79, line); cout << sc(202);
+				gt(87, line); cout << sc(188);
+				break;
 			}
 		}
 		draw_button(25, value, maxlist);
@@ -882,6 +946,19 @@ void view_student_in_course(char *id_course, profile *p){
 	GoTo(57, 7); cout << static_cast<char>(206);
 	GoTo(61, 7); cout << static_cast<char>(206);
 	GoTo(72, 7); cout << static_cast<char>(185);
+
+	if (p == NULL) {
+		GoTo(24, 8); cout << static_cast<char>(200);
+		for (int i = 1; i <= 47; ++i) 
+			cout << static_cast<char>(205);
+		GoTo(27, 8); cout << static_cast<char>(202);
+		GoTo(48, 8); cout << static_cast<char>(202);
+		GoTo(57, 8); cout << static_cast<char>(202);
+		GoTo(61, 8); cout << static_cast<char>(202);
+		GoTo(72, 8); cout << static_cast<char>(188);
+		GoTo(27, 9); cout << "No result." << endl;
+		return;
+	}
 	
 	int maxlist = 0;
 	profile *pp = p;
@@ -939,6 +1016,7 @@ void view_student_in_course(char *id_course, profile *p){
 				}
 			}
 			curx = curx->next;
+			if (curx == NULL) break;
 		}
 		draw_button(25, value, maxlist);
 		char key = _getch();
@@ -969,42 +1047,43 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 	4 11 9 6
 	*/
 
-	showcur(0); // duyet pstudent
-	int line = 5;
-	gt(31, line); cout << sc(201);
-	for (int i = 1; i < 35; ++i)
-		cout << sc(205);
+	//showcur(0); // duyet pstudent
+	//view_space();
+	//int line = 5;
+	//gt(31, line); cout << sc(201);
+	//for (int i = 1; i < 35; ++i)
+	//	cout << sc(205);
 
-	gt(36, line); cout << sc(203);
-	gt(48, line); cout << sc(203);
-	gt(58, line); cout << sc(203);
-	gt(65, line); cout << sc(187);
+	//gt(36, line); cout << sc(203);
+	//gt(48, line); cout << sc(203);
+	//gt(58, line); cout << sc(203);
+	//gt(65, line); cout << sc(187);
 
-	++line;
-	gt(31, line); cout << sc(186);
-	cout << " No ";
-	gt(36, line); cout << sc(186);
-	cout << "   Class   ";
-	gt(48, line); cout << sc(186);
-	cout << "   Num   ";
-	gt(58, line); cout << sc(186);
-	cout << " Year ";
-	gt(65, line); cout << sc(186);
+	//++line;
+	//gt(31, line); cout << sc(186);
+	//cout << " No ";
+	//gt(36, line); cout << sc(186);
+	//cout << "   Class   ";
+	//gt(48, line); cout << sc(186);
+	//cout << "   Num   ";
+	//gt(58, line); cout << sc(186);
+	//cout << " Year ";
+	//gt(65, line); cout << sc(186);
 
-	gt(31, line); cout << sc(186);
-	gt(36, line); cout << sc(186);
-	gt(48, line); cout << sc(186);
-	gt(58, line); cout << sc(186);
-	gt(65, line); cout << sc(186);
+	//gt(31, line); cout << sc(186);
+	//gt(36, line); cout << sc(186);
+	//gt(48, line); cout << sc(186);
+	//gt(58, line); cout << sc(186);
+	//gt(65, line); cout << sc(186);
 
-	++line;
-	gt(31, line); cout << sc(204);
-	for (int i = 1; i < 35; ++i)
-		cout << sc(205);
-	gt(36, line); cout << sc(206);
-	gt(48, line); cout << sc(206);
-	gt(58, line); cout << sc(206);
-	gt(65, line); cout << sc(185);
+	//++line;
+	//gt(31, line); cout << sc(204);
+	//for (int i = 1; i < 35; ++i)
+	//	cout << sc(205);
+	//gt(36, line); cout << sc(206);
+	//gt(48, line); cout << sc(206);
+	//gt(58, line); cout << sc(206);
+	//gt(65, line); cout << sc(185);
 	
 	int maxlist = 0;
 	classrooms *pp = pclassid;
@@ -1014,14 +1093,59 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 	}
 
 	int value = 1;
-	int tmp = line;
+	//int tmp = line;
 	while (true){
-		line = tmp;
+		//line = tmp;
 		showcur(0);
+		view_space();
+		int line = 5;
+		gt(31, line); cout << sc(201);
+		for (int i = 1; i < 35; ++i)
+			cout << sc(205);
+
+		gt(36, line); cout << sc(203);
+		gt(48, line); cout << sc(203);
+		gt(58, line); cout << sc(203);
+		gt(65, line); cout << sc(187);
+
+		++line;
+		gt(31, line); cout << sc(186);
+		cout << " No ";
+		gt(36, line); cout << sc(186);
+		cout << "   Class   ";
+		gt(48, line); cout << sc(186);
+		cout << "   Num   ";
+		gt(58, line); cout << sc(186);
+		cout << " Year ";
+		gt(65, line); cout << sc(186);
+
+		gt(31, line); cout << sc(186);
+		gt(36, line); cout << sc(186);
+		gt(48, line); cout << sc(186);
+		gt(58, line); cout << sc(186);
+		gt(65, line); cout << sc(186);
+
+		++line;
+		gt(31, line); cout << sc(204);
+		for (int i = 1; i < 35; ++i)
+			cout << sc(205);
+		gt(36, line); cout << sc(206);
+		gt(48, line); cout << sc(206);
+		gt(58, line); cout << sc(206);
+		gt(65, line); cout << sc(185);
 		// Mo code cho nay
 		classrooms *p = pclassid;
 		for (int i = 1; i < value; ++i)
 			p = p -> next;
+
+		if (p == NULL) {
+			gt(31, line); cout << sc(200);
+			gt(36, line); cout << sc(202);
+			gt(48, line); cout << sc(202);
+			gt(58, line); cout << sc(202);
+			gt(65, line); cout << sc(188);
+			break;
+		}
 
 		int test = 8;
 		for (int i = 1; i <= test; ++i){
@@ -1034,6 +1158,7 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 					++count;
 				cur = cur->next;
 			}
+
 			gt(31, line); cout << sc(186) << " " << i;
 			gt(36, line); cout << sc(186) << "  " << p -> classroom;
 			gt(48, line); cout << sc(186) << "   " << count;
@@ -1060,6 +1185,7 @@ void view_list_of_class(classrooms *pclassid, profile *pstudent){
 			}
 			p = p -> next;
 			if (p == NULL) {
+				gt(31, line); cout << sc(200);
 				gt(36, line); cout << sc(202);
 				gt(48, line); cout << sc(202);
 				gt(58, line); cout << sc(202);
