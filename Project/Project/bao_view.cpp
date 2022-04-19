@@ -400,8 +400,44 @@ void view_student_enroll_course(int id_student, profile *pstudent, subjects *psu
 	int tmp = line;
 	int value = 1;
 	while (true){
-		line = tmp;
+		//line = tmp;
 		showcur(0);
+		view_space();
+		line = 5;
+		gt(4, line); 
+		for (int i = 1; i < 93; ++i)
+			cout << sc(205);
+		gt( 3, line); cout << sc(201);
+		gt( 8, line); cout << sc(203);
+		gt(39, line); cout << sc(203);
+		gt(50, line); cout << sc(203);
+		gt(71, line); cout << sc(203);
+		gt(79, line); cout << sc(203);
+		gt(86, line); cout << sc(203);
+		gt(95, line); cout << sc(187);
+
+		++line;
+		gt( 3, line); cout << sc(186) << " No";
+		gt( 8, line); cout << sc(186) << "            Name";
+		gt(39, line); cout << sc(186) << "Course ID";
+		gt(50, line); cout << sc(186) << "      Teacher";
+		gt(71, line); cout << sc(186) << "Creadit";
+		gt(79, line); cout << sc(186) << " Year";
+		gt(86, line); cout << sc(186) << "Semester";
+		gt(95, line); cout << sc(186);
+
+		++line;
+		gt(4, line);
+		for (int i = 1; i < 93; ++i)
+			cout << sc(205);
+		gt( 3, line); cout << sc(204);
+		gt( 8, line); cout << sc(206);
+		gt(39, line); cout << sc(206);
+		gt(50, line); cout << sc(206);
+		gt(71, line); cout << sc(206);
+		gt(79, line); cout << sc(206);
+		gt(86, line); cout << sc(206);
+		gt(95, line); cout << sc(185);
 		subject2 *cur = auxilary -> psub2;
 		for (int i = 1; i < value; ++i)
 			cur = cur -> next;
@@ -654,8 +690,47 @@ void view_list_of_course(subjects *psubject, profile *pstudent, int semester, in
 	int tmp = line;
 	int value = 1;
 	while (true){
-		line = tmp;
+		//line = tmp;
 		showcur(0);
+		view_space();
+		int line = 5;
+		gt(10, line); 
+		for (int i = 1; i <= 81; ++i)
+			cout << sc(205);
+		gt( 9, line); cout << sc(201);
+		gt(20, line); cout << sc(203);
+		gt(51, line); cout << sc(203);
+		gt(59, line); cout << sc(203);
+		gt(65, line); cout << sc(203);
+		gt(71, line); cout << sc(203);
+		gt(77, line); cout << sc(203);
+		gt(83, line); cout << sc(203);
+		gt(90, line); cout << sc(187);
+
+		++line;
+		gt( 9, line); cout << sc(186) << "Course ID";
+		gt(20, line); cout << sc(186) << "             Name";
+		gt(51, line); cout << sc(186) << "Creadit";
+		gt(59, line); cout << sc(186) << "Start";
+		gt(65, line); cout << sc(186) << " End";
+		gt(71, line); cout << sc(186) << "Sess1";
+		gt(77, line); cout << sc(186) << "Sess2";
+		gt(83, line); cout << sc(186) << "Enroll";
+		gt(90, line); cout << sc(186);
+
+		++line;
+		gt(10, line);
+		for (int i = 1; i <= 81; ++i)
+			cout << sc(205);
+		gt( 9, line); cout << sc(204);
+		gt(20, line); cout << sc(206);
+		gt(51, line); cout << sc(206);
+		gt(59, line); cout << sc(206);
+		gt(65, line); cout << sc(206);
+		gt(71, line); cout << sc(206);
+		gt(77, line); cout << sc(206);
+		gt(83, line); cout << sc(206);
+		gt(90, line); cout << sc(185);
 		subjects *cur = psubject;
 		for (int i = 1; i < value; ++i) {
 			while (cur != NULL && (cur->year != year || cur->semester != semester))
