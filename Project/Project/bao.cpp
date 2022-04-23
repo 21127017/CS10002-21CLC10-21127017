@@ -32,7 +32,7 @@ void view_student(profile *&pstudent, subjects *&ps, int &semester){
 		cout << "\t6. Gender: " << p -> gender << endl;
 		cout << "\t7. Date of birth: " << p -> dob.day <<  "/" << p -> dob.month << "/" << p -> dob.year << endl;
 		cout << "\t8. Year join to school: " << p -> year << endl;
-		cout << "\t9. Subject enroll in semester " << semester << ":";
+		cout << "\t9. Subject enroll in semester " << semester << ":" << endl;
 		if (p -> psub2 == NULL)
 			cout << "No result." << endl;
 		else {
@@ -330,6 +330,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		}
 		newnode -> year = year;
 		newnode -> semester = semester;
+		newnode->day_of_week = 2;
 
 		newnode -> next = NULL;
 		if (psubject == NULL) 
@@ -967,7 +968,7 @@ void make_choice_1(int &choice, profile *&pstudent, subjects *&psubject,
 			undergraduate_function(no, pstudent, psubject, semester, classroom, year);
 			break;
 		case 6:
-			view_profile(user_id, pstudent);
+			view_profile(user_id, pstudent, 1);
 			break;
 		case 7:
 			break;
@@ -1026,7 +1027,7 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &se
 			view_student_scoreboard(user_id, pstudent, psubject);
 			break;
 		case 3: 
-			view_profile(user_id, pstudent);
+			view_profile(user_id, pstudent, 2);
 			break;
 		case 4: 
 			break;

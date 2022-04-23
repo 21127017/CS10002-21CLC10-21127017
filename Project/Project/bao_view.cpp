@@ -65,7 +65,7 @@ void print_information(char *x1, char *x2, int x, int y, int color){
 	set_color(7);
 }
 
-void view_profile(int user_id, profile *p){
+void view_profile(int user_id, profile *p, int role){
     if (p == NULL) return;
 	while (p != NULL){
 		if (p -> id == user_id) break;
@@ -110,19 +110,35 @@ void view_profile(int user_id, profile *p){
 	int color = 11, spacex = 6;
 	line = 4;
 	set_color(color);
-	gt(spacex, line++); cout <<" ____  _             _            _   ";// " _____         ___ _ _";     
-	gt(spacex, line++); cout <<"/ ___|| |_ _   _  __| | ___ _ __ | |_ ";// "|  _  |___ ___|  _|_| |___ ";
-	gt(spacex, line++); cout <<"\\___ \\| __| | | |/ _` |/ _ \\ '_ \\| __|";// "|   __|  _| . |  _| | | -_|";
-	gt(spacex, line++); cout <<" ___) | |_| |_| | (_| |  __/ | | | |_ ";// "|__|  |_| |___|_| |_|_|___|";
-	gt(spacex, line++); cout <<"|____/ \\__|\\__,_|\\__,_|\\___|_| |_|\\__|";//
+	if (role == 2) {
+		gt(spacex, line++); cout << " ____  _             _            _   ";// " _____         ___ _ _";     
+		gt(spacex, line++); cout << "/ ___|| |_ _   _  __| | ___ _ __ | |_ ";// "|  _  |___ ___|  _|_| |___ ";
+		gt(spacex, line++); cout << "\\___ \\| __| | | |/ _` |/ _ \\ '_ \\| __|";// "|   __|  _| . |  _| | | -_|";
+		gt(spacex, line++); cout << " ___) | |_| |_| | (_| |  __/ | | | |_ ";// "|__|  |_| |___|_| |_|_|___|";
+		gt(spacex, line++); cout << "|____/ \\__|\\__,_|\\__,_|\\___|_| |_|\\__|";//
+	}
+	else {
+		gt(spacex, line++); cout << "  _____ _         __  __ ";
+		gt(spacex, line++); cout << " / ____| |_ __ _ / _|/ _|";
+		gt(spacex, line++); cout << " \\___ \\| __/ _` | |_| |_ ";
+		gt(spacex, line++); cout << " ____) | || (_| |  _|  _| ";
+		gt(spacex, line++); cout << "|_____/ \\__\\__,_|_| |_| ";
+	}
+/*
+  _____ _         __  __   
+ / ____| |_ __ _ / _|/ _|
+ \___ \| __/ _` | |_| |_ 
+ ____) | || (_| |  _|  _| 
+|_____/ \__\__,_|_| |_| */ 
 	set_color(7);                        
 
 	char *auxilary1 = new char[25];
 	char *auxilary2 = new char[30];
 	line += 2;
 	strcpy_s(auxilary1, 5, "Name");
-	strcpy_s(auxilary2, 30, "Vo Nguyen Gia Bao");
+	//strcpy_s(auxilary2, 30, "Vo Nguyen Gia Bao");
 	strcpy_s(auxilary2, 25, p -> last_name);
+	strcat_s(auxilary2, 25, " ");
 	strcat_s(auxilary2, 25, p -> first_name);
 	print_information(auxilary1, auxilary2, spacex, ++line, color);
 
@@ -132,13 +148,14 @@ void view_profile(int user_id, profile *p){
 	print_information(auxilary1, p -> gender, spacex, line, color);
 	strcpy_s(auxilary2, 2, "?");
 	line += 3;
-	//strcpy_s(auxilary1, 4, "ID");
+	strcpy_s(auxilary1, 4, "ID");
 	//strcpy_s(auxilary2, 10, "21127017");
 	print_information(auxilary1, auxilary2, spacex, line, color);
 	gt(20, line + 1); cout << p -> id;
 
 	line += 3;
-	/*strcpy_s(auxilary1, 6, "Year");
+	strcpy_s(auxilary1, 6, "DOB");
+	/*
 	strcpy_s(auxilary2, 5, int_to_char(p -> dob.day));
 	strcat_s(auxilary2, 2, "/");
 	strcat_s(auxilary2, 5, int_to_char(p -> dob.month));
@@ -188,13 +205,13 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	view_space();
 
 	gt(4, 5); cout << "RESULT:";
-	char *auxilary1 = new char[10];
-	strcpy_s(auxilary1, 10, "Creadit");
-	designSquare(12, 4, 3, 14, auxilary1, 7, 7);//Creadit 58
-	strcpy_s(auxilary1, 10, "Average");
-	designSquare(28, 4, 3, 10, auxilary1, 7, 7);//Average 74
-	strcpy_s(auxilary1, 10, "GPA");
-	designSquare(40, 4, 3, 10, auxilary1, 7, 7);//GPA 86
+	char *auxilary1 = new char[20];
+	strcpy_s(auxilary1, 11, "Credit:   ");
+	designSquare(12, 4, 3, 14, auxilary1, 7, 7);//Credit 22 5
+	strcpy_s(auxilary1, 14, "Average:     ");
+	designSquare(28, 4, 3, 17, auxilary1, 7, 7);//Average 39
+	strcpy_s(auxilary1, 11, "GPA:     ");
+	designSquare(47, 4, 3, 13, auxilary1, 7, 7);//GPA 47
 
 	int line = 7;
 	gt(5, line); 
@@ -214,7 +231,7 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	gt(13, line); cout << sc(186) << " Year";
 	gt(20, line); cout << sc(186) << "Course ID";
 	gt(31, line); cout << sc(186) << "             Name";
-	gt(62, line); cout << sc(186) << "Creadit";
+	gt(62, line); cout << sc(186) << "Credit";
 	gt(70, line); cout << sc(186) << "Score";
 	gt(76, line); cout << sc(186) << "       Note";
 	gt(95, line); cout << sc(186);
@@ -254,11 +271,11 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 	score /= creadit;
 	gpa = score * 0.4;
 
-	gt(58, 4); cout << creadit;
-	gt(74, 4); cout << setprecision(2) << fixed << score;
-	gt(86, 4); cout << setprecision(2) << fixed << gpa;
+	gt(22, 5); cout << creadit;
+	gt(39, 5); cout << setprecision(2) << fixed << score;
+	gt(54, 5); cout << setprecision(2) << fixed << gpa;
 
-	int tmp = line;
+	int tmp = line;\
 	int value = 1;
 	while (true){
 		line = tmp;
@@ -267,12 +284,11 @@ void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubje
 		subject2 *cur = auxilary -> psub2;
 		for (int i = 1; i < value; ++i)
 			cur = cur -> next;
-
-		subjects *p = psubject;
-		while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
-			p = p->next;
 	
 		for (int t = 1; t <= 8; ++t){
+			subjects *p = psubject;
+			while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
+				p = p->next;
 			++line;
 			gt( 4, line); cout << sc(186) << p -> semester;
 			gt(13, line); cout << sc(186) << p -> year;

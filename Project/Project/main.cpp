@@ -13,14 +13,14 @@ int main(){
 	char temp[200];
 	int num = 0;
 
-	read_csv_student(pstudent);
-
 	view_space();
 	memcpy(temp, "Do you want to use the last data?", 34);
 	announcement(temp, 1, num, 0);
+	num = 1;
 	if (num == 1) {
 		read_csv_classroom(pclassid);
 		read_csv_subject(psubject);
+		read_csv_student(pstudent);
 	}
 
 	while (true){
