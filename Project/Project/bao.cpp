@@ -287,7 +287,6 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		cout << "Input the session of this course: ";
 
 		GoTo(28, 9); // input course name
-		cin.ignore();
 		cin.getline(auxilary, 50);
 		newnode->name = new char[strlen(auxilary) + 1];
 		strcpy_s(newnode->name, strlen(auxilary) + 1, auxilary);
