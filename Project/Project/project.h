@@ -176,8 +176,21 @@ void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, c
 void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
-
+subject2 *newSubject(char *course_id);
+profile *newProfile(char *classroom, int year, int enrolled_subject_no, subject2 *psub2, int no, int id,
+	char *first_name, char *last_name, char *gender, long long social_id, date_of_birth dob);
 void read_csv_student(profile *&pstudent);
+
+void write_csv_student(profile *pstudent);
+
+subjects *NewSub(int year, int semester, char *course_id, char *teacher_name, int num_of_credits, char *name, int start, int end, int day_of_week, sessions session[2]);
+void read_csv_subject(subjects *&psubject);
+
+void write_csv_subject(subjects *psubject);
+
+void read_csv_classroom(classrooms *&pclass);
+
+void write_csv_classroom(classrooms *pclass);
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);

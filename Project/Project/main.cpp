@@ -9,7 +9,20 @@ int main(){
     pstudent = nullptr;
     psubject = nullptr;
     pclassid = nullptr;
+
+	char temp[200];
+	int num = 0;
+
 	read_csv_student(pstudent);
+
+	view_space();
+	memcpy(temp, "Do you want to use the last data?", 34);
+	announcement(temp, 1, num, 0);
+	if (num == 1) {
+		read_csv_classroom(pclassid);
+		read_csv_subject(psubject);
+	}
+
 	while (true){
 		int role = 0, choice = 1;
 
@@ -18,6 +31,7 @@ int main(){
 		    GoTo(34, 18);
 		    system("pause");
 		}
+
 		if (role == 1){
 			while (choice){
 				showcur(0);
@@ -46,6 +60,15 @@ int main(){
 			}
 		}
 		if (role == 4) break;
+	}
+
+	view_space();
+	memcpy(temp, "Do you want to save data?", 26);
+	announcement(temp, 1, num, 0);
+	if (num == 1) {
+		write_csv_classroom(pclassid);
+		write_csv_subject(psubject);
+		write_csv_student(pstudent);
 	}
 
 	exitProgram();
