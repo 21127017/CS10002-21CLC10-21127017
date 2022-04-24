@@ -718,6 +718,9 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 			memcpy(temp, "View list of course", 20);
 			designSquare(17, 18, 3, 30, temp, 7, 7);
 
+			memcpy(temp, "Export file", 12);
+			designSquare(17, 22, 3, 30, temp, 7, 7);
+
 			memcpy(temp, "Update mark", 12);
 			designSquare(50, 10, 3, 30, temp, 7, 7);
 
@@ -728,7 +731,7 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 			designSquare(50, 18, 3, 30, temp, 7, 7);
 				
 			memcpy(temp, "Back to menu", 13);
-			designSquare(34, 22, 3, 30, temp, 7, 7);
+			designSquare(50, 22, 3, 30, temp, 7, 7);
 			switch (i) {
 			case 0:
 				memcpy(temp, "Add new course", 15);
@@ -760,9 +763,14 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 				designSquare(50, 18, 3, 30, temp, 11, 432);
 				num = 6;
 				break;
+			case 6:
+				memcpy(temp, "Export file", 12);
+				designSquare(17, 22, 3, 30, temp, 11, 432);
+				num = 8;
+				break;
 			default:
 				memcpy(temp, "Back to menu", 13);
-				designSquare(34, 22, 3, 30, temp, 11, 432);
+				designSquare(50, 22, 3, 30, temp, 11, 432);
 				num = 7;
 				break;
 			}
@@ -785,8 +793,8 @@ void print_subject_function(int &choice/*profile *&pstudent, subjects *&psubject
 				break;
 			}
 
-			if (i < 0) i = 6;
-			if (i > 6) i = 0;
+			if (i < 0) i = 7;
+			if (i > 7) i = 0;
 		}
 		choice = num;
 		break;
@@ -1213,4 +1221,57 @@ void print_option_2(int &choice){
 	 if (choice == 1) {
 		 return true;
 	 } else return false;
+ }
+
+ void export_to_file(profile *pstudent, subjects *psubject) {
+	 if (!pstudent || !psubject) return;
+	 char temp[200];
+	 char *course_id;
+	 int choice = 0;
+
+	 memcpy(temp, "Input filename:                               ", 47);
+	 designSquare(24, 16, 3, 50, temp, 7, 7);
+	 memcpy(temp, "Input the course id:                          ", 47);
+	 designSquare(24, 20, 3, 50, temp, 7, 7);
+
+	 GoTo(42, 17);
+	 cin.getline(temp, 200);
+	 ofstream fout;
+	 fout.open(temp);
+
+	 GoTo(47, 21);
+	 cin.getline(temp, 200);
+	 course_id = new char[strlen(temp) + 1];
+	 memcpy(course_id, temp, strlen(temp) + 1);
+
+	 profile *curstu = pstudent;
+	 subjects *cursub = psubject;
+
+	 while (cursub) {
+		 if (strcmp(course_id, cursub->course_id) == 0) {
+			 break;
+		 }
+		 cursub = cursub->next;
+	 }
+	 if (!cursub) {
+		 memcpy(temp, "Cannot find the courseid!", 26);
+		 announcement(temp, 0, choice, -1);
+		 delete [] course_id;
+		 return;
+	 }
+
+	 int count = 0;
+	 while (curstu) {
+		 for (subject2 *cur = curstu->psub2; cur; cur = cur->next) {
+			 if (strcmp(cur->course_id, course_id) == 0) {
+				 fout << ++count << "," << curstu->id << "," << curstu->last_name << "," << curstu->first_name << "," << cur->score << "," << endl;
+				 break;
+			 }
+		 }
+		 curstu = curstu->next;
+	 }
+	 memcpy(temp, "Export successfully!", 21);
+	 announcement(temp, 0, choice, 1);
+	 delete[]course_id;
+	 fout.close();
  }

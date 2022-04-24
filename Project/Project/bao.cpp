@@ -25,7 +25,7 @@ void view_student(profile *&pstudent, subjects *&ps, int &semester){
 	profile *p = pstudent;
 	while (p != NULL){
 		cout << "\t1. No: " << p -> no << endl;
-		cout << "\t2. Name: " << p -> first_name << " " << p-> last_name << endl;
+		cout << "\t2. Name: " << p->last_name << " " << p->first_name << endl;
 		cout << "\t3. ID student: " << p -> id << endl;
 		cout << "\t4. Class:" << p -> classroom << endl;
 		cout << "\t5. Social ID: " << p -> social_id << endl;
@@ -356,7 +356,6 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		designSquare(18, 17, 3, 62, temp, 7, 7);
 		char auxilary[50];
 		GoTo(63, 18);
-		cin.ignore();
 		cin.getline(auxilary, 50);
 		subjects *current = psubject;
 		if (strcmp(current -> course_id, auxilary) == 0){
@@ -391,7 +390,6 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 
 		GoTo(65, 18);
 		char auxilary[50];
-		cin.ignore();
 		cin.getline(auxilary, 50);
 		subjects *current = psubject;
 		while (current != NULL && strcmp(current -> course_id, auxilary) != 0)
@@ -413,8 +411,8 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 					cur2 = cur2 -> next;
 				if (cur2 != NULL){
 					GoTo(37, 4 + count);
-					cout << "ID: " << cur1 -> id;
-					cout << "\tScore: ";
+					cout << setw(20) << "ID: " << cur1->id;
+					cout << setw(10) << "Score: ";
 					cin >> cur2 -> score;
 					++count;
 				}
@@ -444,7 +442,6 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		designSquare(29, 15, 3, 40, temp, 7, 7);
 
 		GoTo(52, 16);
-		cin.ignore();
 		cin.getline(auxilary, 50);
 
 		subjects *cur1 = psubject;
@@ -515,7 +512,6 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 		designSquare(29, 15, 3, 40, temp, 7, 7);
 
 		GoTo(52, 16);
-		cin.ignore();
 		cin.getline(auxilary, 50);
 
 		subjects *cur = psubject;
@@ -528,6 +524,11 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			return;
 		}
 		view_subject(cur);
+	}
+	if (num == 8) {
+		GoTo(30, 1);
+		cout << ">> EXPORT A LIST OF STUDENT TO FILE <<";
+		export_to_file(pstudent, psubject);
 	}
 	return;
 }
@@ -605,7 +606,6 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			memcpy(temp, "Input classroom id:           ", 31);
 			designSquare(32, 16, 3, 34, temp, 7, 7);
 			GoTo(54, 17);
-			cin.ignore();
 			cin.getline(auxilary, 50);
 			classrooms *pclass = pclassid;
 			while (pclass != NULL){
@@ -1016,7 +1016,7 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &se
 				//remove_course();
 				break;
 			case 3:
-				//view_student_enroll_course(user_id, pstudent);
+				view_student_enroll_course(user_id, pstudent, psubject);
 				break;
 			default:
 				break;

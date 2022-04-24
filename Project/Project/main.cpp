@@ -2,7 +2,8 @@
 
 int main(){
 
-    int no = 0, semester = 0, year = 0, classroom = -1, id_profile = 0;
+    int no = 0, semester = 2, year = 2021, classroom = -1, id_profile = 0;
+	int role = 0, choice = 1;
     profile *pstudent;
     subjects *psubject;
     classrooms *pclassid;
@@ -14,6 +15,7 @@ int main(){
 	int num = 0;
 
 	view_space();
+
 	memcpy(temp, "Do you want to use the last data?", 34);
 	announcement(temp, 1, num, 0);
 	num = 1;
@@ -24,7 +26,7 @@ int main(){
 	}
 
 	while (true){
-		int role = 0, choice = 1;
+		role = 0; choice = 1;
 
 		if (role == 3 || role == 0) {
 		    login(role, id_profile);
@@ -65,6 +67,7 @@ int main(){
 	view_space();
 	memcpy(temp, "Do you want to save data?", 26);
 	announcement(temp, 1, num, 0);
+	
 	if (num == 1) {
 		write_csv_classroom(pclassid);
 		write_csv_subject(psubject);

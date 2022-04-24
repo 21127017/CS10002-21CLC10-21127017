@@ -1,11 +1,11 @@
 #include "project.h"
 
 //Read csv student
-subject2 *newSubject(char *course_id) {
+subject2 *newSubject(char *course_id, int score) {
     subject2 *temp = new subject2;
     temp->course_id = new char[strlen(course_id) + 1];
     memcpy(temp->course_id, course_id, strlen(course_id) + 1);
-    temp->score = 0;
+    temp->score = score;
     temp->next = nullptr;
     return temp;
 }
@@ -36,10 +36,10 @@ profile *newProfile(char *classroom, int year, int enrolled_subject_no, subject2
         subject2 *cur = temp->psub2;
         for (int i = 0; i < enrolled_subject_no; i++) {
             if (temp->psub2 != nullptr) {
-                cur->next = newSubject(psub2[i].course_id);
+                cur->next = newSubject(psub2[i].course_id, psub2[i].score);
                 cur = cur->next;
             } else {
-                temp->psub2 = newSubject(psub2[i].course_id);
+                temp->psub2 = newSubject(psub2[i].course_id, psub2[i].score);
                 cur = temp->psub2;
             }
         }
@@ -101,6 +101,8 @@ void read_csv_student(profile *&pstudent) {
                     inp.getline(tmp, 200, ',');
                     psub2[i].course_id = new char[strlen(tmp) + 1];
                     memcpy(psub2[i].course_id, tmp, strlen(tmp) + 1);
+
+                    inp >> psub2[i].score >> a;
                     psub2->next = 0;
                 }
             }
@@ -141,11 +143,12 @@ void write_csv_student(profile *pstudent) {
         psub2 = current->psub2;
         if (current->enrolled_subject_no != 0) {
             while (psub2 != nullptr) {
-                out << psub2->course_id << ",";
+                out << psub2->course_id << "," << psub2->score << ",";
                 psub2 = psub2->next;
             }
         }
-        out << endl;
+        if (current->next != nullptr)
+            out << endl;
         current = current->next;
     }
     out.close();
@@ -258,7 +261,8 @@ void write_csv_subject(subjects *psubject) {
         for (int i = 0; i < 2; i++) {
             out << current->session[i].day << "," << current->session[i].hour_start << "," << current->session[i].minute_start << ",";
         }
-        out << endl;
+        if (current->next != nullptr)
+            out << endl;
         current = current->next;
     }
     out.close();
@@ -340,7 +344,8 @@ void write_csv_classroom(classrooms *pclass) {
             else out << ".";
             cur = cur->next;
         }
-        out << endl;
+        if (current->next != nullptr)
+            out << endl;
         current = current->next;
     }
     out.close();

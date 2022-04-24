@@ -276,6 +276,9 @@ void enroll_course(int semester, int year, int studentid, profile* &pstudent, su
 	newnode -> course_id = new char[strlen(enroll) + 2];
 	memcpy(newnode -> course_id, enroll, strlen(enroll) + 1);
 	newnode -> score = 0;
+	newnode->next = nullptr;
+	p_pro_cur->enrolled_subject_no++;
+	
 	if (p_sub2_cur == NULL)
 		p_sub2_cur = newnode;
 	else
