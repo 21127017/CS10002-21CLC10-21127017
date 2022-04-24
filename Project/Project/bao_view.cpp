@@ -457,11 +457,8 @@ void view_student_enroll_course(int id_student, profile *pstudent, subjects *psu
 		subject2 *cur = auxilary -> psub2;
 		for (int i = 1; i < value; ++i)
 			cur = cur -> next;
-		subjects *p = psubject;
-		while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
-			p = p->next;
 
-		if (p == NULL) {
+		if (cur == NULL) {
 			gt( 3, line); cout << sc(200);
 			gt( 8, line); cout << sc(202);
 			gt(39, line); cout << sc(202);
@@ -475,6 +472,20 @@ void view_student_enroll_course(int id_student, profile *pstudent, subjects *psu
 	
 		for (int t = 1; t <= 8; ++t){
 			++line;
+			subjects *p = psubject;
+			while (p != NULL && strcmp(p->course_id, cur->course_id) != 0)
+				p = p->next;
+			if (p == NULL) {
+				gt( 3, line); cout << sc(200);
+				gt( 8, line); cout << sc(202);
+				gt(39, line); cout << sc(202);
+				gt(50, line); cout << sc(202);
+				gt(71, line); cout << sc(202);
+				gt(79, line); cout << sc(202);
+				gt(86, line); cout << sc(202);
+				gt(95, line); cout << sc(188);
+				break;
+			}
 			gt( 3, line); cout << sc(186) << t;
 			gt( 8, line); cout << sc(186) << p -> name;
 			gt(39, line); cout << sc(186) << p -> course_id;

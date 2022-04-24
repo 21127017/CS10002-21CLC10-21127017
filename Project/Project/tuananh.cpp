@@ -377,6 +377,19 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	return false;
 }
 
+void design_remove(int studentid, profile *&pstudent, subjects *psubject) {
+	view_space();
+	char *auxilary = new char[20];
+	cin >> auxilary;
+	bool check = remove_course(auxilary, studentid, pstudent, psubject);
+	if (check == 1) {
+		cout << "Delete Complete" << endl;
+	} else
+		cout << "Can't delete." << endl;
+
+	return;
+}
+
 void output_to_csv_subject(subjects* psubject)
 {
 	if (psubject == NULL)

@@ -197,7 +197,8 @@ void export_to_file(profile *pstudent, subjects *psubject);
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);
 void design_enroll_course(int semester, int year, int studentid, profile *&pstudent, subjects *&psubject);
-void remove_course();
+bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* psubject);
+void design_remove(int studentid, profile *&pstudent, subjects *psubject);
 
 
 //----------ACCOUNT------------//

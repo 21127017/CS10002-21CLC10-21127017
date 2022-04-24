@@ -1014,6 +1014,7 @@ void make_choice_2(int &choice, profile *&pstudent, subjects *&psubject, int &se
 				break;
 			case 2:
 				//remove_course();
+				design_remove(user_id, pstudent, psubject);
 				break;
 			case 3:
 				view_student_enroll_course(user_id, pstudent, psubject);
