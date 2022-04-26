@@ -94,6 +94,26 @@ void showcur(bool CursorVisibility);
 void set_color(int code);
 
 //-----------STORE DATA-----------//
+subject2 *newSubject(char *course_id, int score);
+
+profile *newProfile(char *classroom, int year, int enrolled_subject_no, subject2 *psub2, int no, int id,
+	char *first_name, char *last_name, char *gender, long long social_id, date_of_birth dob);
+
+void read_csv_student(profile *&pstudent);
+
+void write_csv_student(profile *pstudent);
+
+subjects *NewSub(int year, int semester, char *course_id, char *teacher_name, int num_of_credits, char *name, int start, int end, int day_of_week, sessions session[2]);
+
+void read_csv_subject(subjects *&psubject);
+
+void write_csv_subject(subjects *psubject);
+
+void read_csv_classroom(classrooms *&pclass);
+
+void write_csv_classroom(classrooms *pclass);
+
+void export_to_file(profile *pstudent, subjects *psubject);
 
 //-----------CONDITION BARRIER-----------//
 
@@ -108,15 +128,25 @@ void designSquare(SHORT posX, SHORT posY, int height, int width, char *content, 
 void view_space();
 
 char *int_to_char(long long x);
+
 void draw_button(int value, int maxlist);
+
 void print_information(char *x1, char *x2, int x, int y, int color);
+
 void view_profile(int user_id, profile *p, int role);//
+
 void view_student_scoreboard(int id_student, profile *pstudent, subjects *psubject);//
+
 void view_student_enroll_course(int id_student, profile *pstudent, subjects *psubject);//
+
 void view_scoreboard_of_course(char *id_course, profile *pstudent);
+
 void view_list_of_course(subjects *psubject, profile *pstudent, int semester, int year);//
+
 void view_student_in_class(char *classid, profile *pstudent);//
+
 void view_student_in_course(char *id_course, profile *p);//
+
 void view_list_of_class(classrooms *pclassid, profile *pstudent);//
 
 void view_loginboard();
@@ -140,6 +170,7 @@ void announcement(char *content, bool yesno, int &num, int title);
 void exitProgram();
 
 void view_guide();
+
 void print_course_function(int &choice);
 
 //-----------DELETE LINKED LIST-----------//
@@ -159,7 +190,6 @@ void semester_edit(int num, profile *&pstudent, subjects *&psubject, int &semest
 void school_year_edit(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 
 //-----------STAFF MEMBER FUNCTION SPACE-----------//
-
 void print_undergraduate_function(int &choice/*int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year*/);
 void undergraduate_function(int &no, profile *&pstudent, subjects *&psubject, int &semester, int &classroom, int &year);
 
@@ -176,23 +206,6 @@ void print_year_function(int &choice/*profile *&pstudent, subjects *&psubject, c
 void year_function(profile *&pstudent, subjects *&psubject, classrooms *&pclassid, int &classroom, int &semester, int &year);
 //-----------STUDENT FUNCTION SPACE-----------//
 //tuan + ham nhap file cvs + tao file csv
-subject2 *newSubject(char *course_id, int score);
-profile *newProfile(char *classroom, int year, int enrolled_subject_no, subject2 *psub2, int no, int id,
-	char *first_name, char *last_name, char *gender, long long social_id, date_of_birth dob);
-void read_csv_student(profile *&pstudent);
-
-void write_csv_student(profile *pstudent);
-
-subjects *NewSub(int year, int semester, char *course_id, char *teacher_name, int num_of_credits, char *name, int start, int end, int day_of_week, sessions session[2]);
-void read_csv_subject(subjects *&psubject);
-
-void write_csv_subject(subjects *psubject);
-
-void read_csv_classroom(classrooms *&pclass);
-
-void write_csv_classroom(classrooms *pclass);
-
-void export_to_file(profile *pstudent, subjects *psubject);
 
 void show_enroll_course(subjects *p, int semester, int year, char *&auxilary);
 void enroll_course(int semester, int year, int studentid, profile* &pstudent, subjects *psubject, int &res);

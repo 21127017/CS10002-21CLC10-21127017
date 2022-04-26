@@ -380,13 +380,21 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 void design_remove(int studentid, profile *&pstudent, subjects *psubject) {
 	view_space();
 	char *auxilary = new char[20];
+	char temp[200];
+	int choice;
+	memcpy(temp, "Input course id:                ", 33);
+	designSquare(31, 16, 3, 36, temp, 7, 7);
+	GoTo(50, 17);
 	cin >> auxilary;
 	bool check = remove_course(auxilary, studentid, pstudent, psubject);
 	if (check == 1) {
-		cout << "Delete Complete" << endl;
-	} else
-		cout << "Can't delete." << endl;
-
+		memcpy(temp, "Delete Successfully", 20);
+		announcement(temp, 0, choice, 1);
+	} else {
+		memcpy(temp, "Can't delete", 13);
+		announcement(temp, 0, choice, -1);
+	}
+	delete[]auxilary;
 	return;
 }
 
