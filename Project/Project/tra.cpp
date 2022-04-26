@@ -1125,6 +1125,39 @@ void print_option_2(int &choice){
 	 view_space();
 	 GoTo(47, 1); cout << "Guide";
 	 //cho chot data da
+	 /*
+	 -Navigate the menus with your arrow keys
+- Log Out: exit this account and log in with a different one.
+if Student:
+- Profile: View your current profile and/or change your password.
+- Course:
++ View list of course: 
++ Enroll course: sign up for a new course.
++ Remove course: remove a course from your current list.
++ View list of course: see what courses you are currently in.
+Scoreboard: View your study results.
+if staff:
+- Year: Create a new school year or view existing ones.
+- Semester: create a new semester or view existing ones.
+- Course:
++ Add a new course to the list.
++ Update the marks of students in the courses.
++ Remove a course from the current list.
++ View the current list of courses.
++ View students from a course.
++ Export the list of students into a csv file.
+- Class:
++ Create a new class.
++ Add/Remove student from class.
++ View a list of existing classes.
++ View the list of students from a class.
+- Student:
++ Import csv: add a list of students from a csv file into the program.
++ Add a student manually from keyboard.
++ Remove students.
++ View a list of students.
+
+	 */
  }
 
  void print_course_function(int &choice) {
