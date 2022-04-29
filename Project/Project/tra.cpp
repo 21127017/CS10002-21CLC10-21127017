@@ -1121,9 +1121,20 @@ void print_option_2(int &choice){
 	showcur(1);
  }
 
- void view_guide() {
+ void view_guide(/*int role*/) {
 	 view_space();
 	 GoTo(47, 1); cout << "Guide";
+	 GoTo(10, 5); cout << "Navigate the menus with your arrow keys and press Enter to access the function.";
+	 GoTo(10, 6); cout << "Log Out: exit this account and log in with a different one.";
+	/* if (role == 1) {
+		 cout << "- Course:";
+		 cout << "- Profile: View your current profile and change your password.";
+		 +View list of course :
+		 +Enroll course : sign up for a new course.
+			 + Remove course : remove a course from your current list.
+			 + View list of course : see what courses you are currently in.
+			 Scoreboard : View your study results."
+	 }*/
 	 //cho chot data da
 	 /*
 	 -Navigate the menus with your arrow keys

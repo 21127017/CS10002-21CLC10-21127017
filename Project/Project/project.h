@@ -169,7 +169,7 @@ void announcement(char *content, bool yesno, int &num, int title);
 
 void exitProgram();
 
-void view_guide();
+void view_guide(/*int role*/);
 
 void print_course_function(int &choice);
 

@@ -16,14 +16,12 @@ int main(){
 
 	view_space();
 
-	memcpy(temp, "Do you want to use the last data?", 34);
+	/*memcpy(temp, "Do you want to use the last data?", 34);
 	announcement(temp, 1, num, 0);
-	num = 1;
-	if (num == 1) {
-		read_csv_classroom(pclassid);
-		read_csv_subject(psubject);
-		read_csv_student(pstudent);
-	}
+	num = 1;*/
+	read_csv_classroom(pclassid);
+	read_csv_subject(psubject);
+	read_csv_student(pstudent);
 
 	while (true){
 		role = 0; choice = 1;
@@ -64,15 +62,10 @@ int main(){
 		if (role == 4) break;
 	}
 
-	view_space();
-	memcpy(temp, "Do you want to save data?", 26);
-	announcement(temp, 1, num, 0);
-	
-	if (num == 1) {
-		write_csv_classroom(pclassid);
-		write_csv_subject(psubject);
-		write_csv_student(pstudent);
-	}
+	write_csv_classroom(pclassid);
+	write_csv_subject(psubject);
+	write_csv_student(pstudent);
+
 
 	exitProgram();
 
