@@ -800,7 +800,7 @@ void view_list_of_course(subjects *psubject, profile *pstudent, int semester, in
 			gt(65, line); cout << sc(186) << cur -> end;
 			gt(71, line); cout << sc(186) << cur -> session[0].day;
 			gt(77, line); cout << sc(186) << cur -> session[1].day;
-			gt(83, line); cout << sc(186) << cur -> maximum << "/" << 50;
+			gt(83, line); cout << sc(186) << cur -> maximum;
 			gt(90, line); cout << sc(186);
 
 			++line;
@@ -845,7 +845,12 @@ void view_list_of_course(subjects *psubject, profile *pstudent, int semester, in
 				break;
 			}
 		}
-
+		if (line == 7) {
+			gt(20, 15);
+			set_color(14);
+			cout << ">> There are no courses created in this semester ~_~' <<";
+			set_color(7);
+		}
 		draw_button(25, value, maxlist);
 		char key = _getch();
 		if (key == 77) value = (value + 8 < maxlist) ? value + 8 : value;
