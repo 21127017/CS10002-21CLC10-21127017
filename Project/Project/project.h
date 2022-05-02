@@ -38,7 +38,7 @@ struct list_student {
 struct classrooms {
 	char *classroom;
 	int year;
-	list_student *id_student = new list_student;
+	list_student *id_student;
 	classrooms *next;
 };
 

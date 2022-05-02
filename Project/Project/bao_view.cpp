@@ -684,7 +684,7 @@ void view_list_of_course(subjects *psubject, profile *pstudent, int semester, in
 	++line;
 	gt( 9, line); cout << sc(186) << "Course ID";
 	gt(20, line); cout << sc(186) << "             Name";
-	gt(51, line); cout << sc(186) << "Creadit";
+	gt(51, line); cout << sc(186) << "Credit ";
 	gt(59, line); cout << sc(186) << "Start";
 	gt(65, line); cout << sc(186) << " End";
 	gt(71, line); cout << sc(186) << "Sess1";
@@ -737,7 +737,7 @@ void view_list_of_course(subjects *psubject, profile *pstudent, int semester, in
 		++line;
 		gt( 9, line); cout << sc(186) << "Course ID";
 		gt(20, line); cout << sc(186) << "             Name";
-		gt(51, line); cout << sc(186) << "Creadit";
+		gt(51, line); cout << sc(186) << "Credit ";
 		gt(59, line); cout << sc(186) << "Start";
 		gt(65, line); cout << sc(186) << " End";
 		gt(71, line); cout << sc(186) << "Sess1";

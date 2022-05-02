@@ -163,7 +163,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		GoTo(39, 10);
 		cout << no;
 		newnode->psub2 = NULL;
-
+		newnode->enrolled_subject_no = 0;
 		GoTo(60, 10);
 		cin >> newnode->id;
 
@@ -200,7 +200,7 @@ void student_edit(int num, int &no, profile *&pstudent, int &semester, int &clas
 		GoTo(68, 22);
 		cin >> newnode->dob.day;
 
-		newnode->next = NULL;
+		newnode->next = nullptr;
 		if (pstudent == NULL)
 			pstudent = newnode;
 		else {
@@ -555,6 +555,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 	  	newnode->classroom = new char[strlen(auxilary) + 1];
 	  	strcpy_s(newnode->classroom, strlen(auxilary) + 1, auxilary);
 		newnode->year = year;
+		newnode->id_student = nullptr;
 	  	newnode->next = NULL;
 	  	if (pclassid == NULL)
 	    	pclassid = newnode;
@@ -569,13 +570,76 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 	}
 	if (num == 2){
 		//remove
-		GoTo(39, 1);
-		cout << ">> REMOVE CLASS <<";
+		GoTo(33, 1);
+		cout << ">> REMOVE STUDENT FROM CLASS <<";
 		if (pclassid == NULL){
 			memcpy(temp, "There isn't any classroom in this semester.", 44);
 			announcement(temp, 0, choice, -1);
 			return;
 		}
+		if (pstudent == NULL) {
+			memcpy(temp, "You don't have any student to add to class.", 44);
+			announcement(temp, 0, choice, -1);
+			return;
+		}
+
+		memcpy(temp, "Input student id:             ", 31);
+		int tmp;
+		designSquare(32, 13, 3, 34, temp, 7, 7);
+		GoTo(52, 14);
+		cin >> tmp;
+		profile *current = pstudent;
+		while (current != NULL) {
+			if (current->id == tmp) break;
+			current = current->next;
+		}
+		if (current != NULL && current->id == tmp) {
+			char auxilary[50];
+			memcpy(temp, "Input classroom id:           ", 31);
+			designSquare(32, 16, 3, 34, temp, 7, 7);
+			GoTo(54, 17);
+			cin.ignore();
+			cin.getline(auxilary, 50);
+			classrooms *pclass = pclassid;
+			while (pclass != NULL) {
+				if (strcmp(pclass->classroom, auxilary) == 0)
+					break;
+				pclass = pclass->next;
+			}
+			if (pclass == NULL) {
+				memcpy(temp, "Remove failed! Do you want to remove again?", 44);
+				announcement(temp, 1, choice, -1);
+				if (choice == 1) class_edit(2, pstudent, pclassid, semester, year);
+				return;
+			}
+			strcpy_s(current->classroom, 50, "Unknown");
+			list_student *cur = pclass->id_student;
+			list_student *temp;
+			if (cur->id == current->id) {
+				temp = cur;
+				pclass->id_student = cur->next;
+				delete temp;
+			} else 
+			while (cur) {
+				if (cur->next != nullptr && cur->next->id == current->id) {
+					temp = cur->next;
+					cur->next = temp->next;
+					delete temp;
+					break;
+				}
+				cur = cur->next;
+			}
+
+		} else {
+			memcpy(temp, "ID doesn't exist. Do you want to remove again?", 47);
+			announcement(temp, 1, choice, -1);
+			if (choice == 1) class_edit(2, pstudent, pclassid, semester, year);
+			return;
+		}
+		memcpy(temp, "Do you want to remove another student?", 39);
+		announcement(temp, 1, choice, 1);
+		if (choice == 1) class_edit(2, pstudent, pclassid, semester, year);
+
 	}
 	if  (num == 1){
 		GoTo(35, 1);
@@ -606,6 +670,7 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 			memcpy(temp, "Input classroom id:           ", 31);
 			designSquare(32, 16, 3, 34, temp, 7, 7);
 			GoTo(54, 17);
+			cin.ignore();
 			cin.getline(auxilary, 50);
 			classrooms *pclass = pclassid;
 			while (pclass != NULL){
@@ -620,6 +685,21 @@ void class_edit(int num, profile *&pstudent, classrooms *&pclassid, int &semeste
 				return;
 			}
 			strcpy_s(current -> classroom, 50, auxilary);
+			list_student *cur = pclass->id_student;
+			if (pclass->id_student == nullptr) {
+				pclass->id_student = new list_student;
+				pclass->id_student->id = current->id;
+				pclass->id_student->next = nullptr;
+			} else {
+				while (cur) {
+					if (cur->next == nullptr) break;
+					cur = cur->next;
+				}
+				cur->next = new list_student;
+				cur->next->id = current->id;
+				cur->next->next = nullptr;
+			}
+
 		} else {
 			memcpy(temp, "ID doesn't exist. Do you want to add again?", 44);
 			announcement(temp, 1, choice, -1);
