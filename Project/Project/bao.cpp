@@ -81,12 +81,11 @@ void view_subject(subjects *p){
 	cout << "\t3. Month start: " << p -> start << endl;
 	cout << "\t4. Month end: " << p -> end << endl;
 	cout << "\t5. Teacher: " << p -> teacher_name << endl;
-	cout << "\t6. Day of week: " << p -> day_of_week << endl;
-	cout << "\t7. Session: " << endl;
+	cout << "\t6. Session: " << endl;
 	for (int i = 0; i < 2; ++i)
 		cout << "\t\t+ " << p -> session[i].day << " " << p -> session[i].hour_start << ":" << p -> session[i].minute_start << endl;
-	cout << "\t8. Credit: " << p -> num_of_credits << endl;
-	cout << "\t9. Num of enrool: " << p -> maximum << "/50" << endl << endl;
+	cout << "\t7. Credit: " << p -> num_of_credits << endl;
+	cout << "\t8. Num of enrool: " << p -> maximum << "/50" << endl << endl;
 	cout << "\t(Create in year " << p -> year << " semester " << p -> semester << ")" << endl;
 	system("pause");
 }
@@ -524,7 +523,66 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			return;
 		}
 		view_subject(cur);
-
+		cout << "Input the number you want to update:";
+		int choice;
+		cin >> choice;
+		switch (choice) {
+		case 1:
+			cout << "\tOld Course name: " << cur->name << endl;
+			cout << "\tInput new course name: "; cin >> cur->name;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 2:
+			cout << "\tOld Course id: " << cur->course_id << endl;
+			cout << "\tInput new course id: "; cin >> cur->course_id;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 3:
+			cout << "\tOld Month start: " << cur->start << endl;
+			cout << "\tInput new Month start: "; cin >> cur->start;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 4:
+			cout << "\tOld Month end: " << cur->end << endl;
+			cout << "\tInput new Month end: "; cin >> cur->end;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 5:
+			cout << "\tOld Teacher name: " << cur->teacher_name << endl;
+			cout << "\tInput new Teacher name: "; cin >> cur->teacher_name;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 6:
+			cout << "\tOld Session: " << cur->course_id << endl;
+			cout << "\tInput new Session: ";
+			for (int i = 0; i < 2; ++i) {
+				cout << "\t+ Session" << i + 1 << ":" << endl;
+				cout << "\t\tDay(MON / TUE / WED / THU / FRI / SAT): ";
+				cin.ignore();
+				cin.getline(auxilary, 200);
+				cur->session[i].day = new char[strlen(auxilary) + 1];
+				strcpy_s(cur->session[i].day, 4, auxilary);
+				cout << "\t\tHour start:";
+				cin >> cur->session[i].hour_start;
+				cout << "\t\tMinute start:";
+				cin >> cur->session[i].minute_start;
+			}
+			cout << "\t=>Update successful!" << endl;
+			system("pause");
+			return;
+		case 7:
+			cout << "\tOld Creadits: " << cur->num_of_credits << endl;
+			cout << "\tInput new Creadits: "; cin >> cur->num_of_credits;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		case 8:
+			cout << "\tOld Maximum enroll: " << cur->maximum << endl;
+			cout << "\tInput new Maximum enroll: "; cin >> cur->maximum;
+			cout << "\t=>Update successful!" << endl;
+			return;
+		default:
+			return;
+		}
 	}
 	if (num == 8) {
 		GoTo(30, 1);

@@ -353,7 +353,7 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	
 	if (p_sub2_cur == NULL) return false;
 	
-	if(!strcmp(remove, p_sub2_cur->course_id))
+	if(strcmp(remove, p_sub2_cur->course_id) == 0)
 	{
 		subject2* temp = p_sub2_cur;
 		p_sub2_cur = p_sub2_cur->next;
@@ -364,10 +364,10 @@ bool remove_course(char* remove, int studentid, profile* &pstudent, subjects* ps
 	
 	while (p_sub2_cur->next != NULL)
 	{
-		if (!strcmp(remove, p_sub2_cur->next->course_id))
+		if (strcmp(remove, p_sub2_cur->next->course_id) == 0)
 		{
 			subject2* temp = p_sub2_cur->next;
-			p_sub2_cur = p_sub2_cur->next->next;
+			p_sub2_cur -> next = p_sub2_cur->next->next;
 			delete temp;
 			return true;
 		}

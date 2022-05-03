@@ -404,6 +404,7 @@ void view_student_enroll_course(int id_student, profile *pstudent, subjects *psu
 		gt(79, line); cout << sc(202);
 		gt(86, line); cout << sc(202);
 		gt(95, line); cout << sc(188);
+		return;
 	}
 
 	int maxlist = 0;
