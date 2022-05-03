@@ -524,6 +524,7 @@ void subject_edit(int num, profile *&pstudent, subjects *&psubject, int &semeste
 			return;
 		}
 		view_subject(cur);
+
 	}
 	if (num == 8) {
 		GoTo(30, 1);
@@ -848,7 +849,7 @@ void subject_function(profile *&pstudent, subjects *&psubject, int &semester, in
 		memcpy(temp, "Input course id:           ", 28);
 		designSquare(34, 12, 3, 32, temp, 7, 7);
 		GoTo(53, 13);
-	    cin >> id_course;
+		cin.getline(id_course, 100);
 	    //
 	    view_student_in_course(id_course, pstudent);
     }

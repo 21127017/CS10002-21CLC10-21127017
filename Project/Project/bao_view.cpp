@@ -1025,6 +1025,7 @@ void view_student_in_class(char *classid, profile *pstudent){
 void view_student_in_course(char *id_course, profile *p){
 	//head table
 	//2 20 8 3 10
+	view_space();
 	GoTo(24, 5);
 	cout << static_cast<char>(201);
 	for (int i = 1; i <= 47; ++i)
@@ -1097,8 +1098,10 @@ void view_student_in_course(char *id_course, profile *p){
 						dd = 1;
 						break;
 					}
+					cur1 = cur1->next;
 				}
 				if (dd) break;
+				curx = curx->next;
 			}
 			curx = curx -> next;
 		}
@@ -1111,20 +1114,31 @@ void view_student_in_course(char *id_course, profile *p){
 					dd = 1;
 					break;
 				}
-				if (dd){
-					++endline;
-					GoTo(24, endline); cout << static_cast<char>(186) << count++ << static_cast<char>(186) 
-						<< curx -> last_name << " " << curx -> first_name;
-					GoTo(48, endline); cout << static_cast<char>(186) << curx -> id;
-					GoTo(57, endline); cout << static_cast<char>(186) << curx -> gender;
-					GoTo(61, endline); cout << static_cast<char>(186) 
-						<< curx -> dob.day << "/" << curx ->dob.month << "/" << curx -> dob.year;
-					GoTo(72, endline); cout << static_cast<char>(186);
-				}
+				cur = cur->next;
+			}
+			if (dd){
+				++endline;
+				GoTo(24, endline); cout << static_cast<char>(186) << count++ << " " << static_cast<char>(186)
+					<< curx -> last_name << " " << curx -> first_name;
+				GoTo(48, endline); cout << static_cast<char>(186) << curx -> id;
+				GoTo(57, endline); cout << static_cast<char>(186) << curx -> gender;
+				GoTo(61, endline); cout << static_cast<char>(186) 
+					<< curx -> dob.day << "/" << curx ->dob.month << "/" << curx -> dob.year;
+				GoTo(72, endline); cout << static_cast<char>(186);
 			}
 			curx = curx->next;
 			if (curx == NULL) break;
 		}
+		++endline;
+		GoTo(24, endline); cout << static_cast<char>(200);
+		for (int i = 1; i <= 47; ++i) 
+			cout << static_cast<char>(205);
+		GoTo(27, endline); cout << static_cast<char>(202);
+		GoTo(48, endline); cout << static_cast<char>(202);
+		GoTo(57, endline); cout << static_cast<char>(202);
+		GoTo(61, endline); cout << static_cast<char>(202);
+		GoTo(72, endline); cout << static_cast<char>(188);
+
 		draw_button(25, value, maxlist);
 		char key = _getch();
 		if (key == 77) value = (value + 8 < maxlist) ? value + 8 : value;
@@ -1133,15 +1147,7 @@ void view_student_in_course(char *id_course, profile *p){
 	}
 
 	//end table
-	++endline;
-	GoTo(24, endline); cout << static_cast<char>(200);
-	for (int i = 1; i <= 47; ++i) 
-		cout << static_cast<char>(205);
-	GoTo(27, endline); cout << static_cast<char>(202);
-	GoTo(48, endline); cout << static_cast<char>(202);
-	GoTo(57, endline); cout << static_cast<char>(202);
-	GoTo(61, endline); cout << static_cast<char>(202);
-	GoTo(72, endline); cout << static_cast<char>(188);
+	
 }
 
 void view_list_of_class(classrooms *pclassid, profile *pstudent){
