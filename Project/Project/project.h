@@ -219,9 +219,9 @@ void login(int &role, int &id_profile);
 
 bool logout();
 
-void changePassword(int changed_id);
+void changePassword(int changed_id, int role);
 
-int inputNewPass(char *&oldpassword);
+int inputNewPass(char oldpassword[200]);
 
 //-----------INPUT SPACE-----------//
 void print_option_1(int &choice);

@@ -269,7 +269,7 @@ void print_option_1(int &choice) { //Board for teacher
 	showcur(1);
 }
 
-int inputNewPass(char *&oldpassword) {
+int inputNewPass(char oldpassword[200]) {
 	
 	char temp_string[200], temp_str[200];
 
@@ -316,7 +316,18 @@ int inputNewPass(char *&oldpassword) {
 	return -1;
 }
 
-void changePassword(int changed_id) {
+void writePass(int N, login_information *inf) {
+	ofstream out;
+	out.open("login_information.csv");
+	out << N << ",,," << endl;
+	for (int i = 0; i < N; i++) {
+		out << inf[i].role << "," << inf[i].username << "," << inf[i].password << "," << inf[i].user_id << endl;
+	}
+	out << "0,,,";
+	out.close();
+}
+
+void changePassword(int changed_id, int role) {
 	ifstream inp;
 	inp.open("login_information.csv");
 
@@ -345,7 +356,7 @@ void changePassword(int changed_id) {
 		memcpy(inf[i].password, temp_string, strlen(temp_string) + 1);
 
 		inp >> inf[i].user_id;
-		if (changed_id == inf[i].user_id) k = i;
+		if (changed_id == inf[i].user_id && role == inf[i].role) k = i;
 		inp.ignore();
 		i++;
 	}
@@ -353,16 +364,13 @@ void changePassword(int changed_id) {
 
 	int check = 0;
 	do {
-		check = inputNewPass(inf[k].password);
+		memcpy(temp_string, inf[k].password, strlen(inf[k].password) + 1);
+		check = inputNewPass(temp_string);
+		delete[] inf[k].password;
+		inf[k].password = new char[strlen(temp_string) + 1];
+		memcpy(inf[k].password, temp_string, strlen(temp_string) + 1);
 		if (check == 1) {
-			ofstream out;
-			out.open("login_information.csv");
-			out << N << ",,," << endl;
-			for (int i = 0; i < N; i++) {
-				out << inf[i].role << "," << inf[i].username << "," << inf[i].password << "," << inf[i].user_id << endl;
-			}
-			out << "0,,,";
-			out.close();
+			writePass(N, inf);
 			break;
 		} else if (check == 0) {
 			break;

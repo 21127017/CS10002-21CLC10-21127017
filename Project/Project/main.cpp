@@ -2,7 +2,7 @@
 
 int main(){
 
-    int no = 0, semester = 1, year = 2021, classroom = -1, id_profile = 0;
+    int no = 0, semester = 2, year = 2021, classroom = -1, id_profile = 0;
 	int role = 0, choice = 1;
     profile *pstudent;
     subjects *psubject;

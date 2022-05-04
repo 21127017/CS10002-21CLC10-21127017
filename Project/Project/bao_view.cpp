@@ -195,7 +195,7 @@ void view_profile(int user_id, profile *p, int role){
 		if (i == 0) i = 2;
 		if (i == 3) i = 1;
 	}
-	if (i == 1) changePassword(user_id);
+	if (i == 1) changePassword(user_id, role);
 	showcur(1);
 }
 
